@@ -1,4 +1,7 @@
 import Navbar from "../components/Navbar";
+import React from "react";
+import RegisterForm from '../components/RegisterForm';
+
 
 export default function AccountPage() {
     return (
@@ -6,8 +9,12 @@ export default function AccountPage() {
             <Navbar />
             <section className="text-center my-16 mx-8 flex-auto">
                 <h1 className="text-5xl font-extrabold ">Bienvenido</h1>
+                <div>
+                    <RegisterForm />
+                </div>
 
-                <div className="flex min-h-full flex-col justify-center px-6  lg:px-8">
+
+                {/* <div className="flex min-h-full flex-col justify-center px-6  lg:px-8">
                     <div className="mt-10 sm:mx-auto sm:w-full sm:max-w-sm">
                         <form className="space-y-6" action="#" method="POST">
                             <div>
@@ -74,7 +81,7 @@ export default function AccountPage() {
                             </a>
                         </p>
                     </div>
-                </div>
+                </div> */}
             </section>
         </div>
     );
