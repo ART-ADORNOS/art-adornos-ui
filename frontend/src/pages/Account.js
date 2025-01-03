@@ -1,6 +1,6 @@
 import Navbar from "../components/Navbar";
 import React from "react";
-import RegisterForm from '../components/RegisterForm';
+import RegisterUser from '../components/RegisterUser';
 
 
 export default function AccountPage() {
@@ -10,7 +10,7 @@ export default function AccountPage() {
             <section className="text-center my-16 mx-8 flex-auto">
                 <h1 className="text-5xl font-extrabold ">Bienvenido</h1>
                 <div>
-                    <RegisterForm />
+                    <RegisterUser />
                 </div>
 
 

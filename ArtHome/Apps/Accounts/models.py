@@ -11,31 +11,10 @@ class Audit(models.Model):
     class Meta:
         abstract = True
 
-# Modelo base de usuario personalizado
 class User(AbstractUser, Audit):
-    ROLE_CHOICES = [
-        ('admin', 'Administrator'),
-        ('normal', 'Normal User'),
-    ]
-    role = models.CharField(max_length=10, choices=ROLE_CHOICES, default='normal')
+    last_name = models.CharField(max_length=30, null=True, blank=True)
+    first_name = models.CharField(max_length=30, null=True, blank=True)
     birth_date = models.DateField(null=True, blank=True)
     phone_number = models.CharField(max_length=15, null=True, blank=True)
-
-    def __str__(self):
-        return self.username
-
-# Perfil extendido para administradores
-class AdminProfile(models.Model):
-    user = models.OneToOneField(User, on_delete=models.CASCADE, related_name='admin_profile')
-    access_level = models.PositiveIntegerField(default=1)
-
-    def __str__(self):
-        return f"Admin: {self.user.username}"
-
-# Perfil extendido para usuarios normales
-class NormalUserProfile(models.Model):
-    user = models.OneToOneField(User, on_delete=models.CASCADE, related_name='normal_user_profile')
-    loyalty_points = models.PositiveIntegerField(default=0)
-
-    def __str__(self):
-        return f"User: {self.user.username}"
+    email = models.EmailField(max_length=255, unique=True)
+    

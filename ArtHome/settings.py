@@ -44,6 +44,8 @@ INSTALLED_APPS = [
     'Apps.Shopping_cart',
 ]
 
+# AUTH_USER_MODEL = 'Apps.Accounts.User'
+
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
