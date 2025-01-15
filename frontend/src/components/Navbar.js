@@ -4,6 +4,7 @@ import ThemeContext from "../context/ThemeContent";
 import {BsSun, BsMoon} from "react-icons/bs";
 
 
+
 export default function Navbar() {
     const { isDarkMode, toggleTheme } = useContext(ThemeContext);
 
@@ -17,17 +18,14 @@ export default function Navbar() {
 
                     <li className="cursor-pointer" onClick={toggleTheme}>
                         {isDarkMode ? (
-                            <BsSun className="text-yellow-500" />
+                            <BsSun className="text-yellow-500 text-xl" />
                         ) : (
-                            <BsMoon className="text-black" />
+                            <BsMoon className="text-black text-xl" />
                         )}
                     </li>
 
                     <li className="transition transform hover:scale-110 ease-in-out duration-200">
                         <Link to="/" className="text-gray-700 dark:text-gray-300 hover:text-pink-600 transition-colors duration-300">Home</Link>
-                    </li>
-                    <li className="transition transform hover:scale-110 ease-in-out duration-200">
-                        <Link to="/about" className="text-gray-700 dark:text-gray-300 hover:text-pink-600 transition-colors duration-300">Sobre</Link>
                     </li>
                     <li className="transition transform hover:scale-110 ease-in-out duration-200">
                         <Link to="/account" className="text-gray-700 dark:text-gray-300 hover:text-pink-600 transition-colors duration-300">Cuenta</Link>
