@@ -43,9 +43,9 @@ const Login = () => {
 
         <form onSubmit={handleSubmit} className="max-w-md mx-auto">
           <div className="mt-5">
-            <label className="font-semibold text-sm text-gray-950 pb-1 block" htmlFor="username">Nombre de usuario</label>
+            <label className="font-semibold text-sm text-gray-950 pb-1 block dark:text-gray-300" htmlFor="username">Usuario</label>
             <input
-              className="border rounded-lg px-3 py-2 mt-1 mb-5 text-sm w-full border-orange-400 text-black"
+              className="border rounded-lg px-3 py-2 mt-1 mb-5 text-sm w-full border-gray-400 text-black"
               type="text"
               id="username"
               name="username"
@@ -53,9 +53,9 @@ const Login = () => {
               onChange={handleChange}
               required
             />
-            <label className="font-semibold text-sm text-gray-950 pb-1 block" htmlFor="password">Contraseña</label>
+            <label className="font-semibold text-sm text-gray-950 pb-1 block dark:text-gray-300" htmlFor="password">Contraseña</label>
             <input
-              className="border rounded-lg px-3 py-2 mt-1 mb-5 text-sm w-full border-orange-400 text-black"
+              className="border rounded-lg px-3 py-2 mt-1 mb-5 text-sm w-full border-gray-400 text-black"
               type="password"
               id="password"
               name="password"

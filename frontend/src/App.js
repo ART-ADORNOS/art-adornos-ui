@@ -3,7 +3,6 @@ import { BrowserRouter as Router, Route, Routes, Navigate } from 'react-router-d
 import { AuthProvider } from './context/AuthContext';
 import LandingPages from "./pages/landingPages";
 import AboutPage from "./pages/AboutPage";
-import AccountPage from "./pages/Account";
 import NotFoundPage from "./pages/NotFoundPage";
 import ThemeContext from "./context/ThemeContent";
 import LoginAdmin from "./pages/LoginAdmin";
@@ -17,12 +16,12 @@ const ProtectedRoute = ({ children }) => {
 };
 
 function App() {
-  const [isDarkMode, setIsDarkMode] = useState(false); // Corregido a setIsDarkMode
+  const [isDarkMode, setIsDarkMode] = useState(false);
 
   useEffect(() => {
-    const storedTheme = localStorage.getItem("isDarkMode"); // Corregido a storedTheme
+    const storedTheme = localStorage.getItem("isDarkMode");
     if (storedTheme === "true") {
-      setIsDarkMode(true); // Corregido a setIsDarkMode
+      setIsDarkMode(true);
     }
   }, []);
 

@@ -11,7 +11,7 @@ const api = axios.create({
 // Enviar datos al endpoint de registro
 const handleRegister = async (formData) => {
   try {
-    const response = await api.post('/register/', formData);
+    await api.post('/register/', formData);
   } catch (error) {
     console.error('Error en el registro:', error.response.data);
   }
