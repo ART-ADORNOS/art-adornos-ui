@@ -25,7 +25,7 @@ export default function Navbar() {
         try {
             const response = await api.delete('/delete/'); // Usa el interceptor para el token
             if  (response.status === 200) {
-                console.log("cuenta eliminada");
+                logout('/login');
             } else {
                 setMessage('No se pudo eliminar la cuenta');
                 setMessageType('error');
@@ -40,7 +40,7 @@ export default function Navbar() {
         setIsModalOpen(false);
         setTimeout(() => {
             setShowMessage(false);
-        }); // 4 segundos
+        });
 
         setTimeout(() => {
             navigate('/login');
