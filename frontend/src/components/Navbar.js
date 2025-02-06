@@ -4,7 +4,7 @@ import ThemeContext from "../context/ThemeContent";
 import AuthContext from "../context/AuthContext";
 import {BsSun, BsMoon} from "react-icons/bs";
 import DeleteUserModal from "../components/modal/delete";
-import api from '../utils/axios';
+import api from 'axios';
 import AlertMessage from "./Messages/AlertMessage";
 
 

@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import axios from "../utils/axios";
+import axios from "../core/api/axios";
 import Navbar from "../components/Navbar";
 import InputField from "../components/Fields/InputField";
 import AlertMessage from "../components/Messages/AlertMessage";
