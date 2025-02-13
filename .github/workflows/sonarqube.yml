@@ -39,4 +39,4 @@ jobs:
             -Dsonar.organization=freddyandreszambrano
             -Dsonar.projectKey=freddyandreszambrano_ART_ADORNOS
             -Dsonar.python.coverage.reportPaths=coverage.xml
-            -Dsonar.token=${{ secrets.SONAR_TOKEN }}
+            -Dsonar.token=${{ secrets.SONAR_TOKEN }}-X
