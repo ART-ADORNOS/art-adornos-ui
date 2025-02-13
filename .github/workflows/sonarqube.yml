@@ -32,13 +32,11 @@ jobs:
         run: pip install -r requirements.txt
 
       # Ejecutar SonarCloud Scan
-      - name: SonarCloud Scan
-        uses: SonarSource/sonarqube-scan-action@v4.1.0
-        env:
-          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}  # Opcional para integración con GitHub
-        with:
-          args: >
-            -Dsonar.organization=freddyandreszambrano
-            -Dsonar.projectKey=freddyandreszambrano_ART_ADORNOS
-            -Dsonar.python.coverage.reportPaths=coverage.xml
+      - name: Run SonarCloud Scan with detailed logging
+        run: |
+          sonar-scanner \
+            -Dsonar.organization=freddyandreszambrano \
+            -Dsonar.projectKey=freddyandreszambrano_ART_ADORNOS \
+            -Dsonar.python.coverage.reportPaths=coverage.xml \
+            -Dsonar.token=${{ secrets.SONAR_TOKEN }} -X
+
