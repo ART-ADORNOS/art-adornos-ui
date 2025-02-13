@@ -1,13 +1,13 @@
-import React, { useContext, useState } from "react";
+import React, {useContext, useState} from "react";
 import AuthContext from "../../../shared/providers/AuthContext";
-import { useNavigate } from "react-router-dom";
+import {useLocation, useNavigate} from "react-router-dom";
 import Navbar from "../../../shared/components/layout/header/Navbar";
 import GoBackButton from "../../../shared/components/ui/Buttons/goBack";
 import AlertMessage from "../../../shared/components/ui/Messages/AlertMessage";
 import InputField from "../../../shared/components/ui/Fields/InputField";
 
 const UpdateProfile = () => {
-    const { user, updateUser } = useContext(AuthContext);
+    const {user, updateUser} = useContext(AuthContext);
     const navigate = useNavigate();
 
     const [formData, setFormData] = useState({
@@ -20,6 +20,13 @@ const UpdateProfile = () => {
     const [showMessage, setShowMessage] = useState(false);
     const [message, setMessage] = useState("");
     const [messageType, setMessageType] = useState("");
+    const location = useLocation();
+    const dashboardRedirect = location.state?.fromDashboard === "userSeller"
+        ? "/dashboard-seller"
+        : location.state?.fromDashboard === "user"
+            ? "/dashboard"
+            : "/";
+
 
     const [errors, setErrors] = useState({
         email: false,
@@ -30,15 +37,15 @@ const UpdateProfile = () => {
     });
 
     const handleFocus = (field) => {
-        setFocus({ ...focus, [field]: true });
+        setFocus({...focus, [field]: true});
     };
 
     const handleBlur = (field) => {
-        setFocus({ ...focus, [field]: false });
+        setFocus({...focus, [field]: false});
     };
 
     const handleChange = (e) => {
-        const { name, value } = e.target;
+        const {name, value} = e.target;
         setFormData({
             ...formData,
             [name]: value,
@@ -57,7 +64,7 @@ const UpdateProfile = () => {
         try {
             const success = await updateUser(formData);
             if (success) {
-                navigate("/dashboard", {
+                navigate(dashboardRedirect, {
                     state: {
                         updateSuccess: true,
                         message: "Perfil actualizado con éxito",
@@ -81,12 +88,12 @@ const UpdateProfile = () => {
 
     return (
         <div className="bg-zinc-100 dark:bg-gray-900 flex-auto text-gray-900 dark:text-white flex flex-col">
-            <Navbar />
-            <GoBackButton redirectTo="/dashboard" />
+            <Navbar/>
+            <GoBackButton redirectTo={dashboardRedirect}/>
             <section className="text-center my-16 mx-8 flex-auto">
                 <h1 className="text-5xl font-extrabold">Actualizar perfil</h1>
                 {showMessage && (
-                    <AlertMessage message={message} type={messageType} onClose={() => setShowMessage(false)} />
+                    <AlertMessage message={message} type={messageType} onClose={() => setShowMessage(false)}/>
                 )}
                 <div className="flex min-h-full flex-col justify-center px-6 lg:px-8">
                     <div className="mt-10 sm:mx-auto sm:w-full sm:max-w-sm">
