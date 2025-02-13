@@ -33,13 +33,12 @@ jobs:
 
       # Ejecutar SonarCloud Scan
       - name: SonarCloud Scan
-        uses: SonarSource/sonarcloud-github-action@master
+        uses: SonarSource/sonarqube-scan-action@v4.1.0
         env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}  # Opcional para integración con GitHub
         with:
           args: >
             -Dsonar.organization=freddyandreszambrano
             -Dsonar.projectKey=freddyandreszambrano_ART_ADORNOS
-            -Dsonar.python.coverage.reportPaths=coverage.xml  # Si tienes cobertura
-            -Dsonar.javascript.lcov.reportPaths=coverage/lcov.info  # Si usas Jest/Vitest
-            -Dsonar.token=${{ secrets.SONAR_TOKEN }}
+            -Dsonar.python.coverage.reportPaths=coverage.xml
