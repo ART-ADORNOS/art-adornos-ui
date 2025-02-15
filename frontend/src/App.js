@@ -11,6 +11,7 @@ import Dashboard from './modules/dashboard/pages/Dashboard';
 import DashboardSeller from './modules/dashboard/pages/userSeller/DashboardSeller';
 import UpdateProfile from './modules/dashboard/pages/updateProfile';
 import {NotificationProvider} from "./shared/providers/alertProvider";
+import RegisterStartup from "./modules/dashboard/pages/startup/registerStartup";
 
 
 const ProtectedRoute = ({children}) => {
@@ -67,6 +68,14 @@ function App() {
                                     element={
                                         <ProtectedRoute>
                                             <DashboardSeller/>
+                                        </ProtectedRoute>
+                                    }
+                                />
+                                <Route
+                                    path="/register-startup"
+                                    element={
+                                        <ProtectedRoute>
+                                            <RegisterStartup/>
                                         </ProtectedRoute>
                                     }
                                 />
