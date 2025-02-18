@@ -10,14 +10,12 @@ const DashboardSeller = () => {
     const location = useLocation();
     const navigate = useNavigate();
     const {showNotification} = useNotification();
-
     useEffect(() => {
         if (location.state?.updateSuccess) {
             showNotification("Perfil actualizado con éxito", "success");
             navigate('', {replace: true, state: {}});
         }
     }, [location.state, navigate]);
-
     return (
         <div className="bg-zinc-100 dark:bg-gray-900 flex-auto text-gray-900 dark:text-white flex flex-col">
             <Navbar dashboardTyype="userSeller"/>
@@ -29,8 +27,6 @@ const DashboardSeller = () => {
             </div>
         </div>
     );
-
 };
-
 
 export default DashboardSeller;

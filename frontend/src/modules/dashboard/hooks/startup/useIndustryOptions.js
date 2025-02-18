@@ -9,8 +9,6 @@ const useIndustryOptions = () => {
             .then(response => setIndustryOptions(response.data))
             .catch(error => console.error("Error cargando industrias", error));
     }, []);
-
     return { industryOptions };
 };
-
 export default useIndustryOptions;

@@ -21,13 +21,20 @@ export const AuthProvider = ({children}) => {
         try {
             const response = await api.post('/api/token/', {username, password});
             const {access} = response.data;
-            if (!access) {
-                return false;
+            if (!access) return false;
+            const temApi = api.create();
+            temApi.defaults.headers['Authorization'] = `Bearer ${access}`;
+            const userResponse = await temApi.get('/api/me/');
+            if (!userResponse.data.is_seller) {
+                throw new Error('NOT_SELLER');
             }
             localStorage.setItem('token', access);
             setToken(access);
             return true;
         } catch (error) {
+            if (error.message === 'NOT_SELLER') {
+                throw error;
+            }
             return false;
         }
     };
@@ -35,8 +42,12 @@ export const AuthProvider = ({children}) => {
     const getUser = async () => {
         try {
             const response = await api.get('/api/me/');
-            const {id,first_name, last_name, email, username,is_staff,is_seller} = response.data;
-            setUser({id,first_name, last_name, email, username,is_staff,is_seller});
+            const userData = response.data;
+            if (!userData.is_seller) {
+                logout();
+                return;
+            }
+            setUser({...userData});
         } catch (error) {
             if (error.response && error.response.status === 401) {
                 logout();
