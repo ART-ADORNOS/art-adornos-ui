@@ -1,7 +1,8 @@
 import axios from 'axios';
+import {BASE_URL_STORE} from "../constants/urls";
 
 const apiStartups  = axios.create({
-    baseURL: 'http://127.0.0.1:8000/store',
+    baseURL: BASE_URL_STORE,
     headers: {
         'Content-Type': 'application/json',
     },
