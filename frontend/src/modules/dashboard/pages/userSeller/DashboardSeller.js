@@ -5,7 +5,7 @@ import Navbar from '../../../../shared/components/layout/header/Navbar';
 import { useNotification } from "../../../../shared/providers/alertProvider";
 import AddButton from "../../components/buttons/AddButton";
 import { getStartup } from "../../../startup/services/startupGet";
-import CardStartup from "../../components/card/CardStartup";
+import CardStartup from "../../../startup/components/card/CardStartup";
 
 const DashboardSeller = () => {
     const { user } = useContext(AuthContext);

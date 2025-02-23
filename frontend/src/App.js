@@ -1,6 +1,6 @@
-import { useState, useEffect } from "react";
-import { BrowserRouter as Router, Route, Routes, Navigate } from 'react-router-dom';
-import { AuthProvider } from './shared/providers/AuthContext';
+import {useEffect, useState} from "react";
+import {BrowserRouter as Router, Navigate, Route, Routes} from 'react-router-dom';
+import {AuthProvider} from './shared/providers/AuthContext';
 import LandingPages from "./modules/landing/pages/landingPages";
 import NotFoundPage from "./shared/components/errors/NotFoundPage";
 import ThemeContext from "./shared/providers/ThemeContent";
@@ -10,22 +10,17 @@ import Register from './modules/auth/pages/register/register';
 import Dashboard from './modules/dashboard/pages/dashboard/Dashboard';
 import DashboardSeller from './modules/dashboard/pages/userSeller/DashboardSeller';
 import UpdateProfile from './modules/dashboard/pages/dashboard/updateProfile';
-import { NotificationProvider } from "./shared/providers/alertProvider";
+import {NotificationProvider} from "./shared/providers/alertProvider";
 import RegisterStartup from "./modules/startup/pages/registerStartup";
 import ProductList from "./modules/products/pages/ProductList";
+import StartupProvider from "./modules/startup/context/StartupProvider";
+import CardStartup from "./modules/startup/components/card/CardStartup";
 
-export const protectedRoutes: { path: string, component: React.ReactNode }[] = [
-    { path: "/dashboard", component: <Dashboard /> },
-    { path: "/edit-profile", component: <UpdateProfile /> },
-    { path: "/dashboard-seller", component: <DashboardSeller /> },
-    { path: "/register-startup", component: <RegisterStartup /> },
-    { path: "/product-list", component: <ProductList /> },
-];
-
-const ProtectedRoute = ({ children }: { children: React.ReactNode }) => {
+const ProtectedRoute = ({children}: { children: React.ReactNode }) => {
     const token = localStorage.getItem('token');
-    return token ? children : <Navigate to="/login" />;
+    return token ? children : <Navigate to="/login"/>;
 };
+
 
 function App() {
     const [isDarkMode, setIsDarkMode] = useState(false);
@@ -45,32 +40,46 @@ function App() {
         });
     }
 
-    return (
-        <ThemeContext.Provider value={{ isDarkMode, toggleTheme }}>
-            <div className={`${isDarkMode ? "dark" : "light"} min-h-screen flex flex-col`}>
-                <NotificationProvider>
-                    <AuthProvider>
-                        <Router>
-                            <Routes>
-                                <Route path="/" element={<LandingPages />} />
-                                <Route path="/register" element={<Register />} />
-                                <Route path="/login" element={<Login />} />
-                                <Route path="/admin" element={<LoginAdmin />} />
-                                <Route path="*" element={<NotFoundPage />} />
-                                {protectedRoutes.map((route, index) => (
-                                    <Route
-                                        key={index}
-                                        path={route.path}
-                                        element={<ProtectedRoute>{route.component}</ProtectedRoute>}
-                                    />
-                                ))}
-                            </Routes>
-                        </Router>
-                    </AuthProvider>
-                </NotificationProvider>
-            </div>
-        </ThemeContext.Provider>
-    );
+    return (<ThemeContext.Provider value={{isDarkMode, toggleTheme}}>
+        <div className={`${isDarkMode ? "dark" : "light"} min-h-screen flex flex-col`}>
+            <NotificationProvider>
+                <AuthProvider>
+                    <Router>
+                        <Routes>
+                            <Route path="/" element={<LandingPages/>}/>
+                            <Route path="/register" element={<Register/>}/>
+                            <Route path="/login" element={<Login/>}/>
+                            <Route path="/admin" element={<LoginAdmin/>}/>
+                            <Route path="*" element={<NotFoundPage/>}/>
+                            <Route path="/dashboard" element={<ProtectedRoute><Dashboard/></ProtectedRoute>}/>
+                            <Route path="/edit-profile"
+                                   element={<ProtectedRoute><UpdateProfile/></ProtectedRoute>}/>
+                            <Route path="/register-startup"
+                                   element={<ProtectedRoute><RegisterStartup/></ProtectedRoute>}/>
+
+                            <Route
+                                path="/dashboard-seller"
+                                element={<StartupProvider>
+                                    <ProtectedRoute>
+                                        <DashboardSeller/>
+                                    </ProtectedRoute>
+                                </StartupProvider>}
+                            />
+                            <Route
+                                path="/product-list"
+                                element={<StartupProvider>
+                                    <ProtectedRoute>
+                                        <ProductList/>
+                                    </ProtectedRoute>
+                                </StartupProvider>}
+                            />
+
+                        </Routes>
+                    </Router>
+                </AuthProvider>
+            </NotificationProvider>
+        </div>
+    </ThemeContext.Provider>);
 }
 
 export default App;
