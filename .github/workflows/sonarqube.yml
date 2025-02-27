@@ -2,6 +2,11 @@ name: SonarCloud Analysis
 
 on:
   push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
 
 jobs:
   sonarcloud-scan:
@@ -34,7 +39,7 @@ jobs:
 
       # Ejecutar SonarCloud Scan
       - name: Run SonarCloud Scan
-        uses: SonarSource/sonarqube-scan-action@v4.1.0
+        uses: SonarSource/sonarqube-scan-action@v2
         env:
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
           SONAR_HOST_URL: "https://sonarcloud.io"
