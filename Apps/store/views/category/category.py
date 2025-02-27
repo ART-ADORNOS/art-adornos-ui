@@ -5,6 +5,15 @@ from rest_framework.views import APIView
 from Apps.store.serializer.category.category import CategorySerializer
 
 
+class UserCategoryListView(APIView):
+    permission_classes = [IsAuthenticated]
+
+    def get(self, request):
+        category = request.user.categories.all()
+        serializer = CategorySerializer(category, many=True)
+        return Response(serializer.data)
+
+
 class RegisterCategoryView(APIView):
     permission_classes = [IsAuthenticated]
 

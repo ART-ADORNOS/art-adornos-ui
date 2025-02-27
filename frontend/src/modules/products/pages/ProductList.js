@@ -21,8 +21,7 @@ const ProductList = () => {
                         aria-expanded={isDropdownOpen}
                         aria-controls="dropdown-menu"
                     >
-                        + Crear
-                        <span className="ml-1">▼</span>
+                        Crear
                     </button>
 
                     {isDropdownOpen && (

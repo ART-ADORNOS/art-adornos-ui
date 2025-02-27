@@ -7,6 +7,7 @@ import useRegisterStartup from "../hooks/useRegisterStartup";
 const RegisterStartup = () => {
     const navigate = useNavigate();
     const {formData, handleChange, handleSubmit, industryOptions} = useRegisterStartup();
+    // const Categories =
 
 
     return (

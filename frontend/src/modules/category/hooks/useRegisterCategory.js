@@ -1,8 +1,10 @@
 import {useState} from "react";
 import registerCategoryService from "../services/registerCategoryService";
+import {useNotification} from "../../../shared/providers/alertProvider";
 
 
 const useRegisterCategory = () => {
+    const { showNotification } = useNotification();
 
     const [formData, setFormData] = useState({
         name: "",
@@ -26,9 +28,10 @@ const useRegisterCategory = () => {
                 description: ""
             });
             navigate('/product-list');
+            showNotification("Categoría creada con éxito", "success");
 
         } catch (err) {
-            console.error(err);
+            showNotification("Error al crear la categoría", "error");
         }
     };
 

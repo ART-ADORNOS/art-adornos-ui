@@ -1,4 +1,4 @@
-
+let PRODUCT = 'product';
 export const BASE_URLS_PRODUCT ={
-    REGISTER_PRODUCT: '/products/register/',
+    REGISTER_PRODUCT: `${PRODUCT}/register/`,
 }
