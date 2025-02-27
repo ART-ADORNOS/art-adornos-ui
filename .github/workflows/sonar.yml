@@ -1,0 +1,41 @@
+name: SonarQube Analysis
+
+on:
+  push:
+    branches:
+      - '**'  # Ejecutar en todas las ramas
+  pull_request:
+    branches:
+      - '**'  # También en todos los PRs
+
+jobs:
+  sonar:
+    name: SonarQube Scan
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: 🛠 Checkout del código
+        uses: actions/checkout@v4
+
+      - name: 🔧 Configurar JDK 17 (necesario para SonarScanner)
+        uses: actions/setup-java@v3
+        with:
+          distribution: 'temurin'
+          java-version: '17'
+
+      - name: 📌 Configurar SonarScanner
+        run: |
+          wget -O sonar-scanner.zip https://binaries.sonarsource.com/Distribution/sonar-scanner-cli/sonar-scanner-5.0.1.3006-linux.zip
+          unzip sonar-scanner.zip
+          export PATH=$PWD/sonar-scanner-5.0.1.3006-linux/bin:$PATH
+
+      - name: 🚀 Ejecutar SonarQube Scanner
+        run: |
+          sonar-scanner \
+            -Dsonar.projectKey=ART_ADORNOS \
+            -Dsonar.projectName=ART_ADORNOS \
+            -Dsonar.projectVersion=1.0 \
+            -Dsonar.sources=Apps,frontend/src \
+            -Dsonar.host.url=http://localhost:9000 \
+            -Dsonar.login=${{ secrets.SONARQUBE_USER }} \
+            -Dsonar.password=${{ secrets.SONARQUBE_PASS }}
