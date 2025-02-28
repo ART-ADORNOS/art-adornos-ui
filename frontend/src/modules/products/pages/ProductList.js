@@ -1,19 +1,22 @@
 import Navbar from "../../../shared/components/layout/header/Navbar";
-import React, { useContext, useRef, useState } from "react";
+import React, {useContext, useRef, useState, useEffect} from "react";
 import GoBackButton from "../../../shared/components/ui/Buttons/goBack";
-import { StartupContext } from "../../startup/context/StartupProvider";
-import { Link } from "react-router-dom";
+import {StartupContext} from "../../startup/context/StartupProvider";
+import {Link} from "react-router-dom";
 
 const ProductList = () => {
-    const { selectedStartup } = useContext(StartupContext);
+    const {selectedStartup} = useContext(StartupContext);
     const [isDropdownOpen, setIsDropdownOpen] = useState(false);
     const dropdownRef = useRef(null);
 
+
+
+
     return (
         <div className="bg-zinc-100 dark:bg-gray-900 flex-auto text-gray-900 dark:text-white flex flex-col">
-            <Navbar />
+            <Navbar/>
             <div className="flex items-center justify-between w-full px-4 py-2 overflow-visible">
-                <GoBackButton redirectTo="/dashboard-seller" />
+                <GoBackButton redirectTo="/dashboard-seller"/>
                 <div className="relative mr-4" ref={dropdownRef}>
                     <button
                         className="flex items-center gap-2 bg-gradient-to-r from-orange-500 to-purple-600 hover:from-orange-600 hover:to-purple-700 text-white px-6 py-2 rounded-md shadow-md transition-all duration-300"
