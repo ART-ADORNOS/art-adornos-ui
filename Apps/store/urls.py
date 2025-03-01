@@ -17,6 +17,6 @@ urlpatterns += [
 
     # Category
     path('category/register/', RegisterCategoryView.as_view(), name='register_category'),
-    path('api/category/list/', UserCategoryListView.as_view(), name='get_category'),
+    path('api/category/list/<int:startup_id>', UserCategoryListView.as_view(), name='get_category'),
 
 ]

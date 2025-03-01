@@ -14,13 +14,13 @@ const useRegisterProduct = () => {
     useEffect(() => {
         (async () => {
             try {
-                const data = await getCategory();
+                const data = await getCategory(selectedStartup?.id);
                 setCategories(data);
             } catch (error) {
                 showNotification("Error al cargar la información de las categorías", "error");
             }
         })();
-    }, []);
+    },  [selectedStartup?.id]);
 
     const [formData, setFormData] = useState({
         start_up: "",
@@ -42,9 +42,7 @@ const useRegisterProduct = () => {
     const handleSubmit = async (e, navigate) => {
         e.preventDefault();
         try {
-            if (formData.start_up === "") {
-                formData.start_up = selectedStartup?.id;
-            }
+            formData.start_up = formData.start_up || selectedStartup?.id;
             await registerProductService(formData);
             setFormData({
                 start_up: "",

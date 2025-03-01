@@ -43,7 +43,7 @@ const ProductForm = () => {
                             placeholder="Categoría"
                             value={formData.category}
                             onChange={handleChange}
-                            options={categories}
+                            options={categories.map(category => [category.id, category.name])}
                         />
                         <InputField
                             label="Precio"

@@ -1,16 +1,19 @@
+from django.db.models import Prefetch
 from rest_framework import status
-from rest_framework.permissions import IsAuthenticated
+from rest_framework.permissions import IsAuthenticated, AllowAny
 from rest_framework.response import Response
 from rest_framework.views import APIView
+
+from Apps.store.models import Category, Product
 from Apps.store.serializer.category.category import CategorySerializer
 
 
 class UserCategoryListView(APIView):
-    permission_classes = [IsAuthenticated]
+    permission_classes = [AllowAny]
 
-    def get(self, request):
-        category = request.user.categories.all()
-        serializer = CategorySerializer(category, many=True)
+    def get(self, request, startup_id):
+        categories = Category.objects.filter(start_up_id=startup_id)
+        serializer = CategorySerializer(categories, many=True)
         return Response(serializer.data)
 
 
