@@ -1,21 +1,21 @@
 import Navbar from "../../../shared/components/layout/header/Navbar";
-import React, {useContext, useRef, useState, useEffect} from "react";
+import React, {useContext, useRef, useState} from "react";
 import GoBackButton from "../../../shared/components/ui/Buttons/goBack";
 import {StartupContext} from "../../startup/context/StartupProvider";
 import {Link} from "react-router-dom";
+import ProductCard from "../components/ProductCard";
 
 const ProductList = () => {
     const {selectedStartup} = useContext(StartupContext);
     const [isDropdownOpen, setIsDropdownOpen] = useState(false);
     const dropdownRef = useRef(null);
-
-
+    // const {products} = useGetProducts();
 
 
     return (
         <div className="bg-zinc-100 dark:bg-gray-900 flex-auto text-gray-900 dark:text-white flex flex-col">
             <Navbar/>
-            <div className="flex items-center justify-between w-full px-4 py-2 overflow-visible">
+            <div className="flex items-center justify-between w-full px-4 py-2">
                 <GoBackButton redirectTo="/dashboard-seller"/>
                 <div className="relative mr-4" ref={dropdownRef}>
                     <button
@@ -59,6 +59,12 @@ const ProductList = () => {
                             {selectedStartup?.description}
                         </p>
                     </div>
+                </div>
+            </div>
+
+            <div className="container mx-auto px-4 sm:px-8 lg:px-16 py-10">
+                <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 place-items-center">
+                    <ProductCard/>
                 </div>
             </div>
         </div>

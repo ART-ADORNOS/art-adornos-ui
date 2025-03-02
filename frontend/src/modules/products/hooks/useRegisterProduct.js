@@ -1,26 +1,14 @@
-import {useContext, useEffect, useState} from "react";
+import {useContext, useState} from "react";
 import registerProductService from "../services/productService";
 import {StartupContext} from "../../startup/context/StartupProvider";
-import {getCategory} from "../../category/services/getCategory";
 import {useNotification} from "../../../shared/providers/alertProvider";
-
+import {useGetCategories} from "../../category/hooks/useGetCategory";
 
 const useRegisterProduct = () => {
     const {selectedStartup} = useContext(StartupContext);
-    const [categories, setCategories] = useState([]);
+    const { categories } = useGetCategories(selectedStartup?.id);
     const {showNotification} = useNotification();
 
-
-    useEffect(() => {
-        (async () => {
-            try {
-                const data = await getCategory(selectedStartup?.id);
-                setCategories(data);
-            } catch (error) {
-                showNotification("Error al cargar la información de las categorías", "error");
-            }
-        })();
-    },  [selectedStartup?.id]);
 
     const [formData, setFormData] = useState({
         start_up: "",
@@ -53,8 +41,9 @@ const useRegisterProduct = () => {
                 stock: "",
             });
             navigate('/product-list');
+            showNotification("Producto registrado exitosamente", "success");
         } catch (err) {
-            console.error(err);
+            showNotification("Error al registrar el producto", "error");
         }
     };
 
