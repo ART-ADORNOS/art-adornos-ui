@@ -1,11 +1,15 @@
-import { useState, useContext } from "react";
+import {useContext, useState} from "react";
 import AuthContext from "../../../shared/providers/AuthContext";
 import useIndustryOptions from "../hooks/useIndustryOptions";
-import registerStartupService  from "../services/startupService";
+import registerStartupService from "../services/startupService";
+import {useNotification} from "../../../shared/providers/alertProvider";
+import updateStartupService from "../services/updateStartupService";
 
-const useRegisterStartup = () => {
-    const { user } = useContext(AuthContext);
-    const { industryOptions } = useIndustryOptions();
+const useRegisterStartup = (startupId = null) => {
+    const {user} = useContext(AuthContext);
+    const {industryOptions} = useIndustryOptions();
+    const {showNotification} = useNotification();
+
 
     const [formData, setFormData] = useState({
         owner: "",
@@ -15,7 +19,7 @@ const useRegisterStartup = () => {
     });
 
     const handleChange = (e) => {
-        const { name, value } = e.target;
+        const {name, value} = e.target;
         setFormData((prevData) => ({
             ...prevData,
             [name]: value,
@@ -24,25 +28,38 @@ const useRegisterStartup = () => {
 
     const handleSubmit = async (e, navigate) => {
         e.preventDefault();
-        try {
-            if (formData.owner === "") {
-                formData.owner = user?.id;
+        if (startupId) {
+            try {
+                formData.owner = formData.owner || user?.id;
+                await updateStartupService(startupId, formData);
+                showNotification("Emprendimiento actualizado exitosamente", "success");
+                navigate('/dashboard-seller');
+            } catch (err) {
+                showNotification("Error al actualizar el emprendimiento", "error");
             }
-            await registerStartupService(formData);
-            setFormData({
-                owner: "",
-                name: "",
-                description: "",
-                industry: "",
-            });
-            navigate('/dashboard-seller');
-        } catch (err) {
-            console.error(err);
+        } else {
+            try {
+                if (formData.owner === "") {
+                    formData.owner = user?.id;
+                }
+                await registerStartupService(formData);
+                setFormData({
+                    owner: "",
+                    name: "",
+                    description: "",
+                    industry: "",
+                });
+                showNotification("Emprendimiento registrado exitosamente", "success");
+                navigate('/dashboard-seller');
+            } catch (err) {
+                showNotification("Error al registrar el emprendimiento", "error");
+            }
         }
     };
 
     return {
         formData,
+        setFormData,
         handleChange,
         handleSubmit,
         industryOptions,

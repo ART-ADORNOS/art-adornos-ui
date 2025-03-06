@@ -34,6 +34,7 @@ const ProductList = () => {
                         >
                             <Link
                                 to="/register-category"
+
                                 className="block px-4 py-3 text-gray-800 dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors duration-200"
                             >
                                 Nueva Categoría
@@ -62,34 +63,32 @@ const ProductList = () => {
                 </div>
             </div>
 
-            {products.length > 0 ? (
-                <>
-                    <div className="container mx-auto px-4 sm:px-8 lg:px-16 py-10">
-                        <div
-                            className="flex flex-wrap gap-4" >
-                            {products.map((product, index) => (
-                                <ProductCard
-                                    key={index}
-                                    productnName={product.name}
-                                    productDescription={product.description}
-                                    productPrice={product.price}
-                                />
-                            ))}
+            {
+                products.length > 0 ? (
+                    <>
+                        <div className="container mx-auto px-4 sm:px-8 lg:px-16 py-10">
+                            <div
+                                className="flex flex-wrap gap-4">
+                                {products.map((product) => (
+                                    <ProductCard key={product.id} product={product}/>
+                                ))}
+                            </div>
                         </div>
+                    </>
+                ) : (
+                    <div
+                        className="flex flex-col items-center justify-center h-64 text-center text-gray-700 dark:text-gray-300">
+                        <span className="text-6xl mb-3">📭</span>
+                        <p className="text-lg font-semibold">No se encontraron productos.</p>
+                        <p className="text-sm text-gray-500 dark:text-gray-400">
+                            ¡Anímate a crear tu catalogo para tu emprendimiento!
+                        </p>
                     </div>
-                </>
-            ) : (
-                <div
-                    className="flex flex-col items-center justify-center h-64 text-center text-gray-700 dark:text-gray-300">
-                    <span className="text-6xl mb-3">📭</span>
-                    <p className="text-lg font-semibold">No se encontraron productos.</p>
-                    <p className="text-sm text-gray-500 dark:text-gray-400">
-                        ¡Anímate a crear tu catalogo para tu emprendimiento!
-                    </p>
-                </div>
-            )}
+                )
+            }
         </div>
-    );
+    )
+        ;
 };
 
 export default ProductList;
