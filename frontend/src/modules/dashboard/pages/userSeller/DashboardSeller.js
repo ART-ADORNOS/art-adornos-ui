@@ -1,23 +1,24 @@
-import React, { useContext, useEffect, useState } from 'react';
-import { useLocation, useNavigate } from 'react-router-dom';
+import React, {useContext, useEffect, useState} from 'react';
+import {useLocation, useNavigate} from 'react-router-dom';
 import AuthContext from '../../../../shared/providers/AuthContext';
 import Navbar from '../../../../shared/components/layout/header/Navbar';
-import { useNotification } from "../../../../shared/providers/alertProvider";
+import {useNotification} from "../../../../shared/providers/alertProvider";
 import AddButton from "../../../../shared/components/buttons/AddButton";
-import { getStartup } from "../../../startup/services/startupGet";
+import {getStartup} from "../../../startup/services/startupGet";
 import CardStartup from "../../../startup/components/card/CardStartup";
+import FilterSidebar from "../../components/FilterSidebar";
 
 const DashboardSeller = () => {
-    const { user } = useContext(AuthContext);
+    const {user} = useContext(AuthContext);
     const location = useLocation();
     const navigate = useNavigate();
     const [startupData, setStartupData] = useState([]);
-    const { showNotification } = useNotification();
+    const {showNotification} = useNotification();
 
     useEffect(() => {
         if (location.state?.updateSuccess) {
             showNotification("Perfil actualizado con éxito", "success");
-            navigate('', { replace: true, state: {} });
+            navigate('', {replace: true, state: {}});
         }
 
         const fetchStartup = async () => {
@@ -40,8 +41,11 @@ const DashboardSeller = () => {
                 </div>
                 <AddButton redirectTo="/register-startup" title="Emprendimiento"/>
             </div>
+            <div className="w-full px-8 py-4 ">
+                <FilterSidebar/>
+            </div>
             {startupData.length > 0 ? (
-                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 p-8">
+                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 p-8 mt-10">
                     {startupData.map((startup, index) => (
                         <div key={index}>
                             <CardStartup startup={startup}/>
