@@ -30,6 +30,9 @@ function App() {
         const storedTheme = localStorage.getItem("isDarkMode");
         if (storedTheme === "true") {
             setIsDarkMode(true);
+            document.documentElement.classList.add("dark");
+        } else {
+            document.documentElement.classList.remove("dark");
         }
     }, []);
 
@@ -37,6 +40,11 @@ function App() {
         setIsDarkMode((prevMode) => {
             const newMode = !prevMode;
             localStorage.setItem("isDarkMode", newMode.toString());
+            if (newMode) {
+                document.documentElement.classList.add("dark");
+            } else {
+                document.documentElement.classList.remove("dark");
+            }
             return newMode;
         });
     }

@@ -1,12 +1,26 @@
 import Navbar from "../../../shared/components/layout/header/Navbar";
 import GoBackButton from "../../../shared/components/ui/Buttons/goBack";
-import {useNavigate} from "react-router-dom";
+import {useLocation, useNavigate} from "react-router-dom";
 import InputField from "../../../shared/components/ui/Fields/InputField";
 import useRegisterStartup from "../hooks/useRegisterStartup";
+import {useEffect} from "react";
 
 const RegisterStartup = () => {
     const navigate = useNavigate();
-    const {formData, handleChange, handleSubmit, industryOptions} = useRegisterStartup();
+    const {state} = useLocation();
+    const {formData, handleChange, handleSubmit, industryOptions, setFormData} = useRegisterStartup(state?.startupId);
+
+    useEffect(() => {
+        if (state) {
+            const {startupName, startupDescription, startupIndustry} = state;
+            setFormData(prevData => ({
+                ...prevData,
+                name: startupName || '',
+                description: startupDescription || '',
+                industry: startupIndustry || '',
+            }));
+        }
+    },[state, setFormData]);
 
     return (
         <div className="bg-zinc-100 dark:bg-gray-900 flex-auto text-gray-900 dark:text-white flex flex-col">
@@ -45,7 +59,7 @@ const RegisterStartup = () => {
                         options={industryOptions}
                     />
                     <button type="submit" className="mt-4 w-full bg-blue-500 text-white py-2 rounded-lg">
-                        Registrar
+                        {state? 'Actualizar': 'Registrar'}
                     </button>
                 </form>
             </div>
