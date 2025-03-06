@@ -6,14 +6,14 @@ from Apps.store.serializer.startup.startup import StartupSerializer
 from Apps.store.utilities.enums.industry import Industry
 
 
-class IndustryChoicesView(APIView):
+class IndustryListView(APIView):
     permission_classes = [AllowAny]
 
     def get(self, request):
         return Response(Industry.choices)
 
 
-class GetStartupView(APIView):
+class UserStartupsListView(APIView):
     permission_classes = [IsAuthenticated]
 
     def get(self, request):
@@ -32,3 +32,29 @@ class RegisterStartupView(APIView):
             return Response(serializer.data, status=status.HTTP_201_CREATED)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
+
+class StartupUpdateView(APIView):
+    permission_classes = [IsAuthenticated]
+
+    def put(self, request, startup_id):
+        try:
+            startup = request.user.startups.get(id=startup_id)
+            serializer = StartupSerializer(startup, data=request.data)
+            if serializer.is_valid():
+                serializer.save()
+                return Response(serializer.data, status=status.HTTP_200_OK)
+            return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+        except Exception as e:
+            return Response({"error": str(e)}, status=status.HTTP_400_BAD_REQUEST)
+
+
+class StartupDeleteView(APIView):
+    permission_classes = [IsAuthenticated]
+
+    def delete(self, request, startup_id):
+        try:
+            startup = request.user.startups.get(id=startup_id)
+            startup.delete()
+            return Response({"result": "startup delete successfully"}, status=status.HTTP_200_OK)
+        except Exception as e:
+            return Response({"error": str(e)}, status=status.HTTP_400_BAD_REQUEST)
