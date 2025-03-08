@@ -19,13 +19,12 @@ const ProductList = () => {
                 <GoBackButton redirectTo="/dashboard-seller"/>
                 <div className="relative mr-4" ref={dropdownRef}>
                     <button
-                        className="flex items-center gap-2 bg-gradient-to-r from-orange-500 to-purple-600 hover:from-orange-600 hover:to-purple-700 text-white px-6 py-2 rounded-md shadow-md transition-all duration-300"
+                        className="flex items-center gap-2 bg-gradient-to-r from-orange-500 to-purple-500 hover:from-orange-600 hover:to-purple-600 text-white px-5 py-2.5 rounded-full shadow-lg transition-all duration-300"
                         onClick={() => setIsDropdownOpen(!isDropdownOpen)}
-                        aria-expanded={isDropdownOpen}
-                        aria-controls="dropdown-menu"
                     >
                         Crear
                     </button>
+
 
                     {isDropdownOpen && (
                         <div
@@ -50,13 +49,13 @@ const ProductList = () => {
                 </div>
             </div>
 
-            <div className="container mx-auto px-4 py-10">
-                <div className="flex flex-col sm:flex-row items-center sm:items-start gap-8">
+            <div className="container mx-auto px-6 sm:px-12 py-12">
+                <div className="flex flex-col sm:flex-row items-center sm:items-start gap-6">
                     <div className="text-center sm:text-left">
-                        <h1 className="text-6xl sm:text-7xl font-extrabold bg-gradient-to-r from-orange-500 to-purple-600 bg-clip-text text-transparent animate-fade-in font-serif">
+                        <h1 className="text-5xl sm:text-6xl font-bold bg-gradient-to-r from-orange-400 to-purple-500 bg-clip-text text-transparent">
                             {selectedStartup?.name}
                         </h1>
-                        <p className="mt-8 text-2xl sm:text-3xl text-gray-700 dark:text-gray-200 max-w-3xl leading-loose font-semibold animate-fade-in delay-300 font-serif">
+                        <p className="mt-4 text-lg sm:text-xl text-gray-600 dark:text-gray-300 max-w-2xl leading-relaxed">
                             {selectedStartup?.description}
                         </p>
                     </div>
@@ -81,9 +80,10 @@ const ProductList = () => {
                         <span className="text-6xl mb-3">📭</span>
                         <p className="text-lg font-semibold">No se encontraron productos.</p>
                         <p className="text-sm text-gray-500 dark:text-gray-400">
-                            ¡Anímate a crear tu catalogo para tu emprendimiento!
+                            ¡Anímate a crear tu catálogo para tu emprendimiento!
                         </p>
                     </div>
+
                 )
             }
         </div>
