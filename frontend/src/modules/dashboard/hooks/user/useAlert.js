@@ -1,4 +1,3 @@
-// hooks/useAlert.js
 import {useEffect, useState} from "react";
 
 const useAlert = (location, navigate) => {
