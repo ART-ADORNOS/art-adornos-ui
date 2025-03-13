@@ -5,8 +5,10 @@ import { useNotification } from "../../../shared/providers/alertProvider";
 const useGetCategories = (startupId) => {
     const { showNotification } = useNotification();
     const [categories, setCategories] = useState([]);
+    const [loading, setLoading] = useState(false);
 
     useEffect(() => {
+        setLoading(true);
         const fetchCategories = async () => {
             if (!startupId) return;
 
@@ -15,6 +17,8 @@ const useGetCategories = (startupId) => {
                 setCategories(data);
             } catch (error) {
                 showNotification("Error al cargar la información de las categorías", "error");
+            }finally{
+                setLoading(false);
             }
         };
 
@@ -24,7 +28,7 @@ const useGetCategories = (startupId) => {
 
     }, [startupId, showNotification]);
 
-    return { categories };
+    return { categories, loading };
 };
 
 export { useGetCategories };

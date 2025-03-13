@@ -6,8 +6,10 @@ import getProducts from "../services/productService";
 const useGetProducts = (startupId) => {
     const [products, setProducts] = useState([]);
     const {showNotification} = useNotification();
+    const [loading, setLoading] = useState(false);
 
     useEffect(() => {
+        setLoading(true);
         const fetchProducts = async () => {
             const startupId = localStorage.getItem("selectedStartupId");
             if (!startupId) return;
@@ -17,8 +19,9 @@ const useGetProducts = (startupId) => {
                 setProducts(data);
             } catch (error) {
                 showNotification("Error al cargar los productos", "error");
+            }finally{
+                setLoading(false);
             }
-
         };
 
         fetchProducts().catch(() => {
@@ -27,7 +30,7 @@ const useGetProducts = (startupId) => {
 
     }, [startupId, showNotification]);
 
-    return {products};
+    return {products, loading};
 };
 
 export {useGetProducts};
