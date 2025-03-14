@@ -2,7 +2,8 @@ from django.urls import path
 
 from Apps.store.views import (RegisterStartupView, IndustryListView,
                               UserStartupsListView, RegisterProductView, RegisterCategoryView, CategoryListView,
-                              ProductListView, ProductDeleteView, ProductUpdateView, UserIndustryView)
+                              ProductListView, ProductDeleteView, ProductUpdateView, UserIndustryView,
+                              CategoryDeleteView, CategoryUpdateView)
 from Apps.store.views import StartupUpdateView, \
     StartupDeleteView
 
@@ -29,5 +30,7 @@ urlpatterns += [
     # Category
     path('category/register/', RegisterCategoryView.as_view(), name='register_category'),
     path('api/category/list/<int:startup_id>', CategoryListView.as_view(), name='get_category'),
+    path('api/category/update/<int:category_id>', CategoryUpdateView.as_view(), name='update_category'),
+    path('api/category/delete/<int:category_id>', CategoryDeleteView.as_view(), name='delete_category'),
 
 ]
