@@ -5,17 +5,20 @@ import {useDeleteCategory} from "../../category/hooks/useDeleteCategory";
 
 const CategoryListModal = ({isOpen, onClose, categories}) => {
     const [isModalOpen, setIsModalOpen] = useState(false);
-    const {deleteCategory, isDeleting} = useDeleteCategory(categories[0].id);
+    const [selectedCategory, setSelectedCategory] = useState(null);
+    const {deleteCategory} = useDeleteCategory();
 
-    const handleDeleteRequest = () => {
+    const handleDeleteRequest = (category) => {
+        setSelectedCategory(category);
         setIsModalOpen(true);
     };
 
     const handleDelete = async () => {
-        await deleteCategory();
-        setIsModalOpen(false);
+        if (selectedCategory) {
+            await deleteCategory(selectedCategory.id);
+            setIsModalOpen(false);
+        }
     };
-
 
     return (
         <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 z-50">
@@ -59,9 +62,8 @@ const CategoryListModal = ({isOpen, onClose, categories}) => {
                                     </div>
                                 </Link>
 
-
                                 <div
-                                    onClick= {handleDeleteRequest}
+                                    onClick={() => handleDeleteRequest(category)}
                                     className="flex gap-2 text-gray-600 hover:scale-110 duration-200 hover:cursor-pointer">
                                     <svg
                                         className="w-6 stroke-red-700"
@@ -93,12 +95,14 @@ const CategoryListModal = ({isOpen, onClose, categories}) => {
                     Cerrar
                 </button>
             </div>
-            <DeleteModal
-                isOpen={isModalOpen}
-                onClose={() => setIsModalOpen(false)}
-                onConfirm={handleDelete}
-                message={`¿Estás seguro de que deseas eliminar la categoría "${categories[0].name}"?`}
-            />
+            {selectedCategory && (
+                <DeleteModal
+                    isOpen={isModalOpen}
+                    onClose={() => setIsModalOpen(false)}
+                    onConfirm={handleDelete}
+                    message={`¿Estás seguro de que deseas eliminar la categoría "${selectedCategory.name}"?`}
+                />
+            )}
         </div>
     );
 };

@@ -3,11 +3,13 @@ import {useNotification} from "../../../shared/providers/alertProvider";
 import {useState} from "react";
 
 
-const useDeleteCategory = (categoryId) => {
+const useDeleteCategory = () => {
     const {showNotification} = useNotification();
     const [isDeleting, setIsDeleting] = useState(false);
 
-    const deleteCategory = async () => {
+    const deleteCategory = async (categoryId) => {
+        if (!categoryId) return;
+
         setIsDeleting(true)
         try {
             const result = await deleteCategoryService(categoryId);

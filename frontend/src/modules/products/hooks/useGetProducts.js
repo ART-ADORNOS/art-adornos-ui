@@ -27,7 +27,7 @@ const useGetProducts = (startupId) => {
             showNotification("Error en el servidor", "error");
         });
 
-    }, [startupId]);
+    }, [showNotification, startupId]);
 
     return {products, loading};
 };
