@@ -69,3 +69,13 @@ class StartupDeleteView(APIView):
             return Response({"result": "startup delete successfully"}, status=status.HTTP_200_OK)
         except Exception as e:
             return Response({"error": str(e)}, status=status.HTTP_400_BAD_REQUEST)
+
+
+# API
+class AllStartupsListView(APIView):
+    permission_classes = [IsAuthenticated]
+
+    def get(self, request):
+        startups = Startup.objects.all()
+        serializer = StartupSerializer(startups, many=True)
+        return Response(serializer.data)
