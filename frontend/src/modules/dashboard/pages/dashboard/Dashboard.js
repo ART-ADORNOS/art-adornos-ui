@@ -5,20 +5,33 @@ import AuthContext from "../../../../shared/providers/AuthContext";
 import WelcomeHeader from "../../components/WelcomeHeader";
 import Loader from "../../components/Loader";
 import CardStartup from "../../../startup/components/card/CardStartup";
-import useGetUserIndustry from "../../../startup/hooks/useGetUserIndustry";
 import useFilter from "../../hooks/useFilter";
 import FilterSidebar from "../../components/FilterSidebar";
+import useGetIndustryAll from "../../hooks/user/useGetIndustryAll";
 
 const Dashboard = () => {
     const {user} = useContext(AuthContext);
     const {activeFilters, toggleFilter} = useFilter();
-
     const {startups, loading} = useGetStartup();
-    const {industry} = useGetUserIndustry();
+    const {industry} = useGetIndustryAll();
+
+    const industryMap = React.useMemo(() =>
+        new Map(industry.map(([code, name]) => [code, name])),
+        [industry]
+    );
+
+    const industryNames = React.useMemo(() =>
+        industry.map(([_, name]) => name),
+        [industry]
+    );
 
     const filteredStartups = activeFilters.length > 0
         ? startups.filter(startup =>
-            Array.isArray(startup.industry) && startup.industry.some(ind => activeFilters.includes(ind))
+            Array.isArray(startup.industry) &&
+            startup.industry.some(code => {
+                const industryName = industryMap.get(code);
+                return industryName && activeFilters.includes(industryName);
+            })
         )
         : startups;
 
@@ -29,7 +42,7 @@ const Dashboard = () => {
             <WelcomeHeader username={user?.username}/>
             <div className="w-full px-8 py-4 ">
                 <FilterSidebar
-                    industry={industry}
+                    industry={industryNames}
                     activeFilters={activeFilters}
                     toggleFilter={toggleFilter}
                 />
