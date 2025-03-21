@@ -9,6 +9,7 @@ import useFilter from "../../hooks/useFilter";
 import FilterSidebar from "../../components/FilterSidebar";
 import useGetIndustryAll from "../../hooks/user/useGetIndustryAll";
 import {getFilteredStartups, useIndustryKeys} from "../../utils/filterUtils";
+import USER_TYPE from "../../../../core/constants/user/userType";
 
 const Dashboard = () => {
     const {user} = useContext(AuthContext);
@@ -41,7 +42,7 @@ const Dashboard = () => {
                     <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 p-8 mt-10">
                         {filteredStartups.map((startup, index) => (
                             <div key={index}>
-                                <CardStartup startup={startup}/>
+                                <CardStartup startup={startup} usertype={USER_TYPE.USER}/>
                             </div>
                         ))}
                     </div>

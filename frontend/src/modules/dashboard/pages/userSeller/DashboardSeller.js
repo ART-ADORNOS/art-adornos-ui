@@ -9,6 +9,7 @@ import Loader from "../../components/Loader";
 import useFetchStartups from "../../hooks/userSeller/useFetchStartups";
 import useGetUserIndustry from "../../../startup/hooks/useGetUserIndustry";
 import WelcomeHeader from "../../components/WelcomeHeader";
+import USER_TYPE from "../../../../core/constants/user/userType";
 
 const DashboardSeller = () => {
     const {user} = useContext(AuthContext);
@@ -16,9 +17,6 @@ const DashboardSeller = () => {
     const {activeFilters, toggleFilter} = useFilter();
     const {startupData, loading} = useFetchStartups();
     const {industry} = useGetUserIndustry();
-    console.log(industry);
-    console.log(startupData);
-
 
     const filteredStartups = activeFilters.length > 0
         ? startupData.filter(startup =>
@@ -53,7 +51,7 @@ const DashboardSeller = () => {
                     <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 p-8 mt-10">
                         {filteredStartups.map((startup, index) => (
                             <div key={index}>
-                                <CardStartup startup={startup}/>
+                                <CardStartup startup={startup} usertype={USER_TYPE.SELLER}/>
                             </div>
                         ))}
                     </div>
