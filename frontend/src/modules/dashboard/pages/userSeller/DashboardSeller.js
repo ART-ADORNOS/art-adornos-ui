@@ -16,6 +16,8 @@ const DashboardSeller = () => {
     const {activeFilters, toggleFilter} = useFilter();
     const {startupData, loading} = useFetchStartups();
     const {industry} = useGetUserIndustry();
+    console.log(industry);
+    console.log(startupData);
 
 
     const filteredStartups = activeFilters.length > 0

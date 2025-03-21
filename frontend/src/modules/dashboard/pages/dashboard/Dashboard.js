@@ -8,6 +8,7 @@ import CardStartup from "../../../startup/components/card/CardStartup";
 import useFilter from "../../hooks/useFilter";
 import FilterSidebar from "../../components/FilterSidebar";
 import useGetIndustryAll from "../../hooks/user/useGetIndustryAll";
+import {getFilteredStartups, useIndustryKeys} from "../../utils/filterUtils";
 
 const Dashboard = () => {
     const {user} = useContext(AuthContext);
@@ -15,18 +16,8 @@ const Dashboard = () => {
     const {startups, loading} = useGetStartup();
     const {industry} = useGetIndustryAll();
 
-    const industryKeys = React.useMemo(() =>
-        (industry?.industries || []),
-        [industry]
-    );
-
-    const filteredStartups = activeFilters.length > 0
-        ? startups.filter(startup =>
-            Array.isArray(startup.industry) &&
-            startup.industry.some(ind => activeFilters.includes(ind))
-        )
-        : startups;
-
+    const industryKeys = useIndustryKeys(industry);
+    const filteredStartups = getFilteredStartups(startups, activeFilters);
 
     return (
         <div className="bg-zinc-100 dark:bg-gray-900 flex-auto text-gray-900 dark:text-white flex flex-col">
