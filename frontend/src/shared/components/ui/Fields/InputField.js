@@ -25,8 +25,8 @@ const InputField = ({
                 className="mt-1 p-2 w-full border rounded-md bg-white text-gray-900 "
             >
                 <option value="">Seleccione una opción</option>
-                {options.map(([key, val]) => (
-                    <option key={key} value={key}>{val}</option>
+                {options.map((option, index) => (
+                    <option key={index} value={option}>{option}</option>
                 ))}
             </select>
         ) : (

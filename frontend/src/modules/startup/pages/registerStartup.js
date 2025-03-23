@@ -1,20 +1,22 @@
 import Navbar from "../../../shared/components/layout/header/Navbar";
 import GoBackButton from "../../../shared/components/ui/Buttons/goBack";
-import {useLocation, useNavigate} from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import InputField from "../../../shared/components/ui/Fields/InputField";
 import useRegisterStartup from "../hooks/useRegisterStartup";
-import {useEffect} from "react";
+import { useEffect } from "react";
 import useGetIndustry from "../hooks/useGetIndustry";
+import Loader from "../../../shared/components/ui/Loaders/Loader";
 
 const RegisterStartup = () => {
     const navigate = useNavigate();
-    const {state} = useLocation();
-    const {industryOptions} = useGetIndustry();
-    const {formData, handleChange, handleSubmit, setFormData} = useRegisterStartup(state?.startupId);
+    const { state } = useLocation();
+    const { industryOptions, loading } = useGetIndustry();
+    console.log('industryOptions:', industryOptions);
+    const { formData, handleChange, handleSubmit, setFormData } = useRegisterStartup(state?.startupId);
 
     useEffect(() => {
         if (state) {
-            const {startupName, startupDescription, startupIndustry} = state;
+            const { startupName, startupDescription, startupIndustry } = state;
             setFormData(prevData => ({
                 ...prevData,
                 name: startupName || '',
@@ -22,7 +24,7 @@ const RegisterStartup = () => {
                 industry: startupIndustry || '',
             }));
         }
-    },[state, setFormData]);
+    }, [state, setFormData]);
 
     return (
         <div className="bg-zinc-100 dark:bg-gray-900 flex-auto text-gray-900 dark:text-white flex flex-col">
@@ -58,7 +60,7 @@ const RegisterStartup = () => {
                         placeholder="Industria"
                         value={formData.industry}
                         onChange={handleChange}
-                        options={industryOptions}
+                         options={industryOptions?.industries || []}
                     />
                     <button type="submit" className="mt-4 w-full bg-blue-500 text-white py-2 rounded-lg">
                         {state? 'Actualizar': 'Registrar'}
