@@ -4,9 +4,10 @@ import DeleteModal from "../../../shared/components/ui/Modals/DeleteModal";
 import React, {useState} from "react";
 import {useDeleteProduct} from "../hooks/useDeleteProduct";
 import {Link} from "react-router-dom";
+import USER_TYPE from "../../../core/constants/user/userType";
 
 
-const ProductCard = ({product}) => {
+const ProductCard = ({product, usertype}) => {
     const {id, name, description, category, price, stock} = product;
     const {isMenuOpen, setIsMenuOpen, menuRef} = useOutsideClick();
     const [isModalOpen, setIsModalOpen] = useState(false);
@@ -49,12 +50,14 @@ const ProductCard = ({product}) => {
                         Mas detalles
                     </button>
                 </Link>
-                <button
-                    onClick={() => setIsMenuOpen(!isMenuOpen)}
-                    className="absolute right-4 bottom-6 p-2 rounded-full hover:bg-gray-100"
-                >
-                    <IoEllipsisVertical size={20}/>
-                </button>
+                {usertype === USER_TYPE.SELLER && (
+                    <button
+                        onClick={() => setIsMenuOpen(!isMenuOpen)}
+                        className="absolute right-4 bottom-6 p-2 rounded-full hover:bg-gray-100"
+                    >
+                        <IoEllipsisVertical size={20}/>
+                    </button>
+                )}
             </div>
             {isMenuOpen && (
                 <div ref={menuRef}
