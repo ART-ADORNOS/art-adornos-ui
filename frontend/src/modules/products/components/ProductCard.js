@@ -43,6 +43,7 @@ const ProductCard = ({product, usertype}) => {
             <div className="p-6 pt-0 flex justify-between items-center relative">
                 <Link
                     to={`/product-detail/${id}`}
+                    state={{usertype: usertype}}
                     onClick={handleDetailsClick}
                 >
                     <button data-ripple-light="true" type="button"
