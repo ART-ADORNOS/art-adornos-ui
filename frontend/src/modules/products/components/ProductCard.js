@@ -1,10 +1,11 @@
 import {IoEllipsisVertical, IoPencil, IoTrash} from "react-icons/io5";
 import useOutsideClick from "../hooks/useOutsideClick";
 import DeleteModal from "../../../shared/components/ui/Modals/DeleteModal";
-import React, {useState} from "react";
+import React, {useEffect, useState} from "react";
 import {useDeleteProduct} from "../hooks/useDeleteProduct";
 import {Link} from "react-router-dom";
 import USER_TYPE from "../../../core/constants/user/userType";
+import Loader from "../../../shared/components/ui/Loaders/Loader";
 
 
 const ProductCard = ({product, usertype}) => {
@@ -12,6 +13,7 @@ const ProductCard = ({product, usertype}) => {
     const {isMenuOpen, setIsMenuOpen, menuRef} = useOutsideClick();
     const [isModalOpen, setIsModalOpen] = useState(false);
     const {deleteProduct, isDeleting} = useDeleteProduct(id);
+    usertype = usertype || localStorage.getItem('usertype') || '';
 
     const handleDetailsClick = () => {
         const product = {id, name, description, category, price, stock};
@@ -29,7 +31,9 @@ const ProductCard = ({product, usertype}) => {
     if (!product) {
         return <div className="p-4 border rounded-lg shadow-md">Producto no disponible</div>;
     }
-
+    if (isDeleting) {
+        return <Loader/>;
+    }
     return (
         <div className="relative flex w-80 flex-col rounded-xl bg-white bg-clip-border text-gray-700 shadow-md">
             <div
@@ -43,7 +47,6 @@ const ProductCard = ({product, usertype}) => {
             <div className="p-6 pt-0 flex justify-between items-center relative">
                 <Link
                     to={`/product-detail/${id}`}
-                    state={{usertype: usertype}}
                     onClick={handleDetailsClick}
                 >
                     <button data-ripple-light="true" type="button"

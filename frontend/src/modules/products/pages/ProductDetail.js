@@ -2,14 +2,12 @@ import Navbar from "../../../shared/components/layout/header/Navbar";
 import GoBackButton from "../../../shared/components/ui/Buttons/goBack";
 import {FaBoxOpen, FaDollarSign, FaTags} from "react-icons/fa";
 import useProductDetail from "../hooks/useProductDetail";
-import {useLocation, useParams} from "react-router-dom";
+import {useParams} from "react-router-dom";
 import Loader from "../../../shared/components/ui/Loaders/Loader";
 
 const ProductDetail = () => {
     const {id} = useParams();
     const {product, loading} = useProductDetail(id);
-    const location = useLocation();
-    const {usertype} = location.state || {};
 
     return (
         <div className="bg-zinc-100 dark:bg-gray-900 flex-auto text-gray-900 dark:text-white flex flex-col">
