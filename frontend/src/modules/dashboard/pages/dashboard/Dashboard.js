@@ -10,15 +10,17 @@ import FilterSidebar from "../../components/FilterSidebar";
 import useGetIndustryAll from "../../hooks/user/useGetIndustryAll";
 import {getFilteredStartups, useIndustryKeys} from "../../utils/filterUtils";
 import USER_TYPE from "../../../../core/constants/user/userType";
+import useUsertype from "../../../products/hooks/useUsertype";
 
 const Dashboard = () => {
     const {user} = useContext(AuthContext);
     const {activeFilters, toggleFilter} = useFilter();
     const {startups, loading} = useGetStartup();
     const {industry} = useGetIndustryAll();
-
     const industryKeys = useIndustryKeys(industry);
     const filteredStartups = getFilteredStartups(startups, activeFilters);
+    const [usertype] = useUsertype(USER_TYPE.USER);
+
 
     return (
         <div className="bg-zinc-100 dark:bg-gray-900 flex-auto text-gray-900 dark:text-white flex flex-col">
@@ -42,7 +44,7 @@ const Dashboard = () => {
                     <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 p-8 mt-10">
                         {filteredStartups.map((startup, index) => (
                             <div key={index}>
-                                <CardStartup startup={startup} usertype={USER_TYPE.USER}/>
+                                <CardStartup startup={startup} usertype={usertype}/>
                             </div>
                         ))}
                     </div>
@@ -53,7 +55,7 @@ const Dashboard = () => {
                         <p className="text-lg font-semibold">No se encontraron startups.</p>
                     </div>
                 )
-            )};
+            )}
         </div>
     );
 };

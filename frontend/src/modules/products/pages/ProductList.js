@@ -19,7 +19,8 @@ const ProductList = () => {
     const {products, loadingTwo} = useGetProducts(selectedStartup?.id);
     const {categories, loading} = useGetCategories(selectedStartup?.id);
     const location = useLocation();
-    const {usertype} = location.state || {};
+    let {usertype} = location.state || {};
+    usertype = usertype || localStorage.getItem('usertype') || '';
     const redirect = usertype === USER_TYPE.SELLER ? "/dashboard-seller" : "/dashboard";
 
 

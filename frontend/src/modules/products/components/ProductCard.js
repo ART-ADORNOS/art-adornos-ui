@@ -4,13 +4,16 @@ import DeleteModal from "../../../shared/components/ui/Modals/DeleteModal";
 import React, {useState} from "react";
 import {useDeleteProduct} from "../hooks/useDeleteProduct";
 import {Link} from "react-router-dom";
+import USER_TYPE from "../../../core/constants/user/userType";
+import Loader from "../../../shared/components/ui/Loaders/Loader";
 
 
-const ProductCard = ({product}) => {
+const ProductCard = ({product,usertype}) => {
     const {id, name, description, category, price, stock} = product;
     const {isMenuOpen, setIsMenuOpen, menuRef} = useOutsideClick();
     const [isModalOpen, setIsModalOpen] = useState(false);
     const {deleteProduct, isDeleting} = useDeleteProduct(id);
+    usertype = usertype || localStorage.getItem('usertype') || '';
 
     const handleDetailsClick = () => {
         const product = {id, name, description, category, price, stock};
@@ -28,7 +31,9 @@ const ProductCard = ({product}) => {
     if (!product) {
         return <div className="p-4 border rounded-lg shadow-md">Producto no disponible</div>;
     }
-
+    if (isDeleting) {
+        return <Loader/>;
+    }
     return (
         <div className="relative flex w-80 flex-col rounded-xl bg-white bg-clip-border text-gray-700 shadow-md">
             <div
@@ -49,12 +54,14 @@ const ProductCard = ({product}) => {
                         Mas detalles
                     </button>
                 </Link>
-                <button
-                    onClick={() => setIsMenuOpen(!isMenuOpen)}
-                    className="absolute right-4 bottom-6 p-2 rounded-full hover:bg-gray-100"
-                >
-                    <IoEllipsisVertical size={20}/>
-                </button>
+                {usertype === USER_TYPE.SELLER && (
+                    <button
+                        onClick={() => setIsMenuOpen(!isMenuOpen)}
+                        className="absolute right-4 bottom-6 p-2 rounded-full hover:bg-gray-100"
+                    >
+                        <IoEllipsisVertical size={20}/>
+                    </button>
+                )}
             </div>
             {isMenuOpen && (
                 <div ref={menuRef}
