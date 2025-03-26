@@ -6,12 +6,14 @@ import {IoEllipsisVertical, IoPencil, IoTrash} from "react-icons/io5";
 import useOutsideClick from "../../../products/hooks/useOutsideClick";
 import DeleteModal from "../../../../shared/components/ui/Modals/DeleteModal";
 import {useDeleteStartups} from "../../hooks/useDeleteStartups";
+import Loader from "../../../dashboard/components/Loader";
 
 const CardStartup = ({startup, usertype}) => {
     const {setSelectedStartup} = useContext(StartupContext);
     const {isMenuOpen, setIsMenuOpen, menuRef} = useOutsideClick();
     const [isModalOpen, setIsModalOpen] = useState(false);
     const {deleteStartup, isDeleting} = useDeleteStartups(startup.id);
+    usertype = usertype || localStorage.getItem('usertype') || '';
 
     const handleClick = () => {
         localStorage.setItem("selectedStartupId", startup.id);
@@ -25,6 +27,10 @@ const CardStartup = ({startup, usertype}) => {
         await deleteStartup();
         setIsModalOpen(false);
     };
+
+    if(isDeleting) {
+        return <Loader/>
+    }
 
     return (
         <div className="group relative w-80 h-32 mb-6 transition-all duration-300 hover:-translate-y-1">
