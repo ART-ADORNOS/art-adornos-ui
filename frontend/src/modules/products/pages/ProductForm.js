@@ -2,8 +2,8 @@ import Navbar from "../../../shared/components/layout/header/Navbar";
 import GoBackButton from "../../../shared/components/ui/Buttons/goBack";
 import {useLocation, useNavigate} from "react-router-dom";
 import useRegisterProduct from "../hooks/useRegisterProduct";
-import InputField from "../../../shared/components/ui/Fields/InputField";
 import {useEffect} from "react";
+import ProductInput from "../components/ProductInput";
 
 
 const ProductForm = () => {
@@ -21,6 +21,7 @@ const ProductForm = () => {
                 price: productPrice || '',
                 stock: productStock || '',
                 category: productCategory || '',
+                image: state.image || ''
             }));
         }
     }, [state, setFormData]);
@@ -33,53 +34,20 @@ const ProductForm = () => {
                 <h1 className="text-5xl font-extrabold">{state ? 'Editar Producto' : 'Registro de Producto'}</h1>
             </section>
             <div className="flex min-h-full flex-col justify-center px-6 lg:px-8 pd-20">
-                <div className="mt-10 sm:mx-auto sm:w-full sm:max-w-sm">
+                <div className="mt-10 sm:mx-auto sm:w-full sm:max-w-4xl">
                     <form onSubmit={(e) => handleSubmit(e, navigate)}
-                          className="max-w-md mx-auto bg-white p-6 rounded-lg shadow-md mb-20">
-                        <InputField
-                            label="Nombre"
-                            name="name"
-                            type="text"
-                            placeholder="Nombre del producto"
-                            value={formData.name}
-                            onChange={handleChange}
+                          className="bg-white p-10 rounded-lg shadow-md mb-20">
+                        <ProductInput
+                            formData={formData}
+                            handleChange={handleChange}
+                            categories={categories}
                         />
-                        <InputField
-                            label="Descripción"
-                            name="description"
-                            type="text"
-                            placeholder="Descripción"
-                            value={formData.description}
-                            onChange={handleChange}
-                        />
-                        <InputField
-                            label="Categoría"
-                            name="category"
-                            type="text"
-                            placeholder="Categoría"
-                            value={formData.category}
-                            onChange={handleChange}
-                            options={categories.map(category => [category.name])}
-                        />
-                        <InputField
-                            label="Precio"
-                            name="price"
-                            type="text"
-                            placeholder="Precio"
-                            value={formData.price}
-                            onChange={handleChange}
-                        />
-                        <InputField
-                            label="Stock"
-                            name="stock"
-                            type="text"
-                            placeholder="Stock"
-                            value={formData.stock}
-                            onChange={handleChange}
-                        />
-                        <button type="submit" className="mt-4 w-full bg-blue-500 text-white py-2 rounded-lg">
-                             {state ? 'Actualizar' : 'Registrar'}
-                        </button>
+                        <div className="mt-6">
+                            <button type="submit"
+                                    className="w-full bg-blue-500 text-white py-2 rounded-lg hover:bg-blue-600 transition">
+                                {state ? 'Actualizar' : 'Registrar'}
+                            </button>
+                        </div>
                     </form>
                 </div>
             </div>

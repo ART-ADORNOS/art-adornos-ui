@@ -10,7 +10,9 @@ class RegisterProductView(APIView):
     permission_classes = [IsAuthenticated]
 
     def post(self, request):
+        print(request.data)
         serializer = ProductSerializer(data=request.data)
+        print(serializer.is_valid())
         if serializer.is_valid():
             serializer.save()
             return Response(serializer.data, status=status.HTTP_201_CREATED)
