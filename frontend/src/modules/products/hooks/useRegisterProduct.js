@@ -8,7 +8,7 @@ import updateProductService from "../services/updateProductService";
 const useRegisterProduct = (productId = null) => {
     const {selectedStartup} = useContext(StartupContext);
     const idST = localStorage.getItem("selectedStartupId");
-    const { categories } = useGetCategories(selectedStartup?.id || idST);
+    const {categories} = useGetCategories(selectedStartup?.id || idST);
     const {showNotification} = useNotification();
 
     const [formData, setFormData] = useState({
@@ -22,7 +22,7 @@ const useRegisterProduct = (productId = null) => {
     });
 
     const handleChange = (e) => {
-        const {name, value,files} = e.target;
+        const {name, value, files} = e.target;
         if (name === "image") {
             setFormData((prevData) => ({
                 ...prevData,
@@ -39,19 +39,24 @@ const useRegisterProduct = (productId = null) => {
     const handleSubmit = async (e, navigate) => {
         e.preventDefault();
         const categoryId = categories.find((cat) => cat.name === formData.category)?.id;
+
         const form = new FormData();
-        form.append("start_up", formData.start_up || idST);
+        form.append("start_up", idST);
         form.append("name", formData.name);
         form.append("description", formData.description);
         form.append("category", categoryId || "");
         form.append("price", formData.price);
         form.append("stock", formData.stock);
+
         if (formData.image instanceof File) {
             form.append("image", formData.image);
+        }else{
+            console.log("formData.image", formData.image);
         }
+
         if (productId) {
             try {
-                await updateProductService(productId, formData);
+                await updateProductService(productId, form);
                 showNotification("Producto actualizado exitosamente", "success");
                 navigate("/product-list");
             } catch (err) {
@@ -59,8 +64,7 @@ const useRegisterProduct = (productId = null) => {
             }
         } else {
             try {
-                console.log(formData);
-                await registerProductService(formData);
+                await registerProductService(form);
                 setFormData({
                     start_up: "",
                     name: "",
