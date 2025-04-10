@@ -76,6 +76,9 @@ const ProductInput = ({formData, handleChange, categories}) => {
                 </label>
                 <textarea
                     rows="5"
+                    name="description"
+                    value={formData.description}
+                    onChange={handleChange}
                     placeholder="Enter your content"
                     id="content"
                     className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
@@ -95,7 +98,7 @@ const ProductInput = ({formData, handleChange, categories}) => {
                         id="imageUpload"
                     />
                     <label htmlFor="imageUpload" className="cursor-pointer flex flex-col items-center">
-                        <FiUploadCloud className="text-blue-600 w-12 h-12 mb-4"/> {/* Ícono aquí */}
+                        <FiUploadCloud className="text-blue-600 w-12 h-12 mb-4"/>
 
                         <span className="text-blue-600 font-semibold">
                             Sube una imagen o arrastra y suelta <u>aquí</u>

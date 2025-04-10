@@ -10,6 +10,10 @@ const useRegisterProduct = (productId = null) => {
     const idST = localStorage.getItem("selectedStartupId");
     const {categories} = useGetCategories(selectedStartup?.id || idST);
     const {showNotification} = useNotification();
+    const [showAlert, setShowAlert] = useState(false);
+    const closeAlert = () => {
+        setShowAlert(false);
+    };
 
     const [formData, setFormData] = useState({
         start_up: "",
@@ -38,6 +42,11 @@ const useRegisterProduct = (productId = null) => {
 
     const handleSubmit = async (e, navigate) => {
         e.preventDefault();
+        if (!formData.image) {
+            setShowAlert(true); // Mostrar alerta
+            return;
+        }
+
         const categoryId = categories.find((cat) => cat.name === formData.category)?.id;
 
         const form = new FormData();
@@ -48,11 +57,11 @@ const useRegisterProduct = (productId = null) => {
         form.append("price", formData.price);
         form.append("stock", formData.stock);
 
+
         if (formData.image instanceof File) {
             form.append("image", formData.image);
-        }else{
-            console.log("formData.image", formData.image);
         }
+
 
         if (productId) {
             try {
@@ -88,6 +97,8 @@ const useRegisterProduct = (productId = null) => {
         handleChange,
         handleSubmit,
         categories,
+        showAlert,
+        closeAlert
     };
 }
 
