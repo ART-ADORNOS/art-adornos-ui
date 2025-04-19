@@ -30,6 +30,7 @@ jobs:
         uses: JetBrains/qodana-action@v2024.3
         with:
           pr-mode: false
-        env:
-          QODANA_TOKEN: ${{ secrets.QODANA_TOKEN_165217081 }}
-          QODANA_ENDPOINT: 'https://qodana.cloud'
+
+#        env:
+#          QODANA_TOKEN: ${{ secrets.QODANA_TOKEN_165217081 }}
+#          QODANA_ENDPOINT: 'https://qodana.cloud'
