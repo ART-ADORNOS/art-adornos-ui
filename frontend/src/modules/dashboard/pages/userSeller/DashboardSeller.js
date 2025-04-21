@@ -70,7 +70,7 @@ const DashboardSeller = () => {
                             ¡Anímate a crear tu catalogo para tu emprendimiento!
                         </p>
                         <button
-                            onClick={() => navigate('/register-startup')}
+                            onClick={() => navigate(`${ROUTES.REGISTER_STARTUP}`)}
                             className="mt-4 px-4 py-2 bg-blue-600 hover:bg-blue-700 text-white font-medium rounded-lg shadow-md transition-all"
                         >
                             Crear Startup 🚀
