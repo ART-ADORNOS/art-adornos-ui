@@ -6,6 +6,7 @@ import useRegisterStartup from "../hooks/useRegisterStartup";
 import {useEffect} from "react";
 import useGetIndustry from "../hooks/useGetIndustry";
 import Loader from "../../../shared/components/ui/Loaders/Loader";
+import ROUTES from "../../../core/constants/routes/routes";
 
 const RegisterStartup = () => {
     const navigate = useNavigate();
@@ -32,7 +33,7 @@ const RegisterStartup = () => {
     return (
         <div className="bg-zinc-100 dark:bg-gray-900 flex-auto text-gray-900 dark:text-white flex flex-col">
             <Navbar/>
-            <GoBackButton redirectTo="/dashboard-seller"/>
+            <GoBackButton redirectTo={ROUTES.DASHBOARD_SELLER}/>
             <section className="text-center my-2 mx-8 flex-auto">
                 <h1 className="text-5xl font-extrabold">Registro de Emprendimiento</h1>
             </section>
