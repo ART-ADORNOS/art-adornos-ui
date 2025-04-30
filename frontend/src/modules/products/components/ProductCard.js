@@ -17,8 +17,7 @@ const ProductCard = ({product, usertype}) => {
     const [isModalOpen, setIsModalOpen] = useState(false);
     const {deleteProduct, isDeleting} = useDeleteProduct(id);
     usertype = usertype || localStorage.getItem('usertype') || '';
-    const {handleSubmit, setFormData} = useRegisterCart();
-
+    const {handleSubmit} = useRegisterCart();
 
 
     const handleDeleteRequest = () => {
@@ -30,12 +29,12 @@ const ProductCard = ({product, usertype}) => {
         setIsModalOpen(false);
     };
 
-    const  handleAddToCart = () => {
-        setFormData({
+    const handleAddToCart = (e) => {
+        const data = {
             product_id: id,
             quantity: 1
-        });
-        handleSubmit(new Event('submit')).then(r => {});
+        }
+        handleSubmit(e, data);
     }
 
     if (!product) {
@@ -48,7 +47,8 @@ const ProductCard = ({product, usertype}) => {
 
     return (
         <div className="relative flex w-80 flex-col rounded-xl bg-white bg-clip-border text-gray-700 shadow-md">
-            <div className="relative flex h-56 w-full items-center justify-center overflow-hidden rounded-t-xl bg-gradient-to-tr from-orange-500 to-purple-500">
+            <div
+                className="relative flex h-56 w-full items-center justify-center overflow-hidden rounded-t-xl bg-gradient-to-tr from-orange-500 to-purple-500">
                 <img src={image} alt="producto" className="w-full h-full object-cover rounded-md shadow-md"/>
             </div>
             <div className="p-6">
@@ -75,7 +75,8 @@ const ProductCard = ({product, usertype}) => {
                 ) : (
                     <button
                         onClick={handleAddToCart}
-                        className="p-3 bg-orange-500 text-white rounded-full shadow-md hover:bg-orange-600 transition">
+                        className="p-3 bg-orange-500 text-white rounded-full shadow-md hover:bg-orange-600 transition"
+                    >
                         <FaShoppingCart size={20}/>
                     </button>
                 )}
@@ -85,7 +86,7 @@ const ProductCard = ({product, usertype}) => {
                      className="absolute bottom-14 right-4 bg-gray-800 text-white rounded-md shadow-lg w-35">
                     <ul className="p-2 space-y-1">
                         <Link
-                            to= {`${ROUTES.REGISTER_PRODUCT}`}
+                            to={`${ROUTES.REGISTER_PRODUCT}`}
                             state={{
                                 productId: id,
                                 productName: name,
