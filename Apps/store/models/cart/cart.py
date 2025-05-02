@@ -70,4 +70,4 @@ class OrderProduct(models.Model):
     price_at_purchase = models.DecimalField(max_digits=10, decimal_places=2)
 
     def __str__(self):
-        return f"{self.product.name} x {self.quantity} (Precio: {self.price_at_purchase})"
+        return f"{self.product.name} - {self.quantity} (Precio: {self.price_at_purchase})"
