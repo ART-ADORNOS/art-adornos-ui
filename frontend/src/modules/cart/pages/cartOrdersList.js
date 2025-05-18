@@ -8,15 +8,16 @@ import WhatsAppButton from "../components/WhatsAppButton";
 import {RiDeleteBin5Fill} from "react-icons/ri";
 import useDeleteProductCart from "../hooks/useDeleteProductCart";
 import HorizontalNavBar from "../components/HorizontalNavBar";
+import useFilteredCarts from "../hooks/useFilteredCarts";
 
 const CartOrdersList = () => {
     const {carts, loading} = useGetCart();
     const {deleteProductCart, isDeleting} = useDeleteProductCart();
-
-
     const handleDeleteRequest = (productCartId) => {
         deleteProductCart(productCartId);
     };
+    const {filteredCarts, uniqueStartups, handleFilter, selectedStartup,} = useFilteredCarts(carts);
+
 
     return (
         <div className="bg-zinc-100 dark:bg-gray-900 flex-auto text-gray-900 dark:text-white flex flex-col">
@@ -36,7 +37,7 @@ const CartOrdersList = () => {
             </div>
 
             <div className="flex justify-start mb-14 ml-20">
-                <HorizontalNavBar items={carts.map((cart) => cart.name_startup)}/>
+                <HorizontalNavBar items={uniqueStartups} onFilter={handleFilter}/>
             </div>
 
             {loading || isDeleting ? (
@@ -50,34 +51,26 @@ const CartOrdersList = () => {
                             <table className="min-w-full table-auto border-collapse">
                                 <thead>
                                 <tr className="border-b">
-                                    <th className="px-4 py-2 text-left font-semibold text-gray-700 dark:text-gray-300">
-                                        Productos
-                                    </th>
-                                    <th className="px-4 py-2 text-center font-semibold text-gray-700 dark:text-gray-300">
-                                        Cantidad
-                                    </th>
-                                    <th className="px-4 py-2 text-center font-semibold text-gray-700 dark:text-gray-300">
-                                        Precio
-                                    </th>
-                                    <th className="px-4 py-2 text-right font-semibold text-gray-700 dark:text-gray-300">
-                                        Acción
-                                    </th>
+                                    <th className="px-4 py-2 text-left font-semibold text-gray-700 dark:text-gray-300">Productos</th>
+                                    <th className="px-4 py-2 text-center font-semibold text-gray-700 dark:text-gray-300">Cantidad</th>
+                                    <th className="px-4 py-2 text-center font-semibold text-gray-700 dark:text-gray-300">Precio</th>
+                                    <th className="px-4 py-2 text-right font-semibold text-gray-700 dark:text-gray-300">Acción</th>
                                 </tr>
                                 </thead>
 
-                                {carts.length > 0 ? (
-                                    carts.map((cart) => (
+                                {filteredCarts.length > 0 ? (
+                                    filteredCarts.map((cart) => (
                                         <tr key={cart.id}>
                                             <td className="px-4 py-4">
                                                 <div className="flex items-center">
                                                     <img
                                                         src={cart.image_product}
-                                                        alt="Furniture Set"
+                                                        alt="Producto"
                                                         className="w-16 h-16 object-cover rounded mr-4"
                                                     />
                                                     <div>
                                                         <p className="font-semibold text-gray-800 dark:text-gray-200">
-                                                            {cart.product_id}
+                                                            {cart.product}
                                                         </p>
                                                     </div>
                                                 </div>
@@ -85,13 +78,11 @@ const CartOrdersList = () => {
                                             <td className="px-4 py-4 text-center">
                                                 <div className="inline-flex items-center space-x-2">
                                                     <button
-                                                        className="px-2 py-1 bg-gray-200 dark:bg-gray-700 rounded hover:bg-gray-300 dark:hover:bg-gray-600">
-                                                        -
+                                                        className="px-2 py-1 bg-gray-200 dark:bg-gray-700 rounded hover:bg-gray-300 dark:hover:bg-gray-600">-
                                                     </button>
                                                     <span className="font-medium">{cart.quantity}</span>
                                                     <button
-                                                        className="px-2 py-1 bg-gray-200 dark:bg-gray-700 rounded hover:bg-gray-300 dark:hover:bg-gray-600">
-                                                        +
+                                                        className="px-2 py-1 bg-gray-200 dark:bg-gray-700 rounded hover:bg-gray-300 dark:hover:bg-gray-600">+
                                                     </button>
                                                 </div>
                                             </td>
@@ -102,7 +93,8 @@ const CartOrdersList = () => {
                                                 <button
                                                     className="text-red-500 hover:text-red-700"
                                                     onClick={() => handleDeleteRequest(cart.id)}
-                                                    title="Remove item">
+                                                    title="Eliminar"
+                                                >
                                                     <RiDeleteBin5Fill className="w-6 h-6"/>
                                                 </button>
                                             </td>
@@ -114,10 +106,7 @@ const CartOrdersList = () => {
                                             <div className="flex flex-col items-center justify-center text-center">
                                                 <IoMdCart className="text-6xl mb-3 text-gray-400"/>
                                                 <p className="font-semibold text-gray-800 dark:text-gray-200 text-lg">
-                                                    Tu carrito está vacío
-                                                </p>
-                                                <p className="text-gray-600 dark:text-gray-400 text-center mt-2">
-                                                    Agrega algunos productos para comenzar a comprar.
+                                                    No hay pedidos disponibles
                                                 </p>
                                             </div>
                                         </td>
@@ -125,18 +114,18 @@ const CartOrdersList = () => {
                                 )}
                             </table>
                         </div>
+
                         <div className="flex justify-end mt-4">
                             <span className="text-lg font-semibold text-gray-800 dark:text-gray-200">
-                                Total: ${carts.reduce((acc, cart) => acc + cart.price, 0).toFixed(2)}
+                                Total: ${filteredCarts.reduce((acc, cart) => acc + cart.price, 0).toFixed(2)}
                             </span>
                         </div>
                     </div>
                 </div>
             )}
+
             <div className="flex justify-end mb-14 mr-12">
-                <button>
-                    <WhatsAppButton/>
-                </button>
+                <button><WhatsAppButton/></button>
             </div>
         </div>
     );
