@@ -9,6 +9,7 @@ import {RiDeleteBin5Fill} from "react-icons/ri";
 import useDeleteProductCart from "../hooks/useDeleteProductCart";
 import HorizontalNavBar from "../components/HorizontalNavBar";
 import useFilteredCarts from "../hooks/useFilteredCarts";
+import {handleWhatsAppClick} from "../utils/whatsappUtils";
 
 const CartOrdersList = () => {
     const {carts, loading} = useGetCart();
@@ -17,7 +18,6 @@ const CartOrdersList = () => {
         deleteProductCart(productCartId);
     };
     const {filteredCarts, uniqueStartups, handleFilter, selectedStartup,} = useFilteredCarts(carts);
-
 
     return (
         <div className="bg-zinc-100 dark:bg-gray-900 flex-auto text-gray-900 dark:text-white flex flex-col">
@@ -124,8 +124,12 @@ const CartOrdersList = () => {
                 </div>
             )}
 
-            <div className="flex justify-end mb-14 mr-12">
-                <button><WhatsAppButton/></button>
+            <div className="flex justify-end mb-14 mr-20">
+                <button
+                    onClick={() => handleWhatsAppClick(filteredCarts)}
+                >
+                    <WhatsAppButton/>
+                </button>
             </div>
         </div>
     );
