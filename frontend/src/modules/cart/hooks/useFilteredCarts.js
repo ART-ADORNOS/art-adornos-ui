@@ -2,16 +2,16 @@ import {useEffect, useState} from "react";
 
 const useFilteredCarts = (carts) => {
     const [filteredCarts, setFilteredCarts] = useState([]);
-    const [selectedStartup, setSelectedStartup] = useState(null);
+    const [selectedStartup, setSelectedStartup] = useState("Todos");
 
     useEffect(() => {
         setFilteredCarts(carts);
     }, [carts]);
 
     const handleFilter = (startupName) => {
-        if (startupName === selectedStartup) {
+        if (!startupName || startupName === "Todos") {
             setFilteredCarts(carts);
-            setSelectedStartup(null);
+            setSelectedStartup("Todos");
         } else {
             const result = carts.filter((cart) => cart.name_startup === startupName);
             setFilteredCarts(result);

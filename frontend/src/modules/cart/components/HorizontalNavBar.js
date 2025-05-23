@@ -1,8 +1,6 @@
-import React, {useState} from 'react';
+import React from 'react';
 
-const HorizontalNavBar = ({items, onFilter}) => {
-    const [activeIndex, setActiveIndex] = useState(null);
-
+const HorizontalNavBar = ({items, onFilter, selected}) => {
     return (
         <div
             className="flex bg-white w-fit px-4 py-3 shadow-lg rounded-2xl dark:bg-box-dark dark:shadow-box-dark-out space-x-6 overflow-x-auto">
@@ -10,15 +8,11 @@ const HorizontalNavBar = ({items, onFilter}) => {
                 <button
                     key={index}
                     className={`relative flex items-center px-4 py-2 rounded-lg transition-colors duration-200 focus:outline-none
-                    ${
-                        activeIndex === index
-                            ? 'bg-blue-100 text-blue-700 font-semibold ring-2 ring-blue-400  '
-                            : 'text-gray-700 hover:bg-gray-200 '
-                    }`}
-                    onClick={() => {
-                        setActiveIndex(index);
-                        onFilter(name);
-                    }}
+                        ${selected === name
+                        ? 'bg-blue-100 text-blue-700 font-semibold ring-2 ring-blue-400'
+                        : 'text-gray-700 hover:bg-gray-200'}
+                    `}
+                    onClick={() => onFilter(name)}
                 >
                     <span className="text-sm font-semibold text-gray-700 dark:text-gray-600 whitespace-nowrap">
                         {name}
@@ -33,5 +27,6 @@ const HorizontalNavBar = ({items, onFilter}) => {
         </div>
     );
 };
+
 
 export default HorizontalNavBar;

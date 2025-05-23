@@ -67,7 +67,11 @@ const CartOrdersList = () => {
 
             {filteredCarts.length > 0 && (
                 <div className="flex justify-start mb-14 ml-20">
-                    <HorizontalNavBar items={uniqueStartups} onFilter={handleFilter}/>
+                    <HorizontalNavBar
+                        items={uniqueStartups}
+                        onFilter={handleFilter}
+                        selected={selectedStartup}
+                    />
                 </div>
             )}
 
@@ -181,11 +185,14 @@ const CartOrdersList = () => {
                 </div>
             )}
 
-            <div className="flex justify-end mb-14 mr-20">
-                <button onClick={() => handleWhatsAppClick(filteredCarts)}>
-                    <WhatsAppButton/>
-                </button>
-            </div>
+            {selectedStartup !== "Todos" && (
+                <div className="flex justify-end mb-14 mr-20">
+                    <button onClick={() => handleWhatsAppClick(filteredCarts)}>
+                        <WhatsAppButton/>
+                    </button>
+                </div>
+            )}
+
 
             <DeleteModal
                 isOpen={isModalOpen}
