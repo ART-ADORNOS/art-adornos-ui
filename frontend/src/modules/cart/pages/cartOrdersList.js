@@ -13,6 +13,7 @@ import {handleWhatsAppClick} from "../utils/whatsappUtils";
 import DeleteModal from "../../../shared/components/ui/Modals/DeleteModal";
 import {AnimatePresence, motion} from "framer-motion";
 import updateCartQuantity from "../utils/updateCartQuantity";
+import calculateTotals from "../utils/calculateTotals";
 
 const CartOrdersList = () => {
     const {carts: fetchedCarts, loading} = useGetCart();
@@ -174,10 +175,7 @@ const CartOrdersList = () => {
 
                         <div className="flex justify-end mt-4">
                           <span className="text-lg font-semibold text-gray-800 dark:text-gray-200">
-                            Total: $
-                              {filteredCarts
-                                  .reduce((acc, cart) => acc + cart.price, 0)
-                                  .toFixed(2)}
+                            Total: $ {calculateTotals(filteredCarts)}
                           </span>
                         </div>
                     </div>
@@ -191,7 +189,6 @@ const CartOrdersList = () => {
                     </button>
                 </div>
             )}
-
 
             <DeleteModal
                 isOpen={isModalOpen}
