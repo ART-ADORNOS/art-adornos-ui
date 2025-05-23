@@ -18,8 +18,8 @@ const CartOrdersList = () => {
     const {carts: fetchedCarts, loading} = useGetCart();
     const [carts, setCarts] = useState([]);
     const {deleteProductCart, isDeleting} = useDeleteProductCart();
-    const {filteredCarts, uniqueStartups, handleFilter, selectedStartup,} = useFilteredCarts(carts);
-
+    const [selectStartup, setSelectedStartup] = useState("Todos");
+    const {filteredCarts, uniqueStartups,} = useFilteredCarts(carts, selectStartup);
     const [isModalOpen, setIsModalOpen] = useState(false);
     const [dataProduct, setDataProduct] = useState({id: null, product: ""});
     const [deleteRow, setDeleteRow] = useState(null);
@@ -40,7 +40,6 @@ const CartOrdersList = () => {
     const handleUpdateQuantity = (productId, type) => {
         setCarts(prev => updateCartQuantity(prev, productId, type));
     }
-
 
     useEffect(() => {
         if (fetchedCarts.length > 0) {
@@ -69,8 +68,8 @@ const CartOrdersList = () => {
                 <div className="flex justify-start mb-14 ml-20">
                     <HorizontalNavBar
                         items={uniqueStartups}
-                        onFilter={handleFilter}
-                        selected={selectedStartup}
+                        onFilter={(startup) => setSelectedStartup(startup)}
+                        selected={selectStartup}
                     />
                 </div>
             )}
@@ -185,7 +184,7 @@ const CartOrdersList = () => {
                 </div>
             )}
 
-            {selectedStartup !== "Todos" && (
+            {selectStartup !== "Todos" && (
                 <div className="flex justify-end mb-14 mr-20">
                     <button onClick={() => handleWhatsAppClick(filteredCarts)}>
                         <WhatsAppButton/>
