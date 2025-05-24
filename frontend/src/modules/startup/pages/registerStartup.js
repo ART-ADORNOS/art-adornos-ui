@@ -13,6 +13,7 @@ const RegisterStartup = () => {
     const navigate = useNavigate();
     const {state} = useLocation();
     const {industryOptions, loading} = useGetIndustry();
+    const labelIndustry = industryOptions.industries?.map(item => item.label || []);
     const {formData, handleChange, handleSubmit, setFormData} = useRegisterStartup(state?.startupId);
     const userType = localStorage.getItem('usertype');
     const redirectPage = userType !== 'user' ? ROUTES.DASHBOARD_SELLER : ROUTES.DASHBOARD;
@@ -57,7 +58,7 @@ const RegisterStartup = () => {
                                 placeholder="Industria"
                                 value={Array.isArray(formData.industry) ? formData.industry.join(", ") : formData.industry}
                                 onChange={handleChange}
-                                options={industryOptions?.industries || []}
+                                options={labelIndustry}
                             />
                             <button type="submit" className="mt-4 w-full bg-blue-500 text-white py-2 rounded-lg">
                                 {state ? 'Actualizar' : 'Registrar'}

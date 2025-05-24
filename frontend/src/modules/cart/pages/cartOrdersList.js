@@ -1,5 +1,5 @@
 import Navbar from "../../../shared/components/layout/header/Navbar";
-import React from "react";
+import React, {useEffect, useState} from "react";
 import GoBackButton from "../../../shared/components/ui/Buttons/goBack";
 import {useGetCart} from "../hooks/useGetCart";
 import Loader from "../../../shared/components/ui/Loaders/Loader";
@@ -10,14 +10,43 @@ import useDeleteProductCart from "../hooks/useDeleteProductCart";
 import HorizontalNavBar from "../components/HorizontalNavBar";
 import useFilteredCarts from "../hooks/useFilteredCarts";
 import {handleWhatsAppClick} from "../utils/whatsappUtils";
+import DeleteModal from "../../../shared/components/ui/Modals/DeleteModal";
+import {AnimatePresence, motion} from "framer-motion";
+import updateCartQuantity from "../utils/updateCartQuantity";
+import calculateTotals from "../utils/calculateTotals";
 
 const CartOrdersList = () => {
-    const {carts, loading} = useGetCart();
+    const {carts: fetchedCarts, loading} = useGetCart();
+    const [carts, setCarts] = useState([]);
     const {deleteProductCart, isDeleting} = useDeleteProductCart();
-    const handleDeleteRequest = (productCartId) => {
-        deleteProductCart(productCartId);
+    const [selectStartup, setSelectedStartup] = useState("Todos");
+    const {filteredCarts, uniqueStartups,} = useFilteredCarts(carts, selectStartup);
+    const [isModalOpen, setIsModalOpen] = useState(false);
+    const [dataProduct, setDataProduct] = useState({id: null, product: ""});
+    const [deleteRow, setDeleteRow] = useState(null);
+
+    const openModalConfirmation = (id, product) => {
+        setDataProduct({id, product});
+        setIsModalOpen(true);
     };
-    const {filteredCarts, uniqueStartups, handleFilter, selectedStartup,} = useFilteredCarts(carts);
+
+    const handleDeleteRequest = async (productCartId) => {
+        setDeleteRow(productCartId);
+        await new Promise((resolve) => setTimeout(resolve, 300));
+        await deleteProductCart(productCartId);
+        setCarts(prev => prev.filter(cart => cart.id !== productCartId));
+        setIsModalOpen(false);
+    }
+
+    const handleUpdateQuantity = (productId, type) => {
+        setCarts(prev => updateCartQuantity(prev, productId, type));
+    }
+
+    useEffect(() => {
+        if (fetchedCarts.length > 0) {
+            setCarts(fetchedCarts);
+        }
+    }, [fetchedCarts]);
 
     return (
         <div className="bg-zinc-100 dark:bg-gray-900 flex-auto text-gray-900 dark:text-white flex flex-col">
@@ -36,9 +65,15 @@ const CartOrdersList = () => {
                 </div>
             </div>
 
-            <div className="flex justify-start mb-14 ml-20">
-                <HorizontalNavBar items={uniqueStartups} onFilter={handleFilter}/>
-            </div>
+            {filteredCarts.length > 0 && (
+                <div className="flex justify-start mb-14 ml-20">
+                    <HorizontalNavBar
+                        items={uniqueStartups}
+                        onFilter={(startup) => setSelectedStartup(startup)}
+                        selected={selectStartup}
+                    />
+                </div>
+            )}
 
             {loading || isDeleting ? (
                 <div className="flex items-center justify-center h-96 w-full">
@@ -51,86 +86,116 @@ const CartOrdersList = () => {
                             <table className="min-w-full table-auto border-collapse">
                                 <thead>
                                 <tr className="border-b">
-                                    <th className="px-4 py-2 text-left font-semibold text-gray-700 dark:text-gray-300">Productos</th>
-                                    <th className="px-4 py-2 text-center font-semibold text-gray-700 dark:text-gray-300">Cantidad</th>
-                                    <th className="px-4 py-2 text-center font-semibold text-gray-700 dark:text-gray-300">Precio</th>
-                                    <th className="px-4 py-2 text-right font-semibold text-gray-700 dark:text-gray-300">Acción</th>
+                                    <th className="px-4 py-2 text-left font-semibold text-gray-700 dark:text-gray-300">
+                                        Productos
+                                    </th>
+                                    <th className="px-4 py-2 text-center font-semibold text-gray-700 dark:text-gray-300">
+                                        Cantidad
+                                    </th>
+                                    <th className="px-4 py-2 text-center font-semibold text-gray-700 dark:text-gray-300">
+                                        Precio
+                                    </th>
+                                    <th className="px-4 py-2 text-right font-semibold text-gray-700 dark:text-gray-300">
+                                        Acción
+                                    </th>
                                 </tr>
                                 </thead>
-
-                                {filteredCarts.length > 0 ? (
-                                    filteredCarts.map((cart) => (
-                                        <tr key={cart.id}>
-                                            <td className="px-4 py-4">
-                                                <div className="flex items-center">
-                                                    <img
-                                                        src={cart.image_product}
-                                                        alt="Producto"
-                                                        className="w-16 h-16 object-cover rounded mr-4"
-                                                    />
-                                                    <div>
-                                                        <p className="font-semibold text-gray-800 dark:text-gray-200">
-                                                            {cart.product}
-                                                        </p>
+                                <tbody>
+                                <AnimatePresence>
+                                    {filteredCarts.length > 0 ? (
+                                        filteredCarts.map((cart) => (
+                                            <motion.tr
+                                                key={cart.id}
+                                                initial={{opacity: 0, y: -10}}
+                                                animate={{opacity: 1, y: 0}}
+                                                exit={{opacity: 0, x: 100}}
+                                                transition={{duration: 0.3}}
+                                            >
+                                                <td className="px-4 py-4">
+                                                    <div className="flex items-center">
+                                                        <img
+                                                            src={cart.image_product}
+                                                            alt="Producto"
+                                                            className="w-16 h-16 object-cover rounded mr-4"
+                                                        />
+                                                        <div>
+                                                            <p className="font-semibold text-gray-800 dark:text-gray-200">
+                                                                {cart.product}
+                                                            </p>
+                                                        </div>
                                                     </div>
-                                                </div>
-                                            </td>
-                                            <td className="px-4 py-4 text-center">
-                                                <div className="inline-flex items-center space-x-2">
+                                                </td>
+                                                <td className="px-4 py-4 text-center">
+                                                    <div className="inline-flex items-center space-x-2">
+                                                        <button
+                                                            onClick={() => handleUpdateQuantity(cart.id, "dec")}
+                                                            className="px-2 py-1 bg-gray-200 dark:bg-gray-700 rounded hover:bg-gray-300 dark:hover:bg-gray-600">
+                                                            -
+                                                        </button>
+                                                        <span className="font-medium">{cart.quantity}</span>
+                                                        <button
+                                                            onClick={() => handleUpdateQuantity(cart.id, "inc")}
+                                                            className="px-2 py-1 bg-gray-200 dark:bg-gray-700 rounded hover:bg-gray-300 dark:hover:bg-gray-600">
+                                                            +
+                                                        </button>
+                                                    </div>
+                                                </td>
+                                                <td className="px-4 py-4 text-center font-semibold text-gray-800 dark:text-gray-200">
+                                                    ${cart.price}
+                                                </td>
+                                                <td className="px-4 py-4 text-right">
                                                     <button
-                                                        className="px-2 py-1 bg-gray-200 dark:bg-gray-700 rounded hover:bg-gray-300 dark:hover:bg-gray-600">-
+                                                        className="text-red-500 hover:text-red-700"
+                                                        onClick={() =>
+                                                            openModalConfirmation(cart.id, cart.product)
+                                                        }
+                                                        title="Eliminar"
+                                                    >
+                                                        <RiDeleteBin5Fill className="w-6 h-6"/>
                                                     </button>
-                                                    <span className="font-medium">{cart.quantity}</span>
-                                                    <button
-                                                        className="px-2 py-1 bg-gray-200 dark:bg-gray-700 rounded hover:bg-gray-300 dark:hover:bg-gray-600">+
-                                                    </button>
+                                                </td>
+                                            </motion.tr>
+                                        ))
+                                    ) : (
+                                        <tr>
+                                            <td colSpan={4} className="p-10">
+                                                <div className="flex flex-col items-center justify-center text-center">
+                                                    <IoMdCart className="text-6xl mb-3 text-gray-400"/>
+                                                    <p className="font-semibold text-gray-800 dark:text-gray-200 text-lg">
+                                                        No hay pedidos disponibles
+                                                    </p>
                                                 </div>
-                                            </td>
-                                            <td className="px-4 py-4 text-center font-semibold text-gray-800 dark:text-gray-200">
-                                                ${cart.price}
-                                            </td>
-                                            <td className="px-4 py-4 text-right">
-                                                <button
-                                                    className="text-red-500 hover:text-red-700"
-                                                    onClick={() => handleDeleteRequest(cart.id)}
-                                                    title="Eliminar"
-                                                >
-                                                    <RiDeleteBin5Fill className="w-6 h-6"/>
-                                                </button>
                                             </td>
                                         </tr>
-                                    ))
-                                ) : (
-                                    <tr>
-                                        <td colSpan={4} className="p-10">
-                                            <div className="flex flex-col items-center justify-center text-center">
-                                                <IoMdCart className="text-6xl mb-3 text-gray-400"/>
-                                                <p className="font-semibold text-gray-800 dark:text-gray-200 text-lg">
-                                                    No hay pedidos disponibles
-                                                </p>
-                                            </div>
-                                        </td>
-                                    </tr>
-                                )}
+                                    )}
+                                </AnimatePresence>
+                                </tbody>
                             </table>
                         </div>
 
                         <div className="flex justify-end mt-4">
-                            <span className="text-lg font-semibold text-gray-800 dark:text-gray-200">
-                                Total: ${filteredCarts.reduce((acc, cart) => acc + cart.price, 0).toFixed(2)}
-                            </span>
+                          <span className="text-lg font-semibold text-gray-800 dark:text-gray-200">
+                            Total: $ {calculateTotals(filteredCarts)}
+                          </span>
                         </div>
                     </div>
                 </div>
             )}
 
-            <div className="flex justify-end mb-14 mr-20">
-                <button
-                    onClick={() => handleWhatsAppClick(filteredCarts)}
-                >
-                    <WhatsAppButton/>
-                </button>
-            </div>
+            {selectStartup !== "Todos" && (
+                <div className="flex justify-end mb-14 mr-20">
+                    <button onClick={() => handleWhatsAppClick(filteredCarts)}>
+                        <WhatsAppButton/>
+                    </button>
+                </div>
+            )}
+
+            <DeleteModal
+                isOpen={isModalOpen}
+                onClose={() => setIsModalOpen(false)}
+                onConfirm={() => handleDeleteRequest(dataProduct.id)}
+                message={`¿Estás seguro de que deseas eliminar el producto ${dataProduct.product}?`}
+            />
         </div>
     );
 };
