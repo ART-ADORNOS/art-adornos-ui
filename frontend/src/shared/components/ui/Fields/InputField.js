@@ -1,4 +1,5 @@
 import React from "react";
+import CheckboxField from "./CheckboxField";
 
 const InputField = ({
                         label,
@@ -29,6 +30,15 @@ const InputField = ({
                     <option key={index} value={option}>{option}</option>
                 ))}
             </select>
+        ) : type === "checkbox" ? (
+            <CheckboxField
+                name={name}
+                value={value}
+                onChange={onChange}
+                error={error}
+                errorMessage={errorMessage}
+            />
+
         ) : (
             <div className="mt-2">
                 <input
