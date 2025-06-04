@@ -8,11 +8,15 @@ import useGetIndustry from "../hooks/useGetIndustry";
 import Loader from "../../../shared/components/ui/Loaders/Loader";
 import ROUTES from "../../../core/constants/routes/routes";
 import useInitializeForm from "../hooks/useInitializeForm";
+import useGetIcons from "../hooks/useGetIcons";
 
 const RegisterStartup = () => {
     const navigate = useNavigate();
     const {state} = useLocation();
     const {industryOptions, loading} = useGetIndustry();
+    const {icons, loadingIcons} = useGetIcons()
+    console.log(icons)
+
     const labelIndustry = industryOptions.industries?.map(item => item.label || []);
     const {formData, handleChange, handleSubmit, setFormData} = useRegisterStartup(state?.startupId);
     const userType = localStorage.getItem('usertype');
