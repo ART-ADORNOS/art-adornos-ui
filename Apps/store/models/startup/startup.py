@@ -1,8 +1,7 @@
-from random import choices
-
 from django.db import models
 from django.utils.text import slugify
 from django_currentuser.middleware import (get_current_authenticated_user)
+
 from Apps.Accounts.models import User
 from Apps.store.utilities.enums.icon import Icon
 from Apps.store.utilities.enums.industry import Industry
@@ -45,7 +44,7 @@ class Startup(ModelBase):
     slug = models.SlugField(max_length=255, unique=True, blank=True, null=True, verbose_name='Slug')
     is_active = models.BooleanField(default=True, verbose_name='Activo')
     industry = models.TextField(choices=Industry.choices, verbose_name='Industria')
-    icon = models.TextField(choices=Icon.choices, blank=True ,verbose_name='Icon')
+    icon = models.TextField(choices=Icon.choices, blank=True, verbose_name='Icon')
 
     def __str__(self):
         return self.name

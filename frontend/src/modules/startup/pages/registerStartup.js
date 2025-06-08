@@ -20,7 +20,6 @@ const RegisterStartup = () => {
     const userType = localStorage.getItem('usertype');
     const redirectPage = userType !== 'user' ? ROUTES.DASHBOARD_SELLER : ROUTES.DASHBOARD;
     useInitializeForm(state, setFormData);
-    console.log(formData)
 
     return (
         <div className="bg-zinc-100 dark:bg-gray-900 flex-auto text-gray-900 dark:text-white flex flex-col">
