@@ -8,20 +8,19 @@ import useGetIndustry from "../hooks/useGetIndustry";
 import Loader from "../../../shared/components/ui/Loaders/Loader";
 import ROUTES from "../../../core/constants/routes/routes";
 import useInitializeForm from "../hooks/useInitializeForm";
-import useGetIcons from "../hooks/useGetIcons";
+import IconDropdown from "../../../shared/components/ui/Fields/IconDropdown";
+import iconOptions from "../../../core/constants/startup/iconOptions";
 
 const RegisterStartup = () => {
     const navigate = useNavigate();
     const {state} = useLocation();
-    const {industryOptions, loading} = useGetIndustry();
-    const {icons, loadingIcons} = useGetIcons()
-    console.log(icons)
-
+    const {industryOptions, loadingIndustry} = useGetIndustry();
     const labelIndustry = industryOptions.industries?.map(item => item.label || []);
     const {formData, handleChange, handleSubmit, setFormData} = useRegisterStartup(state?.startupId);
     const userType = localStorage.getItem('usertype');
     const redirectPage = userType !== 'user' ? ROUTES.DASHBOARD_SELLER : ROUTES.DASHBOARD;
     useInitializeForm(state, setFormData);
+    console.log(formData)
 
     return (
         <div className="bg-zinc-100 dark:bg-gray-900 flex-auto text-gray-900 dark:text-white flex flex-col">
@@ -30,7 +29,7 @@ const RegisterStartup = () => {
             <section className="text-center my-2 mx-8 flex-auto">
                 <h1 className="text-5xl font-extrabold">Registro de Emprendimiento</h1>
             </section>
-            {loading ? (
+            {loadingIndustry ? (
                 <div className="flex items-center justify-center h-96 w-full">
                     <Loader/>
                 </div>
@@ -60,9 +59,16 @@ const RegisterStartup = () => {
                                 name="industry"
                                 type="text"
                                 placeholder="Industria"
-                                value={Array.isArray(formData.industry) ? formData.industry.join(", ") : formData.industry}
+                                value={Array.isArray(formData.industry) ? formData.industry[0] : formData.industry}
                                 onChange={handleChange}
                                 options={labelIndustry}
+                            />
+                            <IconDropdown
+                                label="Icono"
+                                name="icon"
+                                value={formData.icon}
+                                onChange={handleChange}
+                                options={iconOptions}
                             />
                             <button type="submit" className="mt-4 w-full bg-blue-500 text-white py-2 rounded-lg">
                                 {state ? 'Actualizar' : 'Registrar'}

@@ -7,7 +7,6 @@ from rest_framework.views import APIView
 
 from Apps.store.models import Startup
 from Apps.store.serializer.startup.startup import StartupSerializer
-from Apps.store.utilities.enums.icon import Icon
 from Apps.store.utilities.enums.industry import Industry
 
 logger = logging.getLogger(__name__)
@@ -37,22 +36,10 @@ class UserStartupsListView(APIView):
         return Response(serializer.data)
 
 
-class IconStartupView(APIView):
-    permission_classes = [IsAuthenticated]
-
-    def get(self, request):
-        icons = [
-            {"icon": choice.value, "label": choice.label}
-            for choice in Icon
-        ]
-        return Response({"icons": icons})
-
-
 class RegisterStartupView(APIView):
     permission_classes = [IsAuthenticated]
 
     def post(self, request):
-        print(request.data)
         serializer = StartupSerializer(data=request.data)
         if serializer.is_valid():
             serializer.save(owner=request.user)
