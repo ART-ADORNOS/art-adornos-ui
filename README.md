@@ -30,7 +30,7 @@ cd ART_ADORNOS
 ```bash
 python -m venv venv
 source venv/bin/activate  # En Windows: venv\Scripts\activate
-pip install -r requirements\delelopment.txt
+pip install -r requirements/development.txt
 ```
 
 #### Aplicar migraciones y ejecutar el servidor
