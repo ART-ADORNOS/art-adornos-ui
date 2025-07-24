@@ -53,6 +53,7 @@ jobs:
           echo "POSTGRES_PASSWORD=${{ secrets.POSTGRES_PASSWORD }}" >> $GITHUB_ENV
           echo "POSTGRES_HOST=localhost" >> $GITHUB_ENV
           echo "POSTGRES_PORT=5432" >> $GITHUB_ENV
+          echo "DEBUG=0" >> $GITHUB_ENV
 
       - name: Apply migrations
         run: python manage.py migrate
