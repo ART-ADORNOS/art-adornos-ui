@@ -3,7 +3,7 @@ import {Link} from "react-router-dom";
 import {StartupContext} from "../../context/StartupProvider";
 import {IoEllipsisVertical, IoPencil, IoTrash} from "react-icons/io5";
 import useOutsideClick from "../../../products/hooks/useOutsideClick";
-import DeleteModal from "../../../../shared/components/ui/Modals/DeleteModal";
+import DeleteModal from "../../../../shared/components/molecules/DeleteModal";
 import {useDeleteStartups} from "../../hooks/useDeleteStartups";
 import Loader from "../../../dashboard/components/Loader";
 import ROUTES from "../../../../core/constants/routes/routes";

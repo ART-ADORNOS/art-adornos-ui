@@ -1,5 +1,5 @@
 import { createContext, useContext, useState } from "react";
-import AlertMessage from "../components/ui/AlertPopup/alertMessage";
+import AlertMessage from "../components/molecules/AlertMessage";
 
 const NotificationContext = createContext();
 

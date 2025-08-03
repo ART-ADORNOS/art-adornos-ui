@@ -1,7 +1,7 @@
 import React, {useContext} from 'react';
 import {useNavigate} from 'react-router-dom';
 import AuthContext from '../../../../shared/providers/AuthContext';
-import Navbar from '../../../../shared/components/layout/header/Navbar';
+import Navbar from '../../../../shared/components/organisms/Navbar';
 import CardStartup from "../../../startup/components/card/CardStartup";
 import FilterSidebar from "../../components/FilterSidebar";
 import useFilter from "../../hooks/useFilter";

@@ -2,7 +2,7 @@ import {useEffect, useMemo, useState} from "react";
 import {BrowserRouter as Router, Navigate, Route, Routes} from 'react-router-dom';
 import {AuthProvider} from './shared/providers/AuthContext';
 import LandingPages from "./modules/landing/pages/landingPages";
-import NotFoundPage from "./shared/components/errors/NotFoundPage";
+import NotFoundPage from "./shared/components/pages/NotFoundPage";
 import ThemeContext from "./shared/providers/ThemeContent";
 import LoginAdmin from "./modules/auth/pages/login/LoginAdmin";
 import Login from './modules/auth/pages/login/Login';

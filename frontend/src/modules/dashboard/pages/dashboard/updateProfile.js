@@ -1,8 +1,8 @@
 import React, {useContext} from "react";
 import AuthContext from "../../../../shared/providers/AuthContext";
-import Navbar from "../../../../shared/components/layout/header/Navbar";
-import GoBackButton from "../../../../shared/components/ui/Buttons/goBack";
-import InputField from "../../../../shared/components/ui/Fields/InputField";
+import Navbar from "../../../../shared/components/organisms/Navbar";
+import GoBackButton from "../../../../shared/components/molecules/GoBackButton";
+import InputField from "../../../../shared/components/atoms/InputField";
 import useFormData from "../../hooks/useFormData";
 import useProfileUpdate from "../../hooks/useProfileUpdate";
 import $ROUTES from "../../../../core/constants/routes/routes";

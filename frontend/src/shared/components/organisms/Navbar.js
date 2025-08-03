@@ -1,15 +1,15 @@
 import {Link, useNavigate} from "react-router-dom";
 import React, {Fragment, useContext, useState} from "react";
-import ThemeContext from "../../../../shared/providers/ThemeContent";
-import AuthContext from "../../../providers/AuthContext";
-import DeleteUserModal from "../../../../modules/auth/components/Modal/delete";
-import api from '../../../../core/api/axios';
-import AlertMessage from "../../ui/Messages/AlertMessage";
-import {NotificationIcon} from "../../icons/NotificationIcon";
-import {ThemeToggleIcon} from "../../icons/ThemeToggleIcon";
-import {NotificationModal} from "../../ui/Modals/NotificationModal";
-import ROUTES from "../../../../core/constants/routes/routes";
-import USER_TYPE from "../../../../core/constants/user/userType";
+import ThemeContext from "../../providers/ThemeContent";
+import AuthContext from "../../providers/AuthContext";
+import DeleteUserModal from "../../../modules/auth/components/Modal/delete";
+import api from '../../../core/api/axios';
+import AlertMessage from "../molecules/AlertMessage";
+import {NotificationIcon} from "../atoms/NotificationIcon";
+import {ThemeToggleIcon} from "../atoms/ThemeToggleIcon";
+import {NotificationModal} from "../molecules/NotificationModal";
+import ROUTES from "../../../core/constants/routes/routes";
+import USER_TYPE from "../../../core/constants/user/userType";
 
 
 export default function Navbar({dashboardTyype}) {

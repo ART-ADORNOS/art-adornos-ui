@@ -1,5 +1,5 @@
 import React, {useContext} from 'react';
-import Navbar from '../../../../shared/components/layout/header/Navbar';
+import Navbar from '../../../../shared/components/organisms/Navbar';
 import useGetStartup from "../../hooks/user/useGetStartup";
 import AuthContext from "../../../../shared/providers/AuthContext";
 import WelcomeHeader from "../../components/WelcomeHeader";

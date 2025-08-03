@@ -1,12 +1,12 @@
-import Navbar from "../../../shared/components/layout/header/Navbar";
+import Navbar from "../../../shared/components/organisms/Navbar";
 import React, {Fragment, useRef, useState} from "react";
-import GoBackButton from "../../../shared/components/ui/Buttons/goBack";
+import GoBackButton from "../../../shared/components/molecules/GoBackButton";
 import {Link, useLocation} from "react-router-dom";
 import ProductCard from "../components/ProductCard";
 import {useGetProducts} from "../hooks/useGetProducts";
 import {useGetCategories} from "../../category/hooks/useGetCategory";
 import CategorySidebar from "../../category/components/CategorySidebar";
-import Loader from "../../../shared/components/ui/Loaders/Loader";
+import Loader from "../../../shared/components/molecules/Loader";
 import USER_TYPE from "../../../core/constants/user/userType";
 import BoxOfCardsAnimation from '../../dashboard/components/animations/BoxOfCardsAnimation';
 import ROUTES from "../../../core/constants/routes/routes";

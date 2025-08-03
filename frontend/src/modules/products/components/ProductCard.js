@@ -1,11 +1,11 @@
 import {IoEllipsisVertical, IoPencil, IoTrash} from "react-icons/io5";
 import useOutsideClick from "../hooks/useOutsideClick";
-import DeleteModal from "../../../shared/components/ui/Modals/DeleteModal";
+import DeleteModal from "../../../shared/components/molecules/DeleteModal";
 import React, {useState} from "react";
 import {useDeleteProduct} from "../hooks/useDeleteProduct";
 import {Link} from "react-router-dom";
 import USER_TYPE from "../../../core/constants/user/userType";
-import Loader from "../../../shared/components/ui/Loaders/Loader";
+import Loader from "../../../shared/components/molecules/Loader";
 import {FaShoppingCart} from "react-icons/fa";
 import ROUTES from "../../../core/constants/routes/routes";
 import useRegisterCart from "../../cart/hooks/useRegisterCart";

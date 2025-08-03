@@ -1,5 +1,5 @@
-import Navbar from "../../../shared/components/layout/header/Navbar";
-import GoBackButton from "../../../shared/components/ui/Buttons/goBack";
+import Navbar from "../../../shared/components/organisms/Navbar";
+import GoBackButton from "../../../shared/components/molecules/GoBackButton";
 import React from "react";
 
 const OrderHistoryList = () => {
@@ -17,6 +17,13 @@ const OrderHistoryList = () => {
                         <h1 className="text-5xl sm:text-6xl font-bold bg-gradient-to-r from-orange-400 to-purple-500 bg-clip-text text-transparent">
                             Historial de Pedidos
                         </h1>
+                    </div>
+                </div>
+            </div>
+
+            <div className="container mx-auto px-6 sm:px-12 pb-12">
+                <div className="bg-white dark:bg-gray-800 p-6 rounded-lg shadow-lg">
+                    <div className="overflow-x-auto">
                     </div>
                 </div>
             </div>
