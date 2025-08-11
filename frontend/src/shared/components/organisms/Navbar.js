@@ -94,7 +94,7 @@ export default function Navbar({dashboardTyype}) {
                                         <li>
                                             <Link
                                                 to="/history-orders"
-                                                state={{fromDashboard: dashboardTyype}}
+                                                state={{dashboardTyype: dashboardTyype}}
                                                 className="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600"
                                             >
                                                 Historial

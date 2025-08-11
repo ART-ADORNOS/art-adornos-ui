@@ -1,4 +1,4 @@
-import React, {useContext} from 'react';
+import React, {useContext, useEffect} from 'react';
 import Navbar from '../../../../shared/components/organisms/Navbar';
 import useGetStartup from "../../hooks/user/useGetStartup";
 import AuthContext from "../../../../shared/providers/AuthContext";
@@ -12,6 +12,7 @@ import {getFilteredStartups, useIndustryKeys} from "../../utils/filterUtils";
 import USER_TYPE from "../../../../core/constants/user/userType";
 import useUsertype from "../../../products/hooks/useUsertype";
 import ROUTES from "../../../../core/constants/routes/routes";
+import {DashboardTypeProvider} from "../../../../shared/providers/dashboardTypeProvider";
 
 const Dashboard = () => {
     const {user} = useContext(AuthContext);
@@ -21,6 +22,12 @@ const Dashboard = () => {
     const industryKeys = useIndustryKeys(industry);
     const filteredStartups = getFilteredStartups(startups, activeFilters);
     const [usertype] = useUsertype(USER_TYPE.USER);
+    const {setDashboardType} = useContext(DashboardTypeProvider);
+
+
+    useEffect(() => {
+        setDashboardType(USER_TYPE.USER);
+    }, [setDashboardType]);
 
 
     return (
