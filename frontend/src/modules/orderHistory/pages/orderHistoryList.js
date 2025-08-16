@@ -17,7 +17,7 @@ const OrderHistoryList = () => {
         <div className="bg-zinc-100 dark:bg-gray-900 flex-auto text-gray-900 dark:text-white flex flex-col">
             <Navbar/>
             <div className="flex items-center justify-between w-full px-4 py-2">
-                <GoBackButton redirectTo={{redirectTo}}/>
+                <GoBackButton redirectTo={redirectTo}/>
             </div>
 
             <PageTitle title={"Historial de Pedidos"}/>

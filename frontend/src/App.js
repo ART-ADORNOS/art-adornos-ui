@@ -61,7 +61,6 @@ function App() {
                 <NotificationProvider>
                     <AuthProvider>
                         <DashboardTypeProvider>
-
                             <Router>
                                 <Routes>
                                     <Route path="/" element={<LandingPages/>}/>
@@ -69,6 +68,7 @@ function App() {
                                     <Route path="/login" element={<Login/>}/>
                                     <Route path="/admin" element={<LoginAdmin/>}/>
                                     <Route path="*" element={<NotFoundPage/>}/>
+
                                     <Route path="/edit-profile"
                                            element={<ProtectedRoute><UpdateProfile/></ProtectedRoute>}/>
                                     <Route path="/register-startup"
@@ -77,56 +77,50 @@ function App() {
                                            element={<ProtectedRoute><ProductDetail/></ProtectedRoute>}/>
                                     <Route path="/cart-orders-list"
                                            element={<ProtectedRoute><CartOrdersList/></ProtectedRoute>}/>
-
                                     <Route path="/history-orders"
-                                           element={
-                                               <ProtectedRoute><OrderHistoryList/></ProtectedRoute>
-                                           }/>
-
-                                    <Route path="/dashboard"
-                                           element={
-                                               <StartupProvider>
-                                                   <ProtectedRoute>
-                                                       <Dashboard/>
-                                                   </ProtectedRoute>
-                                               </StartupProvider>
-                                           }
-                                    />
+                                           element={<ProtectedRoute><OrderHistoryList/></ProtectedRoute>}/>
 
                                     <Route
-                                        path="/dashboard-seller"
+                                        path="/dashboard"
                                         element={
                                             <StartupProvider>
-                                                <ProtectedRoute>
-                                                    <DashboardSeller/>
-                                                </ProtectedRoute>
+                                                <ProtectedRoute><Dashboard/></ProtectedRoute>
                                             </StartupProvider>
                                         }
                                     />
                                     <Route
-                                        path="/product-list"
-                                        element={<StartupProvider>
-                                            <ProtectedRoute>
-                                                <ProductList/>
-                                            </ProtectedRoute>
-                                        </StartupProvider>}
+                                        path="/dashboard-seller"
+                                        element={
+                                            <StartupProvider>
+                                                <ProtectedRoute><DashboardSeller/></ProtectedRoute>
+                                            </StartupProvider>
+                                        }
                                     />
 
                                     <Route
-                                        path="/register-product"
-                                        element={<StartupProvider>
-                                            <ProtectedRoute>
-                                                <ProductForm/>
-                                            </ProtectedRoute>
-                                        </StartupProvider>}
+                                        path="/product-list"
+                                        element={
+                                            <StartupProvider>
+                                                <ProtectedRoute><ProductList/></ProtectedRoute>
+                                            </StartupProvider>
+                                        }
                                     />
                                     <Route
+                                        path="/register-product"
+                                        element={
+                                            <StartupProvider>
+                                                <ProtectedRoute><ProductForm/></ProtectedRoute>
+                                            </StartupProvider>
+                                        }
+                                    />
+
+                                    <Route
                                         path="/register-category"
-                                        element={<StartupProvider>
-                                            <ProtectedRoute>
-                                                <CategoryForm/>
-                                            </ProtectedRoute>
-                                        </StartupProvider>}
+                                        element={
+                                            <StartupProvider>
+                                                <ProtectedRoute><CategoryForm/></ProtectedRoute>
+                                            </StartupProvider>
+                                        }
                                     />
                                 </Routes>
                             </Router>

@@ -10,9 +10,8 @@ import useFetchStartups from "../../hooks/userSeller/useFetchStartups";
 import useGetUserIndustry from "../../../startup/hooks/useGetUserIndustry";
 import WelcomeHeader from "../../components/WelcomeHeader";
 import USER_TYPE from "../../../../core/constants/user/userType";
-import useUsertype from "../../../products/hooks/useUsertype";
 import ROUTES from "../../../../core/constants/routes/routes";
-import {DashboardTypeProvider, useDashboardType} from "../../../../shared/providers/dashboardTypeProvider";
+import {useDashboardType} from "../../../../shared/providers/dashboardTypeProvider";
 
 const DashboardSeller = () => {
     const {user} = useContext(AuthContext);
@@ -20,7 +19,6 @@ const DashboardSeller = () => {
     const {activeFilters, toggleFilter} = useFilter();
     const {startupData, loading} = useFetchStartups();
     const {industry} = useGetUserIndustry();
-    const [usertype] = useUsertype(USER_TYPE.SELLER);
     const {setDashboardType} = useDashboardType();
 
 
@@ -61,7 +59,7 @@ const DashboardSeller = () => {
                     <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 p-8 mt-10">
                         {filteredStartups.map((startup, index) => (
                             <div key={index}>
-                                <CardStartup startup={startup} usertype={usertype}/>
+                                <CardStartup startup={startup}/>
                             </div>
                         ))}
                     </div>
