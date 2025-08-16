@@ -6,7 +6,7 @@ from Apps.store.utilities.enums.order_status import OrderStatus
 
 class Order(ModelBase):
     customer = models.ForeignKey('Accounts.User', on_delete=models.CASCADE, verbose_name='Cliente')
-    cart = models.ForeignKey('Cart', on_delete=models.CASCADE, verbose_name='Carrito')
+    cart = models.ForeignKey('store.Cart', on_delete=models.CASCADE, verbose_name='Carrito')
     total_amount = models.DecimalField(max_digits=10, decimal_places=2, verbose_name='Monto Total')
     status = models.TextField(choices=OrderStatus.choices, verbose_name='Status')
     date_updated = models.DateTimeField(auto_now=True, verbose_name='Fecha de Actualización')
