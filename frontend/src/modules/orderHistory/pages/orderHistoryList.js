@@ -5,13 +5,12 @@ import PageTitle from "../../../shared/components/atoms/PageTitle";
 import ROUTES from "../../../core/constants/routes/routes";
 import {useDashboardType} from "../../../shared/providers/dashboardTypeProvider";
 import USER_TYPE from "../../../core/constants/user/userType";
+import TABS from "../../../core/constants/tabLabels";
 
 const OrderHistoryList = () => {
     const [activeTab, setActiveTab] = useState("Pending");
-    const tabs = ['Pending', 'In Progress', 'Completed'];
-
+    const tabs = TABS
     const {dashboardType} = useDashboardType();
-    console.log("dashboardType", dashboardType);
     const redirectTo = dashboardType === USER_TYPE.USER ? ROUTES.DASHBOARD : ROUTES.DASHBOARD_SELLER;
 
     return (
