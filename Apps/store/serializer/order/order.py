@@ -1,34 +1,47 @@
 from rest_framework import serializers
 
-from Apps.store.models import Order, OrderItem
+from ...models import Order, OrderItem
+from ...utilities.enums.order_status import OrderStatus
 
 
-class OrderSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = Order
-        fields = ['customer', 'cart', 'total_amount', 'status', 'startup']
+class OrderItemInputSerializer(serializers.Serializer):
+    id = serializers.IntegerField()
+    cart = serializers.IntegerField()
+    product = serializers.CharField()
+    quantity = serializers.IntegerField()
+    product_id = serializers.IntegerField()
+    name_startup = serializers.CharField()
+    phone_owner = serializers.CharField()
+    image_product = serializers.CharField()
+    price = serializers.DecimalField(max_digits=10, decimal_places=2)
 
+
+class OrderSerializer(serializers.Serializer):
+    # vamos a usar este serializer con many=True
+    # así DRF sabe que esperamos una lista de items
     def create(self, validated_data):
         request = self.context['request']
-        items_data = request.data  # aquí tomamos directamente tu array
+
+        items_data = validated_data
 
         if not items_data:
             raise serializers.ValidationError("No se recibieron items para la orden.")
 
-        # Asignar el usuario logeado
-        validated_data['customer'] = request.user
+        cart_id = items_data[0]['cart']
+        startup_name = items_data[0]['name_startup']
+        total_amount = sum(item['quantity'] * item['price'] for item in items_data)
 
-        # Tomar cart y startup desde el primer item
-        validated_data['cart'] = items_data[0]['cart']
-        validated_data['startup'] = items_data[0].get('startup', None)  # opcional
+        from Apps.store.models import Startup
+        startup = Startup.objects.get(name=startup_name)
 
-        # Calcular total_amount
-        validated_data['total_amount'] = sum(item['quantity'] * item['price'] for item in items_data)
+        order = Order.objects.create(
+            customer=request.user,
+            cart_id=cart_id,
+            startup=startup,
+            total_amount=total_amount,
+            status=OrderStatus.PENDING
+        )
 
-        # Crear la Order
-        order = Order.objects.create(**validated_data)
-
-        # Crear los OrderItem asociados
         for item in items_data:
             OrderItem.objects.create(
                 order=order,

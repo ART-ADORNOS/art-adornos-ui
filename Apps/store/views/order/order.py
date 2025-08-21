@@ -3,16 +3,16 @@ from rest_framework.permissions import IsAuthenticated
 from rest_framework.response import Response
 from rest_framework.views import APIView
 
-from Apps.store.serializer import OrderSerializer
+from Apps.store.serializer import OrderSerializer, OrderItemInputSerializer
 
 
 class RegisterOrderView(APIView):
     permission_classes = [IsAuthenticated]
 
     def post(self, request):
-        serializer = OrderSerializer(data=request.data, context={'request': request})
-        if serializer.is_valid():
-            print(serializer.is_valid())
-            serializer.save()
-            return Response(serializer.data, status=status.HTTP_201_CREATED)
-        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+        serializer = OrderItemInputSerializer(data=request.data, many=True)
+        serializer.is_valid(raise_exception=True)
+
+        order_serializer = OrderSerializer(context={'request': request})
+        order = order_serializer.create(serializer.validated_data)
+        return Response({"message": "Orden creada correctamente", "order_id": order.id}, status=status.HTTP_201_CREATED)
