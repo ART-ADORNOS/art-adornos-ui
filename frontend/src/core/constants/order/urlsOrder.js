@@ -1,0 +1,5 @@
+import {ACTIONS, BASE_API_URL, RESOURCES} from "../baseUrls";
+
+export const BASE_URLS_ORDER = {
+    REGISTER_ORDER: `${BASE_API_URL}${RESOURCES.ORDER}${ACTIONS.REGISTER}`,
+}

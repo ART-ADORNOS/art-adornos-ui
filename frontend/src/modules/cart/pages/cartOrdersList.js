@@ -9,13 +9,13 @@ import {RiDeleteBin5Fill} from "react-icons/ri";
 import useDeleteProductCart from "../hooks/useDeleteProductCart";
 import HorizontalNavBar from "../components/HorizontalNavBar";
 import useFilteredCarts from "../hooks/useFilteredCarts";
-import {handleWhatsAppClick} from "../utils/whatsappUtils";
 import DeleteModal from "../../../shared/components/molecules/DeleteModal";
 import {AnimatePresence, motion} from "framer-motion";
 import updateCartQuantity from "../utils/updateCartQuantity";
 import calculateTotals from "../utils/calculateTotals";
 import PageTitle from "../../../shared/components/atoms/PageTitle";
 import ROUTES from "../../../core/constants/routes/routes";
+import useRegisterOrder from "../../orderHistory/hooks/useRegisterOrder";
 
 const CartOrdersList = () => {
     const {carts: fetchedCarts, loading} = useGetCart();
@@ -26,6 +26,7 @@ const CartOrdersList = () => {
     const [isModalOpen, setIsModalOpen] = useState(false);
     const [dataProduct, setDataProduct] = useState({id: null, product: ""});
     const [deleteRow, setDeleteRow] = useState(null);
+    const {handleRegisterOrder} = useRegisterOrder();
 
     const openModalConfirmation = (id, product) => {
         setDataProduct({id, product});
@@ -178,9 +179,7 @@ const CartOrdersList = () => {
 
             {selectStartup !== "Todos" && (
                 <div className="flex justify-end mb-14 mr-20">
-                    <button onClick={() => handleWhatsAppClick(filteredCarts)}>
-                        <WhatsAppButton/>
-                    </button>
+                    <WhatsAppButton onClick={(e) => handleRegisterOrder(e, filteredCarts)}/>
                 </div>
             )}
 
