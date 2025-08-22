@@ -1,53 +1,45 @@
 from rest_framework import serializers
 
-from ...models import Order, OrderItem
+from ...models import Order, OrderItem, Startup, Product
 from ...utilities.enums.order_status import OrderStatus
 
 
-class OrderItemInputSerializer(serializers.Serializer):
-    id = serializers.IntegerField()
-    cart = serializers.IntegerField()
-    product = serializers.CharField()
-    quantity = serializers.IntegerField()
-    product_id = serializers.IntegerField()
-    name_startup = serializers.CharField()
-    phone_owner = serializers.CharField()
-    image_product = serializers.CharField()
-    price = serializers.DecimalField(max_digits=10, decimal_places=2)
+class OrderItemInputSerializer(serializers.ModelSerializer):
+    product_id = serializers.IntegerField(write_only=True)
+    product = serializers.PrimaryKeyRelatedField(read_only=True)
+
+    class Meta:
+        model = OrderItem
+        fields = ['product', 'product_id', 'quantity', 'price']
 
 
-class OrderSerializer(serializers.Serializer):
-    # vamos a usar este serializer con many=True
-    # así DRF sabe que esperamos una lista de items
+class OrderSerializer(serializers.ModelSerializer):
+    items = OrderItemInputSerializer(many=True, write_only=True)
+    startup_name = serializers.CharField(write_only=True)
+    startup = serializers.PrimaryKeyRelatedField(read_only=True)
+    total_amount = serializers.DecimalField(max_digits=10, decimal_places=2, read_only=True)
+    status = serializers.CharField(read_only=True)
+
+    class Meta:
+        model = Order
+        fields = ["id", "cart", "startup", "startup_name", "total_amount", "status", "items"]
+
     def create(self, validated_data):
-        request = self.context['request']
+        request = self.context.get('request')
+        items_data = validated_data.pop('items', [])
 
-        items_data = validated_data
-
-        if not items_data:
-            raise serializers.ValidationError("No se recibieron items para la orden.")
-
-        cart_id = items_data[0]['cart']
-        startup_name = items_data[0]['name_startup']
-        total_amount = sum(item['quantity'] * item['price'] for item in items_data)
-
-        from Apps.store.models import Startup
-        startup = Startup.objects.get(name=startup_name)
-
-        order = Order.objects.create(
-            customer=request.user,
-            cart_id=cart_id,
-            startup=startup,
-            total_amount=total_amount,
-            status=OrderStatus.PENDING
-        )
+        startup_name = validated_data.pop("startup_name")
+        validated_data["startup"] = Startup.objects.get(name=startup_name)
 
         for item in items_data:
-            OrderItem.objects.create(
-                order=order,
-                product_id=item['product_id'],
-                quantity=item['quantity'],
-                price=item['price']
-            )
+            item["product"] = Product.objects.get(id=item.pop("product_id"))
+
+        validated_data["total_amount"] = sum(item['quantity'] * item['price'] for item in items_data)
+        validated_data["status"] = OrderStatus.PENDING
+
+        order = Order.objects.create(customer=request.user, **validated_data)
+
+        for item in items_data:
+            OrderItem.objects.create(order=order, **item)
 
         return order

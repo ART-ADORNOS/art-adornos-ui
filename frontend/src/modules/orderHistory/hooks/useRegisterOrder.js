@@ -1,5 +1,6 @@
 import {useNotification} from "../../../shared/providers/alertProvider";
 import registerOrderService from "../service/registerOrderService";
+import {transformOrderData} from "../utils/transformOrderData";
 
 const useRegisterOrder = () => {
     const {showNotification} = useNotification();
@@ -7,8 +8,8 @@ const useRegisterOrder = () => {
     const handleRegisterOrder = async (e, dataOrder) => {
         e.preventDefault();
         try {
-            console.log(dataOrder);
-            await registerOrderService(dataOrder);
+            const payload = transformOrderData(dataOrder)
+            await registerOrderService(payload);
             showNotification("Orden registrada con éxito", "success");
         } catch (error) {
             showNotification("Error al registrar la orden", "error");
