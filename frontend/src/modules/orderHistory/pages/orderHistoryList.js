@@ -6,8 +6,10 @@ import ROUTES from "../../../core/constants/routes/routes";
 import {useDashboardType} from "../../../shared/providers/dashboardTypeProvider";
 import USER_TYPE from "../../../core/constants/user/userType";
 import TABS from "../../../core/constants/tabLabels";
+import {useGetOrder} from "../hooks/useGetOrder";
 
 const OrderHistoryList = () => {
+    const {order: fetchOrders, loading} = useGetOrder();
     const [activeTab, setActiveTab] = useState("Pending");
     const tabs = TABS
     const {dashboardType} = useDashboardType();
