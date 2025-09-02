@@ -6,11 +6,22 @@ from rest_framework.permissions import IsAuthenticated
 from rest_framework.response import Response
 from rest_framework.views import APIView
 
+from Apps.store.api.product import ProductSerializer
 from Apps.store.models import Product
-from Apps.store.serializer import ProductSerializer
 from Apps.store.utils.constants import Messages
 
 logger = logging.getLogger(__name__)
+
+
+class ProductListView(APIView):
+    permission_classes = [IsAuthenticated]
+
+    def get(self, request, startup_id):
+        products = Product.objects.filter(start_up_id=startup_id)
+        serializer = ProductSerializer(products, many=True, context={'request': request})
+        if serializer.is_valid():
+            return Response(serializer.data, status=status.HTTP_200_OK)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 
 class RegisterProductView(APIView):
@@ -23,15 +34,6 @@ class RegisterProductView(APIView):
             serializer.save()
             return Response(status=status.HTTP_200_OK)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
-
-
-class ProductListView(APIView):
-    permission_classes = [IsAuthenticated]
-
-    def get(self, request, startup_id):
-        products = Product.objects.filter(start_up_id=startup_id)
-        serializer = ProductSerializer(products, many=True, context={'request': request})
-        return Response(serializer.data)
 
 
 class ProductUpdateView(APIView):
@@ -58,7 +60,7 @@ class ProductDeleteView(APIView):
         try:
             product = Product.objects.get(id=product_id)
             product.delete()
-            return Response({"result": "product delete successfully"}, status=status.HTTP_200_OK)
+            return Response({"result": Messages.PRODUCT_DELETED_SUCCESS}, status=status.HTTP_200_OK)
         except Exception as e:
             logger.error(f"Error deleting product: {e}")
             return Response({"error": Messages.INTERNAL_ERROR_MSG},
@@ -71,8 +73,8 @@ class ProductDetailView(APIView):
     def get(self, request, product_id):
         try:
             product = Product.objects.get(id=product_id)
-            data = product.to_json(request=request)
-            return Response(data, status=status.HTTP_200_OK)
+            serializer = ProductSerializer(product, context={'request': request})
+            return Response(serializer.data, status=status.HTTP_200_OK)
         except Exception as e:
             logger.error(f"Error getting product detail: {e}")
             return Response({"error": Messages.INTERNAL_ERROR_MSG},
