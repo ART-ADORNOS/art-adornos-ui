@@ -11,19 +11,6 @@ from Apps.store.serializer import CartSerializer
 logger = logging.getLogger(__name__)
 
 
-class CartListView(APIView):
-    permission_classes = [IsAuthenticated]
-
-    def get(self, request):
-        try:
-            cart = Cart.objects.get(user=request.user)
-            cart_products = CartProduct.objects.filter(cart=cart)
-            data = [product.to_json(request=request) for product in cart_products]
-            return Response(data, status=status.HTTP_200_OK)
-        except Cart.DoesNotExist:
-            return Response(status=status.HTTP_400_BAD_REQUEST)
-
-
 class RegisterCartView(APIView):
     permission_classes = [IsAuthenticated]
 
