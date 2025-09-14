@@ -16,12 +16,13 @@ class RegisterUserView(APIView):
 
     def post(self, request):
         try:
-
             serializer = UserSerializer(data=request.data)
             if serializer.is_valid():
                 serializer.save()
                 logger.info(f"User {serializer.data.get('username')} registered successfully.")
                 return Response({"message": Messages.USER_REGISTERED_SUCCESS}, status=status.HTTP_201_CREATED)
+            logger.error(f'User registration failed: {serializer.errors}')
+            return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
         except Exception as e:
             logger.error(str(e))
             return Response({"error": Messages.INTERNAL_ERROR_MSG}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
