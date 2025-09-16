@@ -34,6 +34,7 @@ jobs:
 
       - name: Run tests with coverage
         run: |
+          cd $GITHUB_WORKSPACE
           coverage run --rcfile=.coveragerc manage.py test
           coverage xml -o coverage.xml
 
