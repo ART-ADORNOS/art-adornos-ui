@@ -48,8 +48,8 @@ class UserAPITestCase(APITestCase):
         url = "/accounts/api/user/delete/"
         response = self.client.delete(url)
         self.assertEqual(response.status_code, status.HTTP_200_OK)
-        with self.assertRaises(User.DoesNotExist):
-            User.objects.get(pk=self.user.pk)
+        user = User.objects.get(pk=self.user.pk)
+        self.assertFalse(user.is_active)
 
     def test_delete_user_already_deactivated(self):
         self.user.is_active = False

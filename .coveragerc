@@ -3,7 +3,7 @@ branch = True
 source =
     Apps
     ArtHome
- omit =
+omit =
     */migrations/*
     */tests/*
     */test_*.py
