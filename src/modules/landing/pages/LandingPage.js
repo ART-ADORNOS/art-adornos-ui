@@ -5,8 +5,7 @@ import {FaUserAlt} from "react-icons/fa";
 import {FaUserGear} from "react-icons/fa6";
 import ROUTES from "../../../core/constants/routes/routes";
 
-
-export default function LandingPage() {
+function LandingPage(){
     return (
         <header className="bg-zinc-100 dark:bg-gray-900 min-h-screen text-gray-900 dark:text-white flex flex-col">
 
@@ -52,4 +51,4 @@ export default function LandingPage() {
         </header>
     );
 }
-  
+export default LandingPage;
