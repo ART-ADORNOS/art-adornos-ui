@@ -1,10 +1,10 @@
-import apiStore from "../../../core/api/ApiStore";
+import storeApi from "../../../core/api/storeApi";
 import {BASE_URLS_STARTUP} from "../../../core/constants/startup/urlsStartup";
 
 
 const deleteStartupService = async (startupId) => {
     try {
-        return await apiStore.delete(`${BASE_URLS_STARTUP.DELETE_STARTUP}${startupId}/`);
+        return await storeApi.delete(`${BASE_URLS_STARTUP.DELETE_STARTUP}${startupId}/`);
     } catch (err) {
         throw err;
     }
