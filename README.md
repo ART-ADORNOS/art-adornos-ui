@@ -1,70 +1,138 @@
-# Getting Started with Create React App
+# 🏺 ART-ADORNOS UI
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+## 📋 Descripción del Proyecto
 
-## Available Scripts
+Aplicación web para catálogo de productos decorativos desarrollada con **React**, **autenticación JWT** y diseño **responsive** con **Tailwind CSS**.
 
-In the project directory, you can run:
+Este proyecto proporciona una interfaz moderna e intuitiva para la visualización y gestión de productos decorativos, optimizada para ofrecer una experiencia de usuario excepcional en cualquier dispositivo.
 
-### `npm start`
+---
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+## 🚀 Cómo Ejecutar el Proyecto
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+### 📋 Prerequisitos
 
-### `npm test`
+Asegúrese de tener instalado en su sistema: 
+- **Node.js** (versión 14 o superior)
+- **npm** (gestor de paquetes de Node. js)
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+### 📥 Instalación
 
-### `npm run build`
+1. Clone el repositorio en su máquina local:
+```bash
+git clone https://github.com/ART-ADORNOS/art-adornos-ui.git
+```
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+2. Navegue al directorio del proyecto: 
+```bash
+cd art-adornos-ui
+```
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+3. Instale las dependencias del proyecto: 
+```bash
+npm install
+```
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+### ▶️ Ejecución en Modo Desarrollo
 
-### `npm run eject`
+Para levantar el proyecto en modo desarrollo, ejecute: 
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+```bash
+npm start
+```
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+**Características:**
+- La aplicación se ejecutará en modo desarrollo
+- Acceda a [http://localhost:3000](http://localhost:3000) para visualizar la aplicación en su navegador
+- La página se recargará automáticamente al realizar cambios en el código
+- Los errores de lint se mostrarán en la consola para su corrección inmediata
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+---
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+## 🛠️ Tecnologías Utilizadas
 
-## Learn More
+- **⚛️ React** - Librería de JavaScript para construir interfaces de usuario
+- **🔐 JWT (JSON Web Tokens)** - Sistema de autenticación seguro
+- **🎨 Tailwind CSS** - Framework de CSS para diseño responsive y moderno
+- **📱 Responsive Design** - Adaptable a cualquier dispositivo y tamaño de pantalla
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+---
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+## 📚 Estructura del Proyecto
 
-### Code Splitting
+```
+art-adornos-ui/
+├── public/          # Archivos públicos estáticos
+├── src/             # Código fuente de la aplicación
+│   ├── components/  # Componentes reutilizables
+│   ├── pages/       # Páginas de la aplicación
+│   ├── services/    # Servicios y llamadas API
+│   ├── utils/       # Utilidades y helpers
+│   └── App.js       # Componente principal
+├── package.json     # Dependencias y scripts
+└── README.md        # Documentación del proyecto
+```
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+---
 
-### Analyzing the Bundle Size
+## 📖 Documentación Adicional
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+### Recursos de React
+- **[Documentación de React](https://reactjs.org/)** - Guía oficial de React
+- **[Create React App](https://create-react-app.dev/)** - Documentación de Create React App
 
-### Making a Progressive Web App
+### Recursos de Tailwind CSS
+- **[Documentación de Tailwind CSS](https://tailwindcss.com/docs)** - Guía completa de Tailwind
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
+### Recursos de JWT
+- **[JWT. io](https://jwt.io/)** - Información sobre JSON Web Tokens
 
-### Advanced Configuration
+---
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
+## 🔧 Solución de Problemas
 
-### Deployment
+### Problemas comunes
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
+**Error de instalación de dependencias:**
+```bash
+rm -rf node_modules package-lock.json
+npm install
+```
 
-### `npm run build` fails to minify
+**Puerto 3000 ocupado:**
+```bash
+# La aplicación le preguntará si desea ejecutarla en otro puerto
+# O puede configurar un puerto diferente en las variables de entorno
+```
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+**Errores de compilación:**
+- Verifique que tiene la versión correcta de Node.js instalada
+- Asegúrese de que todas las dependencias estén correctamente instaladas
+
+---
+
+## 🤝 Contribuciones
+
+Las contribuciones son bienvenidas. Por favor, siga las siguientes pautas:
+
+1. Haga fork del proyecto
+2. Cree una rama para su funcionalidad (`git checkout -b feature/nueva-funcionalidad`)
+3. Realice commit de sus cambios (`git commit -m 'Agregar nueva funcionalidad'`)
+4. Push a la rama (`git push origin feature/nueva-funcionalidad`)
+5. Abra un Pull Request
+
+---
+
+## 📄 Licencia
+
+Este proyecto es propiedad de **ART-ADORNOS** y está sujeto a los términos y condiciones establecidos por la organización.
+
+---
+
+## 📞 Contacto
+
+Para consultas o soporte, por favor contacte al equipo de desarrollo de **ART-ADORNOS**. 
+
+---
+
+**Desarrollado con ❤️ por el equipo de ART-ADORNOS**
