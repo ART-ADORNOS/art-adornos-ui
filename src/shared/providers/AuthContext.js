@@ -1,4 +1,4 @@
-import React, {createContext, useEffect, useState} from 'react';
+import React, {createContext, useEffect, useMemo, useState} from 'react';
 import {BASE_URLS_USER} from '../../core/constants/user/urlsUser';
 import accountsApi from '../../core/api/accountsApi';
 import {getCurrentUser, loginRequest,} from '../../modules/auth/services/authService';
@@ -80,9 +80,14 @@ export const AuthProvider = ({ children }) => {
     }
   };
 
+   const value = useMemo(
+    () => ({ user, token, login, logout, updateUser }),
+    [user, token, login, logout, updateUser]
+  );
+
   return (
     <AuthContext.Provider
-      value={{ user, token, login, logout, updateUser }}
+      value={value}
     >
       {children}
     </AuthContext.Provider>

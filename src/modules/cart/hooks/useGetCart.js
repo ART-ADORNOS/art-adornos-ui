@@ -1,6 +1,6 @@
 import {useEffect, useState} from "react";
 import {useNotification} from "../../../shared/providers/alertProvider";
-import {getCart} from "../service/getCart";
+import {getCartService} from "../service/getCartService";
 
 const useGetCart = () => {
     const {showNotification} = useNotification();
@@ -12,7 +12,7 @@ const useGetCart = () => {
         setLoading(true);
         const fetchCart = async () => {
             try {
-                const data = await getCart();
+                const data = await getCartService();
                 setCarts(data);
             } catch {
                 showNotification("Error al cargar la información del carrito", "error");
