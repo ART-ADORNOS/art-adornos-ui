@@ -1,86 +1,92 @@
 import React, {createContext, useEffect, useState} from 'react';
+import {BASE_URLS_USER} from '../../core/constants/user/urlsUser';
 import accountsApi from '../../core/api/accountsApi';
-import {BASE_URLS_USER} from "../../core/constants/user/urlsUser";
+import {getCurrentUser, loginRequest,} from '../../modules/auth/services/authService';
 
 const AuthContext = createContext();
 
-export const AuthProvider = ({children}) => {
-    const [user, setUser] = useState(null);
-    const [token, setToken] = useState(localStorage.getItem('token') || null);
+export const AuthProvider = ({ children }) => {
+  const [user, setUser] = useState(null);
+  const [token, setToken] = useState(
+    localStorage.getItem('token') || null
+  );
 
-    useEffect(() => {
-        if (token) {
-            accountsApi.defaults.headers['Authorization'] = `Bearer ${token}`;
-            getUser();
-        } else {
-            accountsApi.defaults.headers['Authorization'] = null;
-            setUser(null);
-        }
-    }, [token]);
-
-    const login = async (username, password, typeUser) => {
-        try {
-            const response = await accountsApi.post('/api/token/', {username, password});
-            const {access} = response.data;
-            if (!access) {
-                return false;
-            }
-            const tempApi = accountsApi.create();
-            tempApi.defaults.headers['Authorization'] = `Bearer ${access}`;
-            const userResponse = await tempApi.get('/api/me/');
-            const userData = userResponse.data;
-            if (typeUser === 'seller' && !userData.is_seller) {
-                throw new Error('NOT_SELLER');
-            }
-            localStorage.setItem('token', access);
-            setToken(access);
-            return true;
-        } catch (error) {
-            if (error.message === 'NOT_SELLER') throw error;
-            return false;
-        }
-    };
-
-
-    const getUser = async () => {
-        try {
-            const response = await accountsApi.get('/api/me/');
-            const userData = response.data;
-            setUser({...userData});
-        } catch (error) {
-            if (error.response && error.response.status === 401) {
-                logout();
-            }
-        }
-    };
-
-    const logout = (redirectTo = '/login') => {
-        localStorage.removeItem('token');
-        setToken(null);
-        setUser(null);
-        window.location.href = redirectTo;
-    };
-
-    const updateUser = async (userData) => {
-
-        if (!userData.password) {
-            delete userData.password;
-            delete userData.confirm_password;
-        }
-        try {
-            const response = await accountsApi.put(BASE_URLS_USER.UPDATE_USER, userData);
-            setUser(response.data);
-            return true;
-        } catch (error) {
-            return false;
-        }
+  useEffect(() => {
+    if (!token) {
+      setUser(null);
+      return;
     }
+    loadUser();
+  }, [token]);
 
-    return (
-        <AuthContext.Provider value={{user, token, login, logout, updateUser}}>
-            {children}
-        </AuthContext.Provider>
-    );
+  const loadUser = async () => {
+    try {
+      const userData = await getCurrentUser();
+      setUser(userData);
+    } catch (error) {
+      if (error.response?.status === 401) {
+        logout();
+      }
+    }
+  };
+
+  const login = async (username, password, typeUser) => {
+    try {
+      const access = await loginRequest(username, password);
+      if (!access) return false;
+
+      localStorage.setItem('token', access);
+      setToken(access);
+
+      const userData = await getCurrentUser();
+
+      if (typeUser === 'seller' && !userData.is_seller) {
+        throw new Error('NOT_SELLER');
+      }
+
+      setUser(userData);
+      return true;
+    } catch (error) {
+      if (error.message === 'NOT_SELLER') throw error;
+      return false;
+    }
+  };
+
+  const logout = (redirectTo = '/login') => {
+    localStorage.removeItem('token');
+    setToken(null);
+    setUser(null);
+    window.location.href = redirectTo;
+  };
+
+  const updateUser = async (userData) => {
+    try {
+      const payload = { ...userData };
+
+      if (!payload.password) {
+        delete payload.password;
+        delete payload.confirm_password;
+      }
+
+      const { data } = await accountsApi.put(
+        BASE_URLS_USER.UPDATE_USER,
+        payload
+      );
+
+      setUser(data);
+      return true;
+    } catch {
+      return false;
+    }
+  };
+
+  return (
+    <AuthContext.Provider
+      value={{ user, token, login, logout, updateUser }}
+    >
+      {children}
+    </AuthContext.Provider>
+  );
 };
 
 export default AuthContext;
