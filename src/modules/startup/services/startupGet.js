@@ -1,8 +1,8 @@
 import {BASE_URLS_STARTUP} from "../../../core/constants/startup/urlsStartup";
-import apiStore from "../../../core/api/ApiStore";
+import storeApi from "../../../core/api/storeApi";
 
 export const getStartup = async () => {
-    const response = await apiStore.get(BASE_URLS_STARTUP.GET_STARTUP);
+    const response = await storeApi.get(BASE_URLS_STARTUP.GET_STARTUP);
     if (response.status === 200) {
         return response.data;
     } else {
