@@ -47,12 +47,15 @@ export default function AccountPage() {
                                         Contraseña
                                     </label>
                                     <div className="text-sm">
-                                        <a
-                                            href="#"
-                                            className="font-semibold text-indigo-600 hover:text-indigo-500"
-                                        >
-                                            Forgot password?
-                                        </a>
+                                       <button
+                                              type="button"
+                                              className="font-semibold text-indigo-600 hover:text-indigo-500 bg-transparent border-none p-0 cursor-pointer"
+                                              onClick={() => {
+                                                // TODO: lógica de recuperación de contraseña
+                                              }}
+                                            >
+                                              Forgot password?
+                                       </button>CCCCCCCCCCCCCCCCC
                                     </div>
                                 </div>
                                 <div className="mt-2">
