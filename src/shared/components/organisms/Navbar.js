@@ -20,12 +20,9 @@ function Navbar() {
     const [isModalOpen, setIsModalOpen] = useState(false);
     const [showMessage, setShowMessage] = useState(false);
     const [showModalNotification, setShowModalNotification] = useState(false);
-    const [message, setMessage] = useState("");
-    const [messageType, setMessageType] = useState("");
     const {dashboardType} = useDashboardType()
     const dashboardRedirect = dashboardType === USER_TYPE.SELLER ? ROUTES.ADMIN : ROUTES.LOGIN;
-    const {deleteAccount, isDeleting} = useDeleteAccount(logout);
-
+    const {deleteAccount} = useDeleteAccount(logout);
 
     const openModal = () => setIsModalOpen(true);
     const closeModal = () => setIsModalOpen(false);
@@ -36,7 +33,12 @@ function Navbar() {
         <Fragment>
             <nav className="flex items-center justify-between px-8 py-4 bg-gray-200 dark:bg-gray-800 shadow-md">
                 <div className="text-2xl font-bold">
-                    <a href="" className="text-orange-600 dark:text-orange-400">Logo</a>
+                    <Link
+                  to="/"
+                  className="text-orange-600 dark:text-orange-400"
+                >
+                  Logo
+                </Link>
                 </div>
                 <div className="space-x-4">
                     <ul className="flex items-center space-x-6">
