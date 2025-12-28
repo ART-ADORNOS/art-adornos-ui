@@ -20,7 +20,7 @@ const OrderHistoryList = () => {
     const {dashboardType} = useDashboardType();
     const [showModal, setShowModal] = useState(false);
     const redirectTo = dashboardType === USER_TYPE.USER ? ROUTES.DASHBOARD : ROUTES.DASHBOARD_SELLER;
-    const {orderDetail, handleGetOrderDetails, loadingDetail} = useGetOrderDetail()
+    const {orderDetail, handleGetOrderDetails} = useGetOrderDetail()
 
     const handleOpenModal = (orderId) => {
         void handleGetOrderDetails(orderId);

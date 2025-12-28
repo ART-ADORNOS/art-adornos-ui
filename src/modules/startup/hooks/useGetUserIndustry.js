@@ -32,7 +32,7 @@ const useGetUserIndustry = () => {
         return () => {
             isMounted = false;
         };
-    }, []);
+    }, [showNotification]);
 
     return { industry, loading };
 };

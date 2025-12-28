@@ -3,7 +3,6 @@ import React, {Fragment, useContext, useState} from "react";
 import ThemeContext from "../../providers/ThemeContent";
 import AuthContext from "../../providers/AuthContext";
 import DeleteUserModal from "../../../modules/auth/components/Modal/delete";
-import AlertMessage from "../molecules/AlertMessage";
 import {NotificationIcon} from "../atoms/NotificationIcon";
 import {ThemeToggleIcon} from "../atoms/ThemeToggleIcon";
 import {NotificationModal} from "../molecules/NotificationModal";
@@ -18,13 +17,10 @@ function Navbar() {
     const {user, logout} = useContext(AuthContext);
     const [dropdownOpen, setDropdownOpen] = useState(false);
     const [isModalOpen, setIsModalOpen] = useState(false);
-    const [showMessage, setShowMessage] = useState(false);
     const [showModalNotification, setShowModalNotification] = useState(false);
-    const [message, setMessage] = useState("");
-    const [messageType, setMessageType] = useState("");
     const {dashboardType} = useDashboardType()
     const dashboardRedirect = dashboardType === USER_TYPE.SELLER ? ROUTES.ADMIN : ROUTES.LOGIN;
-    const {deleteAccount, isDeleting} = useDeleteAccount(logout);
+    const {deleteAccount} = useDeleteAccount(logout);
 
 
     const openModal = () => setIsModalOpen(true);
@@ -36,7 +32,7 @@ function Navbar() {
         <Fragment>
             <nav className="flex items-center justify-between px-8 py-4 bg-gray-200 dark:bg-gray-800 shadow-md">
                 <div className="text-2xl font-bold">
-                    <a href="" className="text-orange-600 dark:text-orange-400">Logo</a>
+                    <Link to="/" className="text-orange-600 dark:text-orange-400">Logo</Link>
                 </div>
                 <div className="space-x-4">
                     <ul className="flex items-center space-x-6">
@@ -115,14 +111,6 @@ function Navbar() {
                     </ul>
                 </div>
             </nav>
-
-            {showMessage && (
-                <AlertMessage
-                    message={message}
-                    type={messageType}
-                    onClose={() => setShowMessage(false)}
-                />
-            )}
 
             {isModalOpen && (
                 <DeleteUserModal

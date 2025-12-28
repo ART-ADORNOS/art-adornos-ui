@@ -25,7 +25,7 @@ const useGetOrder = () => {
 
         fetchOrder();
 
-    }, []);
+    }, [showNotification]);
     return {order, loading};
 }
 
