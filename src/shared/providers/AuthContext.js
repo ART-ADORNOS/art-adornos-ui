@@ -1,5 +1,5 @@
 import React, {createContext, useEffect, useState} from 'react';
-import api from '../../core/api/axios';
+import accountsApi from '../../core/api/accountsApi';
 import {BASE_URLS_USER} from "../../core/constants/user/urlsUser";
 
 const AuthContext = createContext();
@@ -10,22 +10,22 @@ export const AuthProvider = ({children}) => {
 
     useEffect(() => {
         if (token) {
-            api.defaults.headers['Authorization'] = `Bearer ${token}`;
+            accountsApi.defaults.headers['Authorization'] = `Bearer ${token}`;
             getUser();
         } else {
-            api.defaults.headers['Authorization'] = null;
+            accountsApi.defaults.headers['Authorization'] = null;
             setUser(null);
         }
     }, [token]);
 
     const login = async (username, password, typeUser) => {
         try {
-            const response = await api.post('/api/token/', {username, password});
+            const response = await accountsApi.post('/api/token/', {username, password});
             const {access} = response.data;
             if (!access) {
                 return false;
             }
-            const tempApi = api.create();
+            const tempApi = accountsApi.create();
             tempApi.defaults.headers['Authorization'] = `Bearer ${access}`;
             const userResponse = await tempApi.get('/api/me/');
             const userData = userResponse.data;
@@ -44,7 +44,7 @@ export const AuthProvider = ({children}) => {
 
     const getUser = async () => {
         try {
-            const response = await api.get('/api/me/');
+            const response = await accountsApi.get('/api/me/');
             const userData = response.data;
             setUser({...userData});
         } catch (error) {
@@ -68,7 +68,7 @@ export const AuthProvider = ({children}) => {
             delete userData.confirm_password;
         }
         try {
-            const response = await api.put(BASE_URLS_USER.UPDATE_USER, userData);
+            const response = await accountsApi.put(BASE_URLS_USER.UPDATE_USER, userData);
             setUser(response.data);
             return true;
         } catch (error) {

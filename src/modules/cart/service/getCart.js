@@ -1,9 +1,9 @@
-import apiStore from "../../../core/api/ApiStore";
+import storeApi from "../../../core/api/storeApi";
 import {BASE_URLS_CART} from "../../../core/constants/carts/urlsCarts";
 
 
 export const getCart = async () => {
-    const response = await apiStore(`${BASE_URLS_CART.GET_CART}`);
+    const response = await storeApi(`${BASE_URLS_CART.GET_CART}`);
     if (response.status === 200) {
         return response.data;
     } else {

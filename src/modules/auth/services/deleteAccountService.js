@@ -1,5 +1,5 @@
 import {BASE_URLS_USER} from "../../../core/constants/user/urlsUser";
-import api from "../../../core/api/axios";
+import api from "../../../core/api/accountsApi";
 
 
 export const deleteAccountService = async () => {

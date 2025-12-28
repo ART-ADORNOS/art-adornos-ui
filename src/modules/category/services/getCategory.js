@@ -1,9 +1,9 @@
-import apiStore from "../../../core/api/ApiStore";
+import storeApi from "../../../core/api/storeApi";
 import {BASE_URLS_CATEGORY} from "../../../core/constants/category/urlsCategory";
 
 
 export const getCategory = async (startupId) => {
-    const response = await apiStore.get(`${BASE_URLS_CATEGORY.GET_CATEGORY}${startupId}`);
+    const response = await storeApi.get(`${BASE_URLS_CATEGORY.GET_CATEGORY}${startupId}`);
     if (response.status === 200) {
         return response.data;
     } else {
