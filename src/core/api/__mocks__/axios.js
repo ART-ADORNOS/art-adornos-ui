@@ -5,7 +5,7 @@ const axiosInstanceMock = {
   delete: jest.fn(),
   defaults: {
     headers: {},
-    baseURL: 'http://test',
+    baseURL: 'https://test',
   },
   interceptors: {
     request: {
