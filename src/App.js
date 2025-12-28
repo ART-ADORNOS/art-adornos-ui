@@ -10,7 +10,7 @@ import ProtectedRoute from "./shared/routes/ProtectedRoute";
 import ProtectedStartupRoute from "./shared/routes/ProtectedStartupRoute";
 import {useTheme} from "./shared/hooks/useTheme";
 
-import {fallbackRoute, protectedRoutes, protectedStartupRoutes, publicRoutes,} from "./core/constants/routes/appRoutes";
+import {fallbackRoute, protectedRoutes, protectedStartupRoutes, publicRoutes} from "./core/constants/routes/appRoutes";
 
 function App() {
   const { isDarkMode, toggleTheme } = useTheme();
@@ -22,7 +22,7 @@ function App() {
 
   return (
     <ThemeContext.Provider value={themeValue}>
-      <div className={`${isDarkMode ? "dark" : "light"} min-h-screen`}>
+      <div className={`${isDarkMode ? "dark" : "light"} min-h-screen flex flex-col`}>
         <NotificationProvider>
           <AuthProvider>
             <DashboardTypeProvider>
