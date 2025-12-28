@@ -3,7 +3,6 @@ import React, {Fragment, useContext, useState} from "react";
 import ThemeContext from "../../providers/ThemeContent";
 import AuthContext from "../../providers/AuthContext";
 import DeleteUserModal from "../../../modules/auth/components/Modal/delete";
-import AlertMessage from "../molecules/AlertMessage";
 import {NotificationIcon} from "../atoms/NotificationIcon";
 import {ThemeToggleIcon} from "../atoms/ThemeToggleIcon";
 import {NotificationModal} from "../molecules/NotificationModal";
@@ -18,7 +17,6 @@ function Navbar() {
     const {user, logout} = useContext(AuthContext);
     const [dropdownOpen, setDropdownOpen] = useState(false);
     const [isModalOpen, setIsModalOpen] = useState(false);
-    const [showMessage, setShowMessage] = useState(false);
     const [showModalNotification, setShowModalNotification] = useState(false);
     const {dashboardType} = useDashboardType()
     const dashboardRedirect = dashboardType === USER_TYPE.SELLER ? ROUTES.ADMIN : ROUTES.LOGIN;
@@ -113,14 +111,6 @@ function Navbar() {
                     </ul>
                 </div>
             </nav>
-
-            {showMessage && (
-                <AlertMessage
-                    message={""}
-                    type={""}
-                    onClose={() => setShowMessage(false)}
-                />
-            )}
 
             {isModalOpen && (
                 <DeleteUserModal
