@@ -4,9 +4,9 @@ export default function Footer() {
 
           <span className="text-sm text-gray-500 sm:text-center dark:text-gray-400">
             @ 2024 ('')
-            <a herf="/" className="hover:underline">
+            <button className="hover:underline">
                 Activity manager
-            </a>
+            </button>
           </span>
         </footer>       
     );

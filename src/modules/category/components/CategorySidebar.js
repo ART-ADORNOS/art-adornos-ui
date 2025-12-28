@@ -4,7 +4,7 @@ import categoryColors from "../../../core/constants/colors/categoryColors";
 import CategoryToggleButton from "./CategoryToggleButton";
 
 const CategorySidebar = ({categories}) => {
-    const {isMenuOpen, setIsMenuOpen, menuRef} = useOutsideClick();
+    const {isMenuOpen, setIsMenuOpen} = useOutsideClick();
 
     return (
         <div className="relative flex gap-4 p-6 rounded-lg bg-zinc-100 dark:bg-gray-900 overflow-x-auto shadow-md">

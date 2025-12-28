@@ -25,7 +25,6 @@ const CartOrdersList = () => {
     const {filteredCarts, uniqueStartups,} = useFilteredCarts(carts, selectStartup);
     const [isModalOpen, setIsModalOpen] = useState(false);
     const [dataProduct, setDataProduct] = useState({id: null, product: ""});
-    const [deleteRow, setDeleteRow] = useState(null);
     const {handleRegisterOrder} = useRegisterOrder();
 
     const openModalConfirmation = (id, product) => {
@@ -34,7 +33,6 @@ const CartOrdersList = () => {
     };
 
     const handleDeleteRequest = async (productCartId) => {
-        setDeleteRow(productCartId);
         await new Promise((resolve) => setTimeout(resolve, 300));
         await deleteProductCart(productCartId);
         setCarts(prev => prev.filter(cart => cart.id !== productCartId));

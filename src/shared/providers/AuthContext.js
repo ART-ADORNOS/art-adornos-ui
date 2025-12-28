@@ -1,4 +1,4 @@
-import React, {createContext, useEffect, useMemo, useState} from 'react';
+import React, {createContext, useCallback, useEffect, useMemo, useState} from 'react';
 import {BASE_URLS_USER} from '../../core/constants/user/urlsUser';
 import accountsApi from '../../core/api/accountsApi';
 import {getCurrentUser, loginRequest,} from '../../modules/auth/services/authService';
@@ -11,15 +11,14 @@ export const AuthProvider = ({ children }) => {
     localStorage.getItem('token') || null
   );
 
-  useEffect(() => {
-    if (!token) {
-      setUser(null);
-      return;
-    }
-    loadUser();
-  }, [token]);
+  const logout = useCallback((redirectTo = '/login') => {
+    localStorage.removeItem('token');
+    setToken(null);
+    setUser(null);
+    window.location.href = redirectTo;
+  }, []);
 
-  const loadUser = async () => {
+  const loadUser = useCallback(async () => {
     try {
       const userData = await getCurrentUser();
       setUser(userData);
@@ -28,9 +27,17 @@ export const AuthProvider = ({ children }) => {
         logout();
       }
     }
-  };
+  }, [logout]);
 
-  const login = async (username, password, typeUser) => {
+  useEffect(() => {
+    if (!token) {
+      setUser(null);
+      return;
+    }
+    loadUser();
+  }, [token, loadUser]);
+
+  const login = useCallback(async (username, password, typeUser) => {
     try {
       const access = await loginRequest(username, password);
       if (!access) return false;
@@ -50,16 +57,9 @@ export const AuthProvider = ({ children }) => {
       if (error.message === 'NOT_SELLER') throw error;
       return false;
     }
-  };
+  }, []);
 
-  const logout = (redirectTo = '/login') => {
-    localStorage.removeItem('token');
-    setToken(null);
-    setUser(null);
-    window.location.href = redirectTo;
-  };
-
-  const updateUser = async (userData) => {
+  const updateUser = useCallback(async (userData) => {
     try {
       const payload = { ...userData };
 
@@ -78,7 +78,7 @@ export const AuthProvider = ({ children }) => {
     } catch {
       return false;
     }
-  };
+  }, []);
 
    const value = useMemo(
     () => ({ user, token, login, logout, updateUser }),
