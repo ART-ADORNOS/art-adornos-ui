@@ -1,5 +1,5 @@
 import {useNotification} from "../../../shared/providers/alertProvider";
-import registerOrderService from "../service/registerOrderService";
+import registerOrderService from "../services/registerOrderService";
 import {transformOrderData} from "../utils/transformOrderData";
 
 const useRegisterOrder = () => {

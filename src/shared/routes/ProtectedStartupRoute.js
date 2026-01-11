@@ -1,4 +1,4 @@
-import StartupProvider from "../../modules/startup/context/StartupProvider";
+import StartupProvider from "../../modules/startups/context/StartupProvider";
 import ProtectedRoute from "./ProtectedRoute";
 
 const ProtectedStartupRoute = ({ children }) => (

@@ -1,6 +1,6 @@
 import {useNotification} from "../../../../shared/providers/alertProvider";
 import {useEffect, useState} from "react";
-import {getStartupService} from "../../service/user/getStartupService";
+import {getStartupService} from "../../services/user/getStartupService";
 
 
 const useGetStartup = () => {

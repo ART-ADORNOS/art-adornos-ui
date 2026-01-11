@@ -3,7 +3,7 @@ import GoBackButton from "../../../shared/components/molecules/GoBackButton";
 import {FaBoxOpen, FaDollarSign, FaTags} from "react-icons/fa";
 import useProductDetail from "../hooks/useProductDetail";
 import {useParams} from "react-router-dom";
-import Loader from "../../../shared/components/molecules/Loader";
+import SpinnerLoader from "../../../shared/components/molecules/SpinnerLoader";
 
 const ProductDetail = () => {
     const {id} = useParams();
@@ -18,7 +18,7 @@ const ProductDetail = () => {
 
             {loading ? (
                 <div className="flex items-center justify-center h-96 w-full">
-                    <Loader/>
+                    <SpinnerLoader/>
                 </div>
             ) : (
 

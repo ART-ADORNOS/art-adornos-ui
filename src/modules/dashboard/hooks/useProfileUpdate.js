@@ -3,7 +3,7 @@ import {useLocation, useNavigate} from "react-router-dom";
 import {useNotification} from "../../../shared/providers/alertProvider";
 import {useContext} from "react";
 import AuthContext from "../../../shared/providers/AuthContext";
-import ROUTES from "../../../core/constants/routes/routes";
+import ROUTES from "../../../core/routes/routes";
 import USER_TYPE from "../../../core/constants/user/userType";
 
 const useProfileUpdate = (formData, user) => {

@@ -7,7 +7,7 @@ import AlertMessage from "../molecules/AlertMessage";
 import {NotificationIcon} from "../atoms/NotificationIcon";
 import {ThemeToggleIcon} from "../atoms/ThemeToggleIcon";
 import {NotificationModal} from "../molecules/NotificationModal";
-import ROUTES from "../../../core/constants/routes/routes";
+import ROUTES from "../../../core/routes/routes";
 import USER_TYPE from "../../../core/constants/user/userType";
 import {useDashboardType} from "../../providers/dashboardTypeProvider";
 import {useDeleteAccount} from "../../../modules/auth/hooks/useDeleteAccount";

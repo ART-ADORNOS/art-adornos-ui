@@ -1,6 +1,6 @@
 import {useNotification} from "../../../shared/providers/alertProvider";
 import {useEffect, useState} from "react";
-import {getOrder} from "../service/getOrderService";
+import {getOrder} from "../services/getOrderService";
 
 
 const useGetOrder = () => {

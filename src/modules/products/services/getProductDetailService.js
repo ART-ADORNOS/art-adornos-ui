@@ -1,5 +1,5 @@
 import storeApi from "../../../core/api/storeApi";
-import {BASE_URLS_PRODUCT} from "../../../core/constants/product/urlsProduct";
+import {BASE_URLS_PRODUCT} from "../constants/urlsProduct";
 
 
 const getProductDetailService = async (productId) => {

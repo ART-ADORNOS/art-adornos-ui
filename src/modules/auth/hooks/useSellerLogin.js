@@ -2,7 +2,7 @@ import {useState, useContext} from "react";
 import {useNotification} from "../../../shared/providers/alertProvider";
 import AuthContext from "../../../shared/providers/AuthContext";
 import {useNavigate} from "react-router-dom";
-import ROUTES from "../../../core/constants/routes/routes";
+import ROUTES from "../../../core/routes/routes";
 import USER_TYPE from "../../../core/constants/user/userType";
 
 export function useSellerLogin() {
