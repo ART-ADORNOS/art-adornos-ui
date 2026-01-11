@@ -1,4 +1,4 @@
-export default function Loader() {
+export default function SpinnerLoader() {
     return (
         <div className="flex-col gap-4 w-full flex items-center justify-center">
             <div

@@ -1,4 +1,4 @@
-const Loader = () => {
+const CardLoader = () => {
     return (
         <div className="relative w-full sm:w-80 h-32 mb-6 mx-auto animate-pulse">
             <div
@@ -18,4 +18,4 @@ const Loader = () => {
     );
 };
 
-export default Loader;
+export default CardLoader;

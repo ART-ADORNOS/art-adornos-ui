@@ -1,17 +1,17 @@
 import React, {useContext, useEffect} from 'react';
 import {useNavigate} from 'react-router-dom';
-import AuthContext from '../../../../shared/providers/AuthContext';
-import Navbar from '../../../../shared/components/organisms/Navbar';
-import CardStartup from "../../../startup/components/card/CardStartup";
-import FilterSidebar from "../../components/FilterSidebar";
-import useFilter from "../../hooks/useFilter";
-import Loader from "../../components/Loader";
-import useFetchStartups from "../../hooks/userSeller/useFetchStartups";
-import useGetUserIndustry from "../../../startup/hooks/useGetUserIndustry";
-import WelcomeHeader from "../../components/WelcomeHeader";
-import USER_TYPE from "../../../../core/constants/user/userType";
-import ROUTES from "../../../../core/constants/routes/routes";
-import {useDashboardType} from "../../../../shared/providers/dashboardTypeProvider";
+import AuthContext from '../../../shared/providers/AuthContext';
+import Navbar from '../../../shared/components/organisms/Navbar';
+import CardStartup from "../../startups/components/card/CardStartup";
+import FilterSidebar from "../components/FilterSidebar";
+import useFilter from "../hooks/useFilter";
+import CardLoader from "../../../shared/components/molecules/card-loader";
+import useFetchStartups from "../hooks/userSeller/useFetchStartups";
+import useGetUserIndustry from "../../startups/hooks/useGetUserIndustry";
+import WelcomeHeader from "../components/WelcomeHeader";
+import USER_TYPE from "../../../core/constants/user/userType";
+import ROUTES from "../../../core/constants/routes/routes";
+import {useDashboardType} from "../../../shared/providers/dashboardTypeProvider";
 
 const DashboardSeller = () => {
     const {user} = useContext(AuthContext);
@@ -50,9 +50,9 @@ const DashboardSeller = () => {
             </div>
             {loading ? (
                 <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 p-8 mt-10">
-                    <Loader/>
-                    <Loader/>
-                    <Loader/>
+                    <CardLoader/>
+                    <CardLoader/>
+                    <CardLoader/>
                 </div>
             ) : (
                 filteredStartups.length > 0 ? (

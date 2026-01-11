@@ -1,8 +1,8 @@
 import {useContext, useState} from "react";
 import registerProductService from "../services/registerProductService";
-import {StartupContext} from "../../startup/context/StartupProvider";
+import {StartupContext} from "../../startups/context/StartupProvider";
 import {useNotification} from "../../../shared/providers/alertProvider";
-import {useGetCategories} from "../../category/hooks/useGetCategory";
+import {useGetCategories} from "../../categories/hooks/useGetCategory";
 import updateProductService from "../services/updateProductService";
 
 const useRegisterProduct = (productId = null) => {

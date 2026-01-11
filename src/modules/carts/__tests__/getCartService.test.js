@@ -1,4 +1,4 @@
-const { getCartService } = require('../service/getCartService');
+const { getCartService } = require('../services/getCartService');
 const apiStore = require('../../../core/api/storeApi').default;
 
 jest.mock('axios');

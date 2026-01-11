@@ -1,5 +1,5 @@
 import {useEffect, useState} from 'react';
-import {getStartup} from '../../../startup/services/startupGet';
+import {getStartup} from '../../../startups/services/startupGet';
 import {useNotification} from '../../../../shared/providers/alertProvider';
 
 const useFetchStartups = () => {

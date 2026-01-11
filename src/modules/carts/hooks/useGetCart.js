@@ -1,6 +1,6 @@
 import {useEffect, useState} from "react";
 import {useNotification} from "../../../shared/providers/alertProvider";
-import {getCartService} from "../service/getCartService";
+import {getCartService} from "../services/getCartService";
 
 const useGetCart = () => {
     const {showNotification} = useNotification();

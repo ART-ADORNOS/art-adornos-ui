@@ -1,17 +1,17 @@
-import Login from "../../../modules/auth/pages/login/Login";
-import Register from "../../../modules/auth/pages/register/Register";
-import UpdateProfile from "../../../modules/dashboard/pages/dashboard/UpdateProfile";
-import RegisterStartup from "../../../modules/startup/pages/RegisterStartup";
+import Login from "../../../modules/auth/pages/Login";
+import Register from "../../../modules/auth/pages/Register";
+import UpdateProfile from "../../../modules/dashboard/pages/UpdateProfile";
+import RegisterStartup from "../../../modules/startups/pages/RegisterStartup";
 import ProductDetail from "../../../modules/products/pages/ProductDetail";
-import CartOrdersList from "../../../modules/cart/pages/CartOrdersList";
+import CartOrdersList from "../../../modules/carts/pages/CartOrdersList";
 import OrderHistoryList from "../../../modules/orderHistory/pages/OrderHistoryList";
-import Dashboard from "../../../modules/dashboard/pages/dashboard/Dashboard";
-import DashboardSeller from "../../../modules/dashboard/pages/userSeller/DashboardSeller";
+import Dashboard from "../../../modules/dashboard/pages/Dashboard";
+import DashboardSeller from "../../../modules/dashboard/pages/DashboardSeller";
 import ProductList from "../../../modules/products/pages/ProductList";
 import ProductForm from "../../../modules/products/pages/ProductForm";
-import CategoryForm from "../../../modules/category/pages/CategoryForm";
+import CategoryForm from "../../../modules/categories/pages/CategoryForm";
 import NotFoundPage from "../../../shared/components/pages/NotFoundPage";
-import LoginAdmin from "../../../modules/auth/pages/login/LoginAdmin";
+import LoginAdmin from "../../../modules/auth/pages/LoginAdmin";
 import LandingPage from "../../../modules/landing/pages/LandingPage";
 
 

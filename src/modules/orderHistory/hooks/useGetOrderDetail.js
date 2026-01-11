@@ -1,5 +1,5 @@
 import {useNotification} from "../../../shared/providers/alertProvider";
-import {getOrderDetail} from "../service/getOrderDetail";
+import {getOrderDetail} from "../services/getOrderDetail";
 import {useState} from "react";
 
 
