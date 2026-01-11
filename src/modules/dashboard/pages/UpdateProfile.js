@@ -5,7 +5,7 @@ import GoBackButton from "../../../shared/components/molecules/GoBackButton";
 import InputField from "../../../shared/components/atoms/InputField";
 import useFormData from "../hooks/useFormData";
 import useProfileUpdate from "../hooks/useProfileUpdate";
-import ROUTES from "../../../core/constants/routes/routes";
+import ROUTES from "../../../core/routes/routes";
 import {useDashboardType} from "../../../shared/providers/dashboardTypeProvider";
 import USER_TYPE from "../../../core/constants/user/userType";
 

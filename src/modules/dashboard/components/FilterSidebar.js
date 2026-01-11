@@ -1,6 +1,6 @@
 import React from 'react';
-import {INDUSTRY_ICONS} from '../../../core/constants/industry/industryIcons';
-import {INDUSTRY_COLORS} from '../../../core/constants/industry/industryColors';
+import {INDUSTRY_ICONS} from '../constants/industryIcons';
+import {INDUSTRY_COLORS} from '../constants/industryColors';
 
 
 const FilterSidebar = ({industry = [], activeFilters = [], toggleFilter}) => {

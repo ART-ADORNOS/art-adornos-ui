@@ -10,7 +10,7 @@ import FilterSidebar from "../components/FilterSidebar";
 import useGetIndustryAll from "../hooks/user/useGetIndustryAll";
 import {getFilteredStartups, useIndustryKeys} from "../utils/filterUtils";
 import USER_TYPE from "../../../core/constants/user/userType";
-import ROUTES from "../../../core/constants/routes/routes";
+import ROUTES from "../../../core/routes/routes";
 import {useDashboardType} from "../../../shared/providers/dashboardTypeProvider";
 
 const Dashboard = () => {

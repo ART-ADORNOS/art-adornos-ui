@@ -9,7 +9,7 @@ import CategorySidebar from "../../categories/components/CategorySidebar";
 import SpinnerLoader from "../../../shared/components/molecules/SpinnerLoader";
 import USER_TYPE from "../../../core/constants/user/userType";
 import BoxOfCardsAnimation from '../../dashboard/components/animations/BoxOfCardsAnimation';
-import ROUTES from "../../../core/constants/routes/routes";
+import ROUTES from "../../../core/routes/routes";
 import {useDashboardType} from "../../../shared/providers/dashboardTypeProvider";
 
 

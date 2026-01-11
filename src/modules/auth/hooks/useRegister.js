@@ -2,7 +2,7 @@ import {useState} from "react";
 import {useNotification} from "../../../shared/providers/alertProvider";
 import registerUser from "../services/registerService";
 import {useNavigate} from "react-router-dom";
-import ROUTES from "../../../core/constants/routes/routes";
+import ROUTES from "../../../core/routes/routes";
 import isEmail from 'validator/lib/isEmail';
 
 export function useRegister() {

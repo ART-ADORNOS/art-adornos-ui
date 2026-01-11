@@ -10,7 +10,7 @@ import ProtectedRoute from "./shared/routes/ProtectedRoute";
 import ProtectedStartupRoute from "./shared/routes/ProtectedStartupRoute";
 import {useTheme} from "./shared/hooks/useTheme";
 
-import {fallbackRoute, protectedRoutes, protectedStartupRoutes, publicRoutes} from "./core/constants/routes/appRoutes";
+import {fallbackRoute, protectedRoutes, protectedStartupRoutes, publicRoutes} from "./core/routes/appRoutes";
 
 function App() {
   const { isDarkMode, toggleTheme } = useTheme();

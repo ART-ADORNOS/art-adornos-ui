@@ -6,7 +6,7 @@ import InputField from "../../../shared/components/atoms/InputField";
 import useInitializeCategoryForm from "../hooks/useInitializeCategoryForm";
 import ButtonSubmit from "../../../shared/components/atoms/ButtonSubmit";
 import ButtonCancel from "../../../shared/components/atoms/ButtonCancel";
-import ROUTES from "../../../core/constants/routes/routes";
+import ROUTES from "../../../core/routes/routes";
 
 
 const CategoryForm = () => {

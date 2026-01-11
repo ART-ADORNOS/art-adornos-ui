@@ -1,4 +1,4 @@
-import URLS_EXTERNALS from "../../../core/constants/routes/externals";
+import URLS_EXTERNALS from "../../../core/routes/externals";
 
 export function handleWhatsAppClick(filteredCarts) {
     if (!filteredCarts.length) return;

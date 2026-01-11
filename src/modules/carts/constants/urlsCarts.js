@@ -1,4 +1,4 @@
-import {ACTIONS, ADDITIONAL, BASE_API_URL, RESOURCES} from "../baseUrls";
+import {ACTIONS, ADDITIONAL, BASE_API_URL, RESOURCES} from "../../../core/constants/baseUrls";
 
 
 export const BASE_URLS_CART = {

@@ -3,7 +3,7 @@ import AuthContext from "../../../shared/providers/AuthContext";
 import registerStartupService from "../services/startupService";
 import {useNotification} from "../../../shared/providers/alertProvider";
 import updateStartupService from "../services/updateStartupService";
-import ROUTES from "../../../core/constants/routes/routes";
+import ROUTES from "../../../core/routes/routes";
 
 const useRegisterStartup = (startupId = null) => {
     const {user} = useContext(AuthContext);

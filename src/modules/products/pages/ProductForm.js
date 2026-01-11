@@ -5,7 +5,7 @@ import useRegisterProduct from "../hooks/useRegisterProduct";
 import ProductInput from "../components/ProductInput";
 import Alert from "../components/Alert";
 import useInitializeProductForm from "../hooks/useInitializeProductForm";
-import ROUTES from "../../../core/constants/routes/routes";
+import ROUTES from "../../../core/routes/routes";
 import ButtonSubmit from "../../../shared/components/atoms/ButtonSubmit";
 import ButtonCancel from "../../../shared/components/atoms/ButtonCancel";
 

@@ -1,4 +1,4 @@
-import {BASE_API_URL, RESOURCES, ACTIONS} from "../baseUrls";
+import {BASE_API_URL, RESOURCES, ACTIONS} from "../../../core/constants/baseUrls";
 
 
 export const BASE_URLS_CATEGORY = {

@@ -10,7 +10,7 @@ import useFetchStartups from "../hooks/userSeller/useFetchStartups";
 import useGetUserIndustry from "../../startups/hooks/useGetUserIndustry";
 import WelcomeHeader from "../components/WelcomeHeader";
 import USER_TYPE from "../../../core/constants/user/userType";
-import ROUTES from "../../../core/constants/routes/routes";
+import ROUTES from "../../../core/routes/routes";
 import {useDashboardType} from "../../../shared/providers/dashboardTypeProvider";
 
 const DashboardSeller = () => {

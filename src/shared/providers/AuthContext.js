@@ -1,5 +1,5 @@
 import React, {createContext, useEffect, useMemo, useState} from 'react';
-import {BASE_URLS_USER} from '../../core/constants/user/urlsUser';
+import {BASE_URLS_USER} from '../../modules/auth/constants/urlsUser';
 import accountsApi from '../../core/api/accountsApi';
 import {getCurrentUser, loginRequest,} from '../../modules/auth/services/authService';
 

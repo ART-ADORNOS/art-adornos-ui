@@ -1,5 +1,5 @@
 import storeApi from "../../../core/api/storeApi";
-import {BASE_URLS_STARTUP} from "../../../core/constants/startup/urlsStartup";
+import {BASE_URLS_STARTUP} from "../constants/urlsStartup";
 
 
 const updateStartupService = async (startupId, formData) => {

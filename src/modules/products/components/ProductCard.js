@@ -7,7 +7,7 @@ import {Link} from "react-router-dom";
 import USER_TYPE from "../../../core/constants/user/userType";
 import SpinnerLoader from "../../../shared/components/molecules/SpinnerLoader";
 import {FaShoppingCart} from "react-icons/fa";
-import ROUTES from "../../../core/constants/routes/routes";
+import ROUTES from "../../../core/routes/routes";
 import useRegisterCart from "../../carts/hooks/useRegisterCart";
 import {useDashboardType} from "../../../shared/providers/dashboardTypeProvider";
 

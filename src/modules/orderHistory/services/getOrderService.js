@@ -1,5 +1,5 @@
 import storeApi from "../../../core/api/storeApi";
-import {BASE_URLS_ORDER} from "../../../core/constants/order/urlsOrder";
+import {BASE_URLS_ORDER} from "../constants/urlsOrder";
 
 
 export const getOrder = async () => {

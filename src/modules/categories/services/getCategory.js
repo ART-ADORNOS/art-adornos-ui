@@ -1,5 +1,5 @@
 import storeApi from "../../../core/api/storeApi";
-import {BASE_URLS_CATEGORY} from "../../../core/constants/category/urlsCategory";
+import {BASE_URLS_CATEGORY} from "../constants/urlsCategory";
 
 
 export const getCategory = async (startupId) => {

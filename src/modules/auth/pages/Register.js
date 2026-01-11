@@ -3,7 +3,7 @@ import Navbar from "../../../shared/components/organisms/Navbar";
 import InputField from "../../../shared/components/atoms/InputField";
 import GoBackButton from "../../../shared/components/molecules/GoBackButton";
 import {useRegister} from "../hooks/useRegister";
-import ROUTES from "../../../core/constants/routes/routes";
+import ROUTES from "../../../core/routes/routes";
 
 
 const Register = () => {

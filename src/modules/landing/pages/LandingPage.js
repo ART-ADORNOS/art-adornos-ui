@@ -3,7 +3,7 @@ import Footer from "../../../shared/components/organisms/Footer";
 import {Link} from "react-router-dom";
 import {FaUserAlt} from "react-icons/fa";
 import {FaUserGear} from "react-icons/fa6";
-import ROUTES from "../../../core/constants/routes/routes";
+import ROUTES from "../../../core/routes/routes";
 
 function LandingPage(){
     return (

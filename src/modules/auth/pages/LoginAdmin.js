@@ -2,7 +2,7 @@ import React from 'react';
 import Navbar from "../../../shared/components/organisms/Navbar"
 import {Link} from "react-router-dom";
 import {useSellerLogin} from "../hooks/useSellerLogin";
-import ROUTES from "../../../core/constants/routes/routes";
+import ROUTES from "../../../core/routes/routes";
 
 
 export default function AccountPage() {

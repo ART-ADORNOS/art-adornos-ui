@@ -6,7 +6,7 @@ import useOutsideClick from "../../../products/hooks/useOutsideClick";
 import DeleteModal from "../../../../shared/components/molecules/DeleteModal";
 import {useDeleteStartups} from "../../hooks/useDeleteStartups";
 import CardLoader from "../../../../shared/components/molecules/card-loader";
-import ROUTES from "../../../../core/constants/routes/routes";
+import ROUTES from "../../../../core/routes/routes";
 import getIconComponent from "../../../../shared/utils/getIconComponent";
 import {useDashboardType} from "../../../../shared/providers/dashboardTypeProvider";
 

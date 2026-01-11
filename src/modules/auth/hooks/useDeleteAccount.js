@@ -1,6 +1,6 @@
 import {useNotification} from "../../../shared/providers/alertProvider";
 import {useState} from "react";
-import ROUTES from "../../../core/constants/routes/routes";
+import ROUTES from "../../../core/routes/routes";
 import {deleteAccountService} from "../services/deleteAccountService";
 
 

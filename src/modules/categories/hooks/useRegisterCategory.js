@@ -2,7 +2,7 @@ import {useState} from "react";
 import registerCategoryService from "../services/registerCategoryService";
 import {useNotification} from "../../../shared/providers/alertProvider";
 import updateCategoryService from "../services/updateCategoryService";
-import ROUTES from "../../../core/constants/routes/routes";
+import ROUTES from "../../../core/routes/routes";
 
 
 const useRegisterCategory = (categoryId = null) => {

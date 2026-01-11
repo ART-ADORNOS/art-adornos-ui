@@ -2,7 +2,7 @@ import React from 'react';
 import {Link} from "react-router-dom";
 import Navbar from "../../../shared/components/organisms/Navbar";
 import {useLogin} from "../hooks/useUserLogin";
-import ROUTES from "../../../core/constants/routes/routes";
+import ROUTES from "../../../core/routes/routes";
 
 const Login = () => {
     const {credentials, handleChange, handleSubmit} = useLogin();

@@ -14,7 +14,7 @@ import {AnimatePresence, motion} from "framer-motion";
 import updateCartQuantity from "../utils/updateCartQuantity";
 import calculateTotals from "../utils/calculateTotals";
 import PageTitle from "../../../shared/components/atoms/PageTitle";
-import ROUTES from "../../../core/constants/routes/routes";
+import ROUTES from "../../../core/routes/routes";
 import useRegisterOrder from "../../orderHistory/hooks/useRegisterOrder";
 
 const CartOrdersList = () => {

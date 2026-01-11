@@ -2,7 +2,7 @@ import Navbar from "../../../shared/components/organisms/Navbar";
 import GoBackButton from "../../../shared/components/molecules/GoBackButton";
 import React, {useMemo, useState} from "react";
 import PageTitle from "../../../shared/components/atoms/PageTitle";
-import ROUTES from "../../../core/constants/routes/routes";
+import ROUTES from "../../../core/routes/routes";
 import {useDashboardType} from "../../../shared/providers/dashboardTypeProvider";
 import USER_TYPE from "../../../core/constants/user/userType";
 import TABS from "../../../core/constants/tabLabels";

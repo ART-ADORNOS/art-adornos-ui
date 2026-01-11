@@ -2,7 +2,7 @@ import {Link} from "react-router-dom";
 import {useState} from "react";
 import DeleteModal from "../../../shared/components/molecules/DeleteModal";
 import {useDeleteCategory} from "../hooks/useDeleteCategory";
-import ROUTES from "../../../core/constants/routes/routes";
+import ROUTES from "../../../core/routes/routes";
 
 const CategoryListModal = ({isOpen, onClose, categories}) => {
     const [isModalOpen, setIsModalOpen] = useState(false);

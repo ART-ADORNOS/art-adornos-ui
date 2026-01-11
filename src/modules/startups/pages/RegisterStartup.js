@@ -6,10 +6,10 @@ import useRegisterStartup from "../hooks/useRegisterStartup";
 import React from "react";
 import useGetIndustry from "../hooks/useGetIndustry";
 import SpinnerLoader from "../../../shared/components/molecules/SpinnerLoader";
-import ROUTES from "../../../core/constants/routes/routes";
+import ROUTES from "../../../core/routes/routes";
 import useInitializeForm from "../hooks/useInitializeForm";
 import IconDropdown from "../../../shared/components/atoms/IconDropdown";
-import iconOptions from "../../../core/constants/startup/iconOptions";
+import iconOptions from "../constants/iconOptions";
 
 const RegisterStartup = () => {
     const navigate = useNavigate();
