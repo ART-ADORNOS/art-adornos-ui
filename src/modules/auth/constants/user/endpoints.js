@@ -1,7 +1,7 @@
-import {ACTIONS, BASE_API_URL, RESOURCES} from "../../../core/constants/baseUrls";
+import {ACTIONS, BASE_API_URL, RESOURCES} from "../../../../core/constants/baseUrls";
 
 
-export const BASE_URLS_USER = {
+export const USER_ENDPOINTS  = {
     REGISTER_USER: `${BASE_API_URL}${RESOURCES.USER}${ACTIONS.REGISTER}`,
     UPDATE_USER: `${BASE_API_URL}${RESOURCES.USER}${ACTIONS.UPDATE}`,
     DELETE_USER: `${BASE_API_URL}${RESOURCES.USER}${ACTIONS.DELETE}`,

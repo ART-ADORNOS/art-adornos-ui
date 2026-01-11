@@ -1,7 +1,7 @@
-import {ACTIONS, BASE_API_URL, RESOURCES} from "../../../core/constants/baseUrls";
+import {ACTIONS, BASE_API_URL, RESOURCES} from "../../../../core/constants/baseUrls";
 
 
-export const BASE_URLS_INDUSTRY = {
+export const INDUSTRY_ENDPOINTS = {
     GET_INDUSTRY: `${BASE_API_URL}${RESOURCES.INDUSTRY}${ACTIONS.LIST}`,
     GET_USER_INDUSTRY: `${BASE_API_URL}${RESOURCES.INDUSTRY}${ACTIONS.USER_INDUSTRY}`,
 

@@ -1,5 +1,5 @@
 import storeApi from "../../../../core/api/storeApi";
-import {BASE_URLS_STARTUP as BASE_URLS_STARTUP_API} from "../../../startups/constants/urlsStartup";
+import {BASE_URLS_STARTUP as BASE_URLS_STARTUP_API} from "../../../startups/constants/endpoints";
 
 
 export const getStartupService = async () => {

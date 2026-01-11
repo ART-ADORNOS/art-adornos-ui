@@ -1,8 +1,8 @@
 import storeApi from '../../../core/api/storeApi';
-import {BASE_URLS_CART} from "../../../core/constants/carts/urlsCarts";
+import {CART_ENDPOINTS} from "../constants/endpoints";
 
 export const getCartService = async () => {
-  const response = await storeApi.get(BASE_URLS_CART.GET_CART);
+  const response = await storeApi.get(CART_ENDPOINTS.GET_CART);
 
   if (response.status === 200) {
     return response.data;

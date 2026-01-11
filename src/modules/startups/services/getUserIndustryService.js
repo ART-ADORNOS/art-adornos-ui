@@ -1,9 +1,9 @@
 import storeApi from "../../../core/api/storeApi";
-import {BASE_URLS_INDUSTRY} from "../constants/urlsIndustry";
+import {INDUSTRY_ENDPOINTS} from "../constants/industry/endpoints";
 
 
 export const getUserIndustry = async () => {
-    const response = await storeApi.get(BASE_URLS_INDUSTRY.GET_USER_INDUSTRY);
+    const response = await storeApi.get(INDUSTRY_ENDPOINTS.GET_USER_INDUSTRY);
     if (response.status === 200) {
         return response.data;
     } else {

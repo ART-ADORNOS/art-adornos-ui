@@ -1,8 +1,8 @@
-import {BASE_URLS_STARTUP} from "../constants/urlsStartup";
 import storeApi from "../../../core/api/storeApi";
+import {STARTUP_ENDPOINTS} from "../constants/endpoints";
 
 export const getStartup = async () => {
-    const response = await storeApi.get(BASE_URLS_STARTUP.GET_STARTUP);
+    const response = await storeApi.get(STARTUP_ENDPOINTS.GET_STARTUP);
     if (response.status === 200) {
         return response.data;
     } else {

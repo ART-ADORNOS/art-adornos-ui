@@ -9,7 +9,7 @@ import SpinnerLoader from "../../../shared/components/molecules/SpinnerLoader";
 import ROUTES from "../../../core/routes/routes";
 import useInitializeForm from "../hooks/useInitializeForm";
 import IconDropdown from "../../../shared/components/atoms/IconDropdown";
-import iconOptions from "../constants/iconOptions";
+import iconOptions from "../ui/iconOptions";
 
 const RegisterStartup = () => {
     const navigate = useNavigate();

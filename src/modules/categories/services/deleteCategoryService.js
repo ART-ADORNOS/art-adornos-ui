@@ -1,10 +1,10 @@
 import storeApi from "../../../core/api/storeApi";
-import {BASE_URLS_CATEGORY} from "../constants/urlsCategory";
+import {CATEGORY_ENDPOINT} from "../constants/endpoints";
 
 
 const deleteCategoryService = async (categoryId) => {
     try {
-        const response = await storeApi.delete(`${BASE_URLS_CATEGORY.DELETE_CATEGORY}${categoryId}`);
+        const response = await storeApi.delete(`${CATEGORY_ENDPOINT.DELETE_CATEGORY}${categoryId}`);
         if (response.status === 200) {
             return response.data;
         }

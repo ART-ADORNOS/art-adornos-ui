@@ -1,5 +1,4 @@
-
-export const BASE_URLS_AUTH = {
+export const AUTH_ENDPOINTS = {
     LOGIN: 'api/token/',
     CURRENT_USER: 'api/user/me/',
 }

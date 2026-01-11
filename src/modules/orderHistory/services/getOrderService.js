@@ -1,10 +1,10 @@
 import storeApi from "../../../core/api/storeApi";
-import {BASE_URLS_ORDER} from "../constants/urlsOrder";
+import {ORDER_ENDPOINTS} from "../constants/endpoints";
 
 
 export const getOrder = async () => {
     try {
-        return await storeApi.get(`${BASE_URLS_ORDER.GET_ORDERS}`);
+        return await storeApi.get(`${ORDER_ENDPOINTS.GET_ORDERS}`);
     } catch (error) {
         throw error
     }
