@@ -5,7 +5,7 @@ import InputField from "../../../shared/components/atoms/InputField";
 import useRegisterStartup from "../hooks/useRegisterStartup";
 import React from "react";
 import useGetIndustry from "../hooks/useGetIndustry";
-import Loader from "../../../shared/components/molecules/Loader";
+import SpinnerLoader from "../../../shared/components/molecules/SpinnerLoader";
 import ROUTES from "../../../core/constants/routes/routes";
 import useInitializeForm from "../hooks/useInitializeForm";
 import IconDropdown from "../../../shared/components/atoms/IconDropdown";
@@ -30,7 +30,7 @@ const RegisterStartup = () => {
             </section>
             {loadingIndustry ? (
                 <div className="flex items-center justify-center h-96 w-full">
-                    <Loader/>
+                    <SpinnerLoader/>
                 </div>
             ) : (
                 <div className="flex min-h-full flex-col justify-center px-6 lg:px-8 pd-20">

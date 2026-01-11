@@ -4,9 +4,9 @@ import GoBackButton from "../../../shared/components/molecules/GoBackButton";
 import {Link} from "react-router-dom";
 import ProductCard from "../components/ProductCard";
 import {useGetProducts} from "../hooks/useGetProducts";
-import {useGetCategories} from "../../category/hooks/useGetCategory";
-import CategorySidebar from "../../category/components/CategorySidebar";
-import Loader from "../../../shared/components/molecules/Loader";
+import {useGetCategories} from "../../categories/hooks/useGetCategory";
+import CategorySidebar from "../../categories/components/CategorySidebar";
+import SpinnerLoader from "../../../shared/components/molecules/SpinnerLoader";
 import USER_TYPE from "../../../core/constants/user/userType";
 import BoxOfCardsAnimation from '../../dashboard/components/animations/BoxOfCardsAnimation';
 import ROUTES from "../../../core/constants/routes/routes";
@@ -62,7 +62,7 @@ const ProductList = () => {
             </div>
             {isLoading ? (
                 <div className="flex items-center justify-center h-96 w-full">
-                    <Loader/>
+                    <SpinnerLoader/>
                 </div>
             ) : (
                 <Fragment>

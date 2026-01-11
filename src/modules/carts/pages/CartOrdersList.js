@@ -2,12 +2,12 @@ import Navbar from "../../../shared/components/organisms/Navbar";
 import React, {useEffect, useState} from "react";
 import GoBackButton from "../../../shared/components/molecules/GoBackButton";
 import {useGetCart} from "../hooks/useGetCart";
-import Loader from "../../../shared/components/molecules/Loader";
+import SpinnerLoader from "../../../shared/components/molecules/SpinnerLoader";
 import {IoMdCart} from "react-icons/io";
 import WhatsAppButton from "../components/WhatsAppButton";
 import {RiDeleteBin5Fill} from "react-icons/ri";
 import useDeleteProductCart from "../hooks/useDeleteProductCart";
-import HorizontalNavBar from "../components/HorizontalNavBar";
+import CartNavBar from "../components/CartNavBar";
 import useFilteredCarts from "../hooks/useFilteredCarts";
 import DeleteModal from "../../../shared/components/molecules/DeleteModal";
 import {AnimatePresence, motion} from "framer-motion";
@@ -62,7 +62,7 @@ const CartOrdersList = () => {
 
             {filteredCarts.length > 0 && (
                 <div className="flex justify-start mb-14 ml-20">
-                    <HorizontalNavBar
+                    <CartNavBar
                         items={uniqueStartups}
                         onFilter={(startup) => setSelectedStartup(startup)}
                         selected={selectStartup}
@@ -72,7 +72,7 @@ const CartOrdersList = () => {
 
             {loading || isDeleting ? (
                 <div className="flex items-center justify-center h-96 w-full">
-                    <Loader/>
+                    <SpinnerLoader/>
                 </div>
             ) : (
                 <div className="container mx-auto px-6 sm:px-12 pb-12">

@@ -7,7 +7,7 @@ import {useDashboardType} from "../../../shared/providers/dashboardTypeProvider"
 import USER_TYPE from "../../../core/constants/user/userType";
 import TABS from "../../../core/constants/tabLabels";
 import {useGetOrder} from "../hooks/useGetOrder";
-import Loader from "../../../shared/components/molecules/Loader";
+import SpinnerLoader from "../../../shared/components/molecules/SpinnerLoader";
 import {FaUser} from "react-icons/fa";
 import {useGetOrderDetail} from "../hooks/useGetOrderDetail";
 import {OrderDetailModal} from "../components/OrderDetailModal";
@@ -58,7 +58,7 @@ const OrderHistoryList = () => {
 
                     <div className="divide-y divide-gray-200 dark:divide-gray-700 mt-6">
                         {loading ? (
-                            <Loader/>
+                            <SpinnerLoader/>
                         ) : filteredOrders.length === 0 ? (
                             <p className="text-center text-gray-500 dark:text-gray-400 py-6">
                                 No orders found.

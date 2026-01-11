@@ -1,5 +1,5 @@
 import {useNotification} from "../../../shared/providers/alertProvider";
-import registerCartService from "../service/registerCartService";
+import registerCartService from "../services/registerCartService";
 
 
 const useRegisterCart = () => {

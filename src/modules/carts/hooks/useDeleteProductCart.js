@@ -1,6 +1,6 @@
 import {useNotification} from "../../../shared/providers/alertProvider";
 import {useState} from "react";
-import deleteProductCartService from "../service/deleteProductCartService";
+import deleteProductCartService from "../services/deleteProductCartService";
 
 
 const useDeleteProductCart = () => {

@@ -1,6 +1,6 @@
 import {useNotification} from "../../../../shared/providers/alertProvider";
 import {useEffect, useState} from "react";
-import getIndustryAll from "../../service/user/getIndustryAll";
+import getIndustryAll from "../../services/user/getIndustryAll";
 
 
 const useGetIndustryAll = () => {

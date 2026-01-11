@@ -1,13 +1,13 @@
 import React, {useContext} from "react";
-import AuthContext from "../../../../shared/providers/AuthContext";
-import Navbar from "../../../../shared/components/organisms/Navbar";
-import GoBackButton from "../../../../shared/components/molecules/GoBackButton";
-import InputField from "../../../../shared/components/atoms/InputField";
-import useFormData from "../../hooks/useFormData";
-import useProfileUpdate from "../../hooks/useProfileUpdate";
-import ROUTES from "../../../../core/constants/routes/routes";
-import {useDashboardType} from "../../../../shared/providers/dashboardTypeProvider";
-import USER_TYPE from "../../../../core/constants/user/userType";
+import AuthContext from "../../../shared/providers/AuthContext";
+import Navbar from "../../../shared/components/organisms/Navbar";
+import GoBackButton from "../../../shared/components/molecules/GoBackButton";
+import InputField from "../../../shared/components/atoms/InputField";
+import useFormData from "../hooks/useFormData";
+import useProfileUpdate from "../hooks/useProfileUpdate";
+import ROUTES from "../../../core/constants/routes/routes";
+import {useDashboardType} from "../../../shared/providers/dashboardTypeProvider";
+import USER_TYPE from "../../../core/constants/user/userType";
 
 const UpdateProfile = () => {
     const {user} = useContext(AuthContext);

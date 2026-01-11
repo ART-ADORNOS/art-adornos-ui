@@ -1,6 +1,6 @@
 import React from 'react';
 
-const HorizontalNavBar = ({items, onFilter, selected}) => {
+const CartNavBar = ({items, onFilter, selected}) => {
     return (
         <div
             className="flex bg-white w-fit px-4 py-3 shadow-lg rounded-2xl dark:bg-box-dark dark:shadow-box-dark-out space-x-6 overflow-x-auto">
@@ -29,4 +29,4 @@ const HorizontalNavBar = ({items, onFilter, selected}) => {
 };
 
 
-export default HorizontalNavBar;
+export default CartNavBar;
