@@ -1,7 +1,9 @@
-import {ACTIONS, BASE_API_URL, RESOURCES} from "../../../core/constants/baseUrls";
+import {RESOURCES} from "../../../core/constants/api/resources";
+import {ACTIONS} from "../../../core/constants/api/actions";
+import {BASE_URLS} from "../../../core/constants/api/baseUrls";
 
 export const ORDER_ENDPOINTS = {
-    REGISTER_ORDER: `${BASE_API_URL}${RESOURCES.ORDER}${ACTIONS.REGISTER}`,
-    GET_ORDERS: `${BASE_API_URL}${RESOURCES.ORDER}${ACTIONS.LIST}`,
-    GET_ORDER_DETAIL: `${BASE_API_URL}${RESOURCES.ORDER}${ACTIONS.DETAIL}`,
+    REGISTER_ORDER: `${BASE_URLS}${RESOURCES.ORDER}${ACTIONS.REGISTER}`,
+    GET_ORDERS: `${BASE_URLS}${RESOURCES.ORDER}${ACTIONS.LIST}`,
+    GET_ORDER_DETAIL: `${BASE_URLS}${RESOURCES.ORDER}${ACTIONS.DETAIL}`,
 }
