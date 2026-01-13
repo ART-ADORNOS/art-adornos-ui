@@ -1,5 +1,5 @@
 import storeApi from "../../../../core/api/storeApi";
-import {BASE_URLS_INDUSTRY} from "../../../startups/constants/urlsIndustry";
+import {BASE_URLS_INDUSTRY} from "../../../startups/constants/industry/endpoints";
 
 
 export const getIndustryAll = async () => {

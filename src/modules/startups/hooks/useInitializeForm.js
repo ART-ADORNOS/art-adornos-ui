@@ -1,5 +1,5 @@
 import {useEffect} from 'react';
-import industryMap from "../constants/industryMap";
+import industryMap from "../ui/industryMap";
 
 const useInitializeForm = (state, setFormData) => {
     useEffect(() => {

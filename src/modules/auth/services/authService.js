@@ -1,15 +1,15 @@
 import accountsApi from '../../../core/api/accountsApi';
-import {BASE_URLS_AUTH} from "../../../core/constants/auth/urlsAuth";
+import {AUTH_ENDPOINTS} from "../constants/auth/endpoints";
 
 export const loginRequest = async (username, password) => {
-  const { data } = await accountsApi.post(BASE_URLS_AUTH.LOGIN, {
-    username,
-    password,
-  });
-  return data?.access;
+    const {data} = await accountsApi.post(AUTH_ENDPOINTS.LOGIN, {
+        username,
+        password,
+    });
+    return data?.access;
 };
 
 export const getCurrentUser = async () => {
-  const { data } = await accountsApi.get(BASE_URLS_AUTH.CURRENT_USER);
-  return data;
+    const {data} = await accountsApi.get(AUTH_ENDPOINTS.CURRENT_USER);
+    return data;
 };

@@ -5,7 +5,7 @@ import PageTitle from "../../../shared/components/atoms/PageTitle";
 import ROUTES from "../../../core/routes/routes";
 import {useDashboardType} from "../../../shared/providers/dashboardTypeProvider";
 import USER_TYPE from "../../../core/constants/user/userType";
-import TABS from "../../../core/constants/tabLabels";
+import TABS from "../../../core/constants/ui/tabLabels";
 import {useGetOrder} from "../hooks/useGetOrder";
 import SpinnerLoader from "../../../shared/components/molecules/SpinnerLoader";
 import {FaUser} from "react-icons/fa";

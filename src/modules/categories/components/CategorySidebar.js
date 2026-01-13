@@ -1,6 +1,6 @@
 import useOutsideClick from "../../products/hooks/useOutsideClick";
 import CategoryListModal from "./CategoryListModal";
-import categoryColors from "../../../core/constants/colors/categoryColors";
+import categoryColors from "../../../core/constants/ui/categoryColors";
 import CategoryToggleButton from "./CategoryToggleButton";
 
 const CategorySidebar = ({categories}) => {

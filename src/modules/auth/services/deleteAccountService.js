@@ -1,4 +1,4 @@
-import {BASE_URLS_USER} from "../constants/urlsUser";
+import {BASE_URLS_USER} from "../constants/user/endpoints";
 import api from "../../../core/api/accountsApi";
 
 

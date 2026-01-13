@@ -1,5 +1,0 @@
-describe('storeApi', () => {
-  test('módulo existe', () => {
-    expect(true).toBe(true);
-  });
-});

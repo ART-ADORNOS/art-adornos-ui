@@ -1,10 +1,10 @@
 import storeApi from "../../../core/api/storeApi";
-import {BASE_URLS_STARTUP} from "../constants/urlsStartup";
+import {STARTUP_ENDPOINTS} from "../constants/endpoints";
 
 
 const deleteStartupService = async (startupId) => {
     try {
-        return await storeApi.delete(`${BASE_URLS_STARTUP.DELETE_STARTUP}${startupId}/`);
+        return await storeApi.delete(`${STARTUP_ENDPOINTS.DELETE_STARTUP}${startupId}/`);
     } catch (err) {
         throw err;
     }
