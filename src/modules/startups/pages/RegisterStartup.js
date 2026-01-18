@@ -58,7 +58,11 @@ const RegisterStartup = () => {
                                 name="industry"
                                 type="text"
                                 placeholder="Industria"
-                                value={Array.isArray(formData.industry) ? formData.industry[0] : formData.industry}
+                                value={
+                                    Array.isArray(formData.industry)
+                                        ? formData.industry[0]
+                                        : formData.industry
+                                }
                                 onChange={handleChange}
                                 options={labelIndustry}
                             />

@@ -30,7 +30,6 @@ const useRegisterStartup = (startupId = null) => {
         if (startupId) {
             try {
                 formData.owner ||= user?.id;
-                formData.industry = Array.isArray(formData.industry) ? formData.industry[0] : formData.industry;
                 await updateStartupService(startupId, formData);
                 showNotification("Emprendimiento actualizado exitosamente", "success");
                 navigate(ROUTES.DASHBOARD_SELLER);
