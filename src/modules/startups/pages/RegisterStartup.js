@@ -15,7 +15,7 @@ const RegisterStartup = () => {
     const navigate = useNavigate();
     const {state} = useLocation();
     const {industryOptions, loadingIndustry} = useGetIndustry();
-    const labelIndustry = industryOptions.industries?.map(item => item.label || []);
+    const labelIndustry = industryOptions?.industries?.map((industry) => industry.label) || [];
     const {formData, handleChange, handleSubmit, setFormData} = useRegisterStartup(state?.startupId);
     const userType = localStorage.getItem('usertype');
     const redirectPage = userType !== 'user' ? ROUTES.DASHBOARD_SELLER : ROUTES.DASHBOARD;
@@ -58,7 +58,11 @@ const RegisterStartup = () => {
                                 name="industry"
                                 type="text"
                                 placeholder="Industria"
-                                value={Array.isArray(formData.industry) ? formData.industry[0] : formData.industry}
+                                value={
+                                    Array.isArray(formData.industry)
+                                        ? formData.industry[0]
+                                        : formData.industry
+                                }
                                 onChange={handleChange}
                                 options={labelIndustry}
                             />

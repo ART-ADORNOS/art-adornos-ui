@@ -1,5 +1,5 @@
 import {Link} from "react-router-dom";
-import React, {Fragment, useContext, useState} from "react";
+import React, {Fragment, useContext, useReducer} from "react";
 import ThemeContext from "../../providers/ThemeContent";
 import AuthContext from "../../providers/AuthContext";
 import DeleteUserModal from "../../../modules/auth/components/Modal/delete";
@@ -11,38 +11,44 @@ import ROUTES from "../../../core/routes/routes";
 import USER_TYPE from "../../../core/constants/user/userType";
 import {useDashboardType} from "../../providers/dashboardTypeProvider";
 import {useDeleteAccount} from "../../../modules/auth/hooks/useDeleteAccount";
+import {initialUIState, MODALS, UI_ACTIONS, uiReducer} from "../../reducers/uiReducer";
 
 
 function Navbar() {
     const {isDarkMode, toggleTheme} = useContext(ThemeContext);
     const {user, logout} = useContext(AuthContext);
-    const [dropdownOpen, setDropdownOpen] = useState(false);
-    const [isModalOpen, setIsModalOpen] = useState(false);
-    const [showMessage, setShowMessage] = useState(false);
-    const [showModalNotification, setShowModalNotification] = useState(false);
     const {dashboardType} = useDashboardType()
     const dashboardRedirect = dashboardType === USER_TYPE.SELLER ? ROUTES.ADMIN : ROUTES.LOGIN;
     const {deleteAccount} = useDeleteAccount(logout);
+    const [ui, dispatch] = useReducer(uiReducer, initialUIState);
 
-    const openModal = () => setIsModalOpen(true);
-    const closeModal = () => setIsModalOpen(false);
-    const toggleDropdown = () => setDropdownOpen(!dropdownOpen);
-    const handleNotification = () => setShowModalNotification((wasVisible) => !wasVisible);
+    const openModal = (modalType) => dispatch({type: UI_ACTIONS.OPEN_MODAL, payload: modalType});
+    const closeModal = () => dispatch({type: UI_ACTIONS.CLOSE_MODAL});
+    const toggleDropdown = () => dispatch({type: UI_ACTIONS.TOGGLE_DROPDOWN});
+    const showAlert = (message, type = "success") => dispatch({type: UI_ACTIONS.SHOW_ALERT, payload: {message, type},});
+
+    const closeAlert = () => dispatch({type: UI_ACTIONS.HIDE_ALERT});
+
 
     return (
         <Fragment>
             <nav className="flex items-center justify-between px-8 py-4 bg-gray-200 dark:bg-gray-800 shadow-md">
                 <div className="text-2xl font-bold">
                     <Link
-                  to="/"
-                  className="text-orange-600 dark:text-orange-400"
-                >
-                  Logo
-                </Link>
+                        to="/"
+                        className="text-orange-600 dark:text-orange-400"
+                    >
+                        Logo
+                    </Link>
                 </div>
                 <div className="space-x-4">
                     <ul className="flex items-center space-x-6">
-                        {user && <NotificationIcon count={6} onClick={handleNotification}/>}
+                        {user && (
+                            <NotificationIcon
+                                count={6}
+                                onClick={() => openModal(MODALS.NOTIFICATION)}
+                            />
+                        )}
                         <ThemeToggleIcon toggleTheme={toggleTheme} isDarkMode={isDarkMode}/>
                         {user ? (
                             <li className="relative">
@@ -57,7 +63,7 @@ function Navbar() {
                                     />
                                 </button>
 
-                                {dropdownOpen && (
+                                {ui.dropdownOpen && (
                                     <ul className="absolute right-0 mt-2 bg-white dark:bg-gray-700 text-gray-800 dark:text-gray-200 rounded-md shadow-lg py-2 w-48">
                                         <li>
                                             <Link
@@ -118,24 +124,24 @@ function Navbar() {
                 </div>
             </nav>
 
-            {showMessage && (
+            {ui.alert.visible && (
                 <AlertMessage
-                    message={message}
-                    type={messageType}
-                    onClose={() => setShowMessage(false)}
+                    message={ui.alert.message}
+                    type={ui.alert.type}
+                    onClose={closeAlert}
                 />
             )}
 
-            {isModalOpen && (
+            {ui.modal === MODALS.DELETE_USER && (
                 <DeleteUserModal
-                    isOpenModal={isModalOpen}
+                    isOpenModal
                     onCloseModal={closeModal}
                     onDelete={deleteAccount}
                 />
             )}
 
-            {showModalNotification && (
-                <NotificationModal onClose={() => setShowModalNotification(false)}/>
+            {ui.modal === MODALS.NOTIFICATION && (
+                <NotificationModal onClose={closeModal}/>
             )}
         </Fragment>
     );

@@ -3,7 +3,6 @@ import React, {Fragment, useRef, useState} from "react";
 import GoBackButton from "../../../shared/components/molecules/GoBackButton";
 import {Link} from "react-router-dom";
 import ProductCard from "../components/ProductCard";
-import {useGetProducts} from "../hooks/useGetProducts";
 import {useGetCategories} from "../../categories/hooks/useGetCategory";
 import CategorySidebar from "../../categories/components/CategorySidebar";
 import SpinnerLoader from "../../../shared/components/molecules/SpinnerLoader";
@@ -11,6 +10,7 @@ import USER_TYPE from "../../../core/constants/user/userType";
 import BoxOfCardsAnimation from '../../dashboard/components/animations/BoxOfCardsAnimation';
 import ROUTES from "../../../core/routes/routes";
 import {useDashboardType} from "../../../shared/providers/dashboardTypeProvider";
+import {useGetProducts} from "../hooks/useGetProducts";
 
 
 const ProductList = () => {

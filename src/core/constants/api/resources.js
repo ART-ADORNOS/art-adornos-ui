@@ -5,5 +5,5 @@ export const RESOURCES = {
   PRODUCT: 'product/',
   CATEGORY: 'category/',
   INDUSTRY: 'industry/',
-  STARTUP: 'startups/',
+  STARTUP: 'startup/',
 };

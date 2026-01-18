@@ -6,20 +6,18 @@ import CardStartup from "../../startups/components/card/CardStartup";
 import FilterSidebar from "../components/FilterSidebar";
 import useFilter from "../hooks/useFilter";
 import CardLoader from "../../../shared/components/molecules/card-loader";
-import useFetchStartups from "../hooks/userSeller/useFetchStartups";
-import useGetUserIndustry from "../../startups/hooks/useGetUserIndustry";
 import WelcomeHeader from "../components/WelcomeHeader";
 import USER_TYPE from "../../../core/constants/user/userType";
 import ROUTES from "../../../core/routes/routes";
 import {useDashboardType} from "../../../shared/providers/dashboardTypeProvider";
+import useSellerDashboardData from "../../startups/hooks/useSellerDashboardData";
 
 const DashboardSeller = () => {
     const {user} = useContext(AuthContext);
     const navigate = useNavigate();
     const {activeFilters, toggleFilter} = useFilter();
-    const {startupData, loading} = useFetchStartups();
-    const {industry} = useGetUserIndustry();
     const {setDashboardType} = useDashboardType();
+    const {startups, industries, loading, error} = useSellerDashboardData();
 
 
     useEffect(() => {
@@ -27,10 +25,10 @@ const DashboardSeller = () => {
     }, [setDashboardType]);
 
     const filteredStartups = activeFilters.length > 0
-        ? startupData.filter(startup =>
+        ? startups.filter(startup =>
             startup.industry.some(ind => activeFilters.includes(ind))
         )
-        : startupData;
+        : startups;
 
     return (
         <div className="bg-zinc-100 dark:bg-gray-900 flex-auto text-gray-900 dark:text-white flex flex-col">
@@ -43,7 +41,7 @@ const DashboardSeller = () => {
 
             <div className="w-full px-8 py-4 ">
                 <FilterSidebar
-                    industry={industry}
+                    industry={industries}
                     activeFilters={activeFilters}
                     toggleFilter={toggleFilter}
                 />

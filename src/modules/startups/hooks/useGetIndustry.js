@@ -1,30 +1,23 @@
 import {useNotification} from "../../../shared/providers/alertProvider";
+import useOrchestratedFetch from "../../../shared/hooks/useOrchestratedFetch";
 import {getIndustry} from "../services/getIndustryService";
-import {useEffect, useState} from "react";
-
 
 const useGetIndustry = () => {
     const {showNotification} = useNotification();
-    const [industryOptions, setIndustryOptions] = useState([]);
-    const [loading, setLoading] = useState(true);
 
-    useEffect(() => {
-        setLoading(true);
-        const fetchIndustry = async () => {
-            try {
-                const data = await getIndustry();
-                setIndustryOptions(data);
-            } catch (error) {
-                showNotification("Error al cargar la información de las industrias", "error");
-            }finally {
-                setLoading(false);
-            }
-        };
+    const {data, loading, error} = useOrchestratedFetch(
+        () => getIndustry(),
+        {
+            onError: () =>
+                showNotification("Error al cargar la información de las industrias", "error"),
+        }
+    );
 
-        fetchIndustry().catch((error) => console.error("Error en fetchIndustry:", error));
-
-    }, [showNotification]);
-    return {industryOptions, loading};
-
+    return {
+        industryOptions: data,
+        loadingIndustry: loading,
+        errorIndustry: error,
+    };
 };
+
 export default useGetIndustry;

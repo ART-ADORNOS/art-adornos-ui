@@ -2,17 +2,8 @@ import React from "react";
 import CheckboxField from "./CheckboxField";
 
 const InputField = ({
-                        label,
-                        name,
-                        type,
-                        placeholder,
-                        value,
-                        onChange,
-                        error,
-                        errorMessage,
-                        onFocus,
-                        onBlur,
-                        className, options,
+                        label, name, type, placeholder, value, onChange, error,
+                        errorMessage, onFocus, onBlur, className, options,
                     }) => (
     <div className="mb-4 ">
         <label htmlFor={name} className="block mb-2 text-sm font-medium text-gray-900">
