@@ -15,7 +15,6 @@ const RegisterStartup = () => {
     const navigate = useNavigate();
     const {state} = useLocation();
     const {industryOptions, loadingIndustry} = useGetIndustry();
-    console.log(industryOptions)
     const labelIndustry = industryOptions?.industries?.map((industry) => industry.label) || [];
     const {formData, handleChange, handleSubmit, setFormData} = useRegisterStartup(state?.startupId);
     const userType = localStorage.getItem('usertype');
