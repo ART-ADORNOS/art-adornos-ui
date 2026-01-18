@@ -1,35 +1,25 @@
 import {useNotification} from "../../../shared/providers/alertProvider";
-import {useEffect, useState} from "react";
 import getProducts from "../services/productService";
+import useOrchestratedFetch from "../../../shared/hooks/useOrchestratedFetch";
 
 
 const useGetProducts = (startupId) => {
-    const [products, setProducts] = useState([]);
     const {showNotification} = useNotification();
-    const [loading, setLoading] = useState(false);
 
-    useEffect(() => {
-        setLoading(true);
-        const fetchProducts = async () => {
-            const startupId = localStorage.getItem("selectedStartupId");
-            if (!startupId) return;
-            try {
-                const data = await getProducts(startupId);
-                setProducts(data);
-            } catch (error) {
-                showNotification("Error al cargar los productos", "error");
-            }finally{
-                setLoading(false);
-            }
-        };
+    const {data, loading, error} = useOrchestratedFetch(
+        () => getProducts(startupId),
+        {
+            onError: () =>
+                showNotification("Error al cargar la información de los productos", "error"),
+            enabled: !!startupId,
+        }
+    );
 
-        fetchProducts().catch(() => {
-            showNotification("Error en el servidor", "error");
-        });
-
-    }, [showNotification, startupId]);
-
-    return {products, loading};
+    return {
+        products: Array.isArray(data) ? data : [],
+        loadingTwo: loading,
+        errorTwo: error,
+    }
 };
 
 export {useGetProducts};
