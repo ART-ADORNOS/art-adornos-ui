@@ -1,8 +1,8 @@
 import createAxiosClient from './clients/axiosClient';
-import {BASE_URL_STORE} from '../constants/api/baseUrls';
+import {BASE_URLS} from "../constants/api/baseUrls";
 
 const storeApi = createAxiosClient({
-  baseURL: BASE_URL_STORE,
+    baseURL: BASE_URLS.STORE,
 });
 
 export default storeApi;

@@ -1,8 +1,8 @@
 import createAxiosClient from './clients/axiosClient';
-import {BASE_URL_ACCOUNTS} from '../constants/api/baseUrls';
+import {BASE_URLS} from "../constants/api/baseUrls";
 
 const accountsApi = createAxiosClient({
-  baseURL: BASE_URL_ACCOUNTS,
+    baseURL: BASE_URLS.ACCOUNTS,
 });
 
 export default accountsApi;
