@@ -1,6 +1,6 @@
 import {useRef, useState} from "react";
 
-const useRegisterOrchestrator = (commandFn, options = {}) => {
+const useMutationOrchestrator = (commandFn, options = {}) => {
     const {onSuccess, onError, preventConcurrent = true} = options;
 
     const [loading, setLoading] = useState(false);
@@ -36,4 +36,4 @@ const useRegisterOrchestrator = (commandFn, options = {}) => {
     };
 };
 
-export default useRegisterOrchestrator;
+export default useMutationOrchestrator;
