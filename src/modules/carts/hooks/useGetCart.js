@@ -14,9 +14,9 @@ const useGetCart = () => {
     )
 
     return {
-        cart: data,
-        loadingCart: loading,
-        errorCart: error,
+        carts: data,
+        loading: loading,
+        error: error,
     }
 };
 

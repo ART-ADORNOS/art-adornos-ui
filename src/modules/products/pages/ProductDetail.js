@@ -7,7 +7,7 @@ import SpinnerLoader from "../../../shared/components/molecules/SpinnerLoader";
 
 const ProductDetail = () => {
     const {id} = useParams();
-    const {product, loading} = useGetProductDetail(id);
+    const {productDetail: product, loading} = useGetProductDetail(id);
 
     return (
         <div className="bg-zinc-100 dark:bg-gray-900 flex-auto text-gray-900 dark:text-white flex flex-col">
