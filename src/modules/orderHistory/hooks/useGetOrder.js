@@ -1,32 +1,24 @@
 import {useNotification} from "../../../shared/providers/alertProvider";
-import {useEffect, useState} from "react";
 import {getOrder} from "../services/getOrderService";
+import useFetchOrchestrator from "../../../shared/hooks/useFetchOrchestrator";
 
 
 const useGetOrder = () => {
     const {showNotification} = useNotification();
-    const [order, setOrder] = useState([]);
-    const [loading, setLoading] = useState(false);
 
-    useEffect(() => {
-        setLoading(true);
-        const fetchOrder = async () => {
-            try {
-                const response = await getOrder();
-                if (response.status === 200) {
-                    setOrder(response.data);
-                }
-            } catch {
-                showNotification("Error al cargar la información de las órdenes", "error");
-            } finally {
-                setLoading(false);
-            }
-        };
+    const {data, loading, error} = useFetchOrchestrator(
+        () => getOrder(),
+        {
+            onError: () =>
+                showNotification("Error al cargar la información de las órdenes", "error"),
+        }
+    );
 
-        fetchOrder();
-
-    }, [showNotification]);
-    return {order, loading};
+    return {
+        order: data,
+        loading,
+        error,
+    }
 }
 
 
