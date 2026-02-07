@@ -1,26 +1,34 @@
 import {useNotification} from "../../../shared/providers/alertProvider";
-import {useState} from "react";
 import deleteProductService from "../services/deleteProductService";
+import useMutationOrchestrator from "../../../shared/hooks/useMutationOrchestrator";
 
 
 const useDeleteProduct = (productId) => {
     const {showNotification} = useNotification();
-    const [isDeleting, setIsDeleting] = useState(false);
 
-    const deleteProduct = async () => {
-        setIsDeleting(true)
-        try {
-            const result = await deleteProductService(productId);
-            if (result) {
-                showNotification("Producto eliminado con éxito", "success");
-            }
-        } catch (error) {
-            showNotification("Error al eliminar el producto", "error");
-        } finally {
-            setIsDeleting(false);
+    const deleteProductCommand = useMutationOrchestrator(
+        deleteProductService(productId),
+        {
+            onSuccess: () => {
+                showNotification(
+                    "Producto eliminado exitosamente",
+                    "success"
+                );
+            },
+            onError: () => {
+                showNotification(
+                    "Error al eliminar el producto",
+                    "error"
+                );
+            },
         }
-    };
-    return {deleteProduct, isDeleting};
+    );
+
+    return {
+        deleteProduct: deleteProductCommand.execute,
+        isDeleting: deleteProductCommand.loading,
+        error: deleteProductCommand.error,
+    }
 }
 
 export {useDeleteProduct};
