@@ -1,27 +1,33 @@
 import {useNotification} from "../../../shared/providers/alertProvider";
-import {useState} from "react";
+import useMutationOrchestrator from "../../../shared/hooks/useMutationOrchestrator";
 import deleteProductCartService from "../services/deleteProductCartService";
-
 
 const useDeleteProductCart = () => {
     const {showNotification} = useNotification();
-    const [isDeleting, setIsDeleting] = useState(false);
 
-    const deleteProductCart = async (productCartId) => {
-        setIsDeleting(true)
-        try {
-            const result = await deleteProductCartService(productCartId);
-            if (result) {
-                showNotification("Producto eliminado del carrito con éxito", "success");
+    const deleteProductCartCommand = useMutationOrchestrator(
+        deleteProductCartService,
+        {
+            onSuccess: () => {
+                showNotification(
+                    "Producto eliminado del carrito con éxito",
+                    "success"
+                );
+            },
+            onError: () => {
+                showNotification(
+                    "Error al eliminar el producto del carrito",
+                    "error"
+                );
             }
-        } catch{
-            showNotification("Error al eliminar el producto del carrito", "error");
-        } finally {
-            setIsDeleting(false);
         }
-    }
-    return {deleteProductCart, isDeleting};
+    );
 
-}
+    return {
+        deleteProductCart: deleteProductCartCommand.execute,
+        isDeleting: deleteProductCartCommand.loading,
+        error: deleteProductCartCommand.error,
+    };
+};
 
 export default useDeleteProductCart;

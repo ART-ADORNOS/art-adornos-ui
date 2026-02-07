@@ -4,7 +4,7 @@ import registerStartupService from "../services/startupService";
 import updateStartupService from "../services/updateStartupService";
 import {useNotification} from "../../../shared/providers/alertProvider";
 import ROUTES from "../../../core/routes/routes";
-import useOrchestratedCommand from "../../../shared/hooks/useOrchestratedCommand";
+import useMutationOrchestrator from "../../../shared/hooks/useMutationOrchestrator";
 
 const initialFormState = {
     name: "",
@@ -19,7 +19,7 @@ const useRegisterStartup = (startupId = null) => {
 
     const [formData, setFormData] = useState(initialFormState);
 
-    const registerCommand = useOrchestratedCommand(
+    const registerCommand = useMutationOrchestrator(
         registerStartupService,
         {
             onSuccess: () => {
@@ -37,7 +37,7 @@ const useRegisterStartup = (startupId = null) => {
         }
     );
 
-    const updateCommand = useOrchestratedCommand(
+    const updateCommand = useMutationOrchestrator(
         updateStartupService,
         {
             onSuccess: () => {

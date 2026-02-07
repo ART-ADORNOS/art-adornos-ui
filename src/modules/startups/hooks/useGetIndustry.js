@@ -1,11 +1,11 @@
 import {useNotification} from "../../../shared/providers/alertProvider";
-import useOrchestratedFetch from "../../../shared/hooks/useOrchestratedFetch";
+import useFetchOrchestrator from "../../../shared/hooks/useFetchOrchestrator";
 import {getIndustry} from "../services/getIndustryService";
 
 const useGetIndustry = () => {
     const {showNotification} = useNotification();
 
-    const {data, loading, error} = useOrchestratedFetch(
+    const {data, loading, error} = useFetchOrchestrator(
         () => getIndustry(),
         {
             onError: () =>

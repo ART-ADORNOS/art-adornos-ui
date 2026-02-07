@@ -1,13 +1,13 @@
 import Navbar from "../../../shared/components/organisms/Navbar";
 import GoBackButton from "../../../shared/components/molecules/GoBackButton";
 import {FaBoxOpen, FaDollarSign, FaTags} from "react-icons/fa";
-import useProductDetail from "../hooks/useProductDetail";
+import useGetProductDetail from "../hooks/useGetProductDetail";
 import {useParams} from "react-router-dom";
 import SpinnerLoader from "../../../shared/components/molecules/SpinnerLoader";
 
 const ProductDetail = () => {
     const {id} = useParams();
-    const {product, loading} = useProductDetail(id);
+    const {productDetail: product, loading} = useGetProductDetail(id);
 
     return (
         <div className="bg-zinc-100 dark:bg-gray-900 flex-auto text-gray-900 dark:text-white flex flex-col">

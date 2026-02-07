@@ -1,28 +1,34 @@
 import {useNotification} from "../../../shared/providers/alertProvider";
-import {getOrderDetail} from "../services/getOrderDetail";
 import {useState} from "react";
-
+import useFetchOrchestrator from "../../../shared/hooks/useFetchOrchestrator";
+import getOrderDetail from "../services/getOrderDetail";
 
 const useGetOrderDetail = () => {
     const {showNotification} = useNotification();
-    const [orderDetail, setOrderDetail] = useState(null);
-    const [loading, setLoading] = useState(false);
+    const [orderId, setOrderId] = useState(null);
 
-    const handleGetOrderDetails = async (orderId) => {
-        setLoading(true);
-        try {
-            const response = await getOrderDetail(orderId);
-            if (response.status === 200) {
-                setOrderDetail(response.data);
+    const {data, loading} = useFetchOrchestrator(
+        () => getOrderDetail(orderId),
+        {
+            enabled: Boolean(orderId),
+            onError: () => {
+                showNotification(
+                    "Error al obtener los detalles de la orden",
+                    "error"
+                );
             }
-        } catch (error) {
-            showNotification("Error al obtener los detalles de la orden", "error");
-        } finally {
-            setLoading(false);
         }
-    };
-    return {orderDetail, handleGetOrderDetails, loading};
-}
+    );
 
+    const handleGetOrderDetails = (id) => {
+        setOrderId(id);
+    };
+
+    return {
+        orderDetail: data,
+        handleGetOrderDetails,
+        loading,
+    };
+};
 
 export {useGetOrderDetail};

@@ -1,21 +1,38 @@
 import {useNotification} from "../../../shared/providers/alertProvider";
+import useMutationOrchestrator from "../../../shared/hooks/useMutationOrchestrator";
 import registerCartService from "../services/registerCartService";
-
 
 const useRegisterCart = () => {
     const {showNotification} = useNotification();
+
+    const registerCart = useMutationOrchestrator(
+        registerCartService,
+        {
+            onSuccess: () => {
+                showNotification(
+                    "Carrito creado con éxito",
+                    "success"
+                );
+            },
+            onError: () => {
+                showNotification(
+                    "Error al crear el carrito",
+                    "error"
+                );
+            }
+        }
+    );
+
     const handleSubmit = async (e, data) => {
         e.preventDefault();
-
-        try {
-            await registerCartService(data);
-            showNotification("Carrito creado con éxito", "success");
-
-        } catch (err) {
-            showNotification("Error al crear el carrito", "error");
-        }
+        await registerCart.execute(data);
     };
-    return {handleSubmit};
-}
+
+    return {
+        handleSubmit,
+        loading: registerCart.loading,
+        error: registerCart.error,
+    };
+};
 
 export default useRegisterCart;

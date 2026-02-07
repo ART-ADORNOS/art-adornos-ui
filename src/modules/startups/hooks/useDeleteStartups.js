@@ -1,26 +1,35 @@
 import {useNotification} from "../../../shared/providers/alertProvider";
-import {useState} from "react";
 import deleteStartupService from "../services/deleteStartupService";
+import useMutationOrchestrator from "../../../shared/hooks/useMutationOrchestrator";
 
 
 const useDeleteStartups = (startupId) => {
     const {showNotification} = useNotification();
-    const [isDeleting, setIsDeleting] = useState(false);
 
-    const deleteStartup = async () => {
-        setIsDeleting(true)
-        try {
-            const result = await deleteStartupService(startupId);
-            if (result) {
-                showNotification("Startup eliminado con éxito", "success");
+    const deleteStartupCommand = useMutationOrchestrator(
+        deleteStartupService,
+        {
+            onSuccess: () => {
+                showNotification(
+                    "Startup eliminada con éxito",
+                    "success"
+                );
+            },
+            onError: () => {
+                showNotification(
+                    "Error al eliminar la startup",
+                    "error"
+                );
             }
-        } catch (error) {
-            showNotification("Error al eliminar el startup", "error");
-        } finally {
-            setIsDeleting(false);
         }
-    };
-    return {deleteStartup, isDeleting};
+    );
+
+    return {
+        deleteStartup: () => deleteStartupCommand.execute(startupId),
+        isDeleting: deleteStartupCommand.loading,
+        error: deleteStartupCommand.error,
+    }
+
 }
 
 export {useDeleteStartups};

@@ -1,28 +1,33 @@
 import deleteCategoryService from "../services/deleteCategoryService";
 import {useNotification} from "../../../shared/providers/alertProvider";
-import {useState} from "react";
+import useMutationOrchestrator from "../../../shared/hooks/useMutationOrchestrator";
 
 
 const useDeleteCategory = () => {
     const {showNotification} = useNotification();
-    const [isDeleting, setIsDeleting] = useState(false);
 
-    const deleteCategory = async (categoryId) => {
-        if (!categoryId) return;
-
-        setIsDeleting(true)
-        try {
-            const result = await deleteCategoryService(categoryId);
-            if (result) {
-                showNotification("Categoría eliminada con éxito", "success");
+    const deleteCategoryCartCommand = useMutationOrchestrator(
+        deleteCategoryService,
+        {
+            onSuccess: () => {
+                showNotification(
+                    "Categoría eliminada con éxito",
+                    "success"
+                );
+            },
+            onError: () => {
+                showNotification(
+                    "Error al eliminar la categoría",
+                    "error"
+                );
             }
-        } catch {
-            showNotification("Error al eliminar la categoría", "error");
-        } finally {
-            setIsDeleting(false);
         }
-    };
-    return {deleteCategory, isDeleting};
+    );
+    return {
+        deleteCategory: deleteCategoryCartCommand.execute,
+        isDeleting: deleteCategoryCartCommand.loading,
+        error: deleteCategoryCartCommand.error,
+    }
 }
 
 export {useDeleteCategory};

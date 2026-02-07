@@ -1,33 +1,23 @@
-import {useEffect, useState} from "react";
 import {useNotification} from "../../../shared/providers/alertProvider";
 import {getCartService} from "../services/getCartService";
+import useFetchOrchestrator from "../../../shared/hooks/useFetchOrchestrator";
 
 const useGetCart = () => {
     const {showNotification} = useNotification();
-    const [carts, setCarts] = useState([]);
-    const [loading, setLoading] = useState(false);
 
+    const {data, loading, error} = useFetchOrchestrator(
+        () => getCartService(),
+        {
+            onError: () =>
+                showNotification("Error al cargar la información del carrito", "error"),
+        }
+    )
 
-    useEffect(() => {
-        setLoading(true);
-        const fetchCart = async () => {
-            try {
-                const data = await getCartService();
-                setCarts(data);
-            } catch {
-                showNotification("Error al cargar la información del carrito", "error");
-            } finally {
-                setLoading(false);
-            }
-        };
-
-        fetchCart().catch(() => {
-            showNotification("Error en el servidor", "error");
-        });
-
-    }, [showNotification]);
-
-    return {carts, loading};
+    return {
+        carts: data,
+        loading: loading,
+        error: error,
+    }
 };
 
 export {useGetCart};
