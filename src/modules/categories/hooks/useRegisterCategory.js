@@ -1,7 +1,7 @@
 import registerCategoryService from "../services/registerCategoryService";
 import {useNotification} from "../../../shared/providers/alertProvider";
 import {useState} from "react";
-import useOrchestratedCommand from "../../../shared/hooks/useOrchestratedCommand";
+import useRegisterOrchestrator from "../../../shared/hooks/useRegisterOrchestrator";
 import updateCategoryService from "../services/updateCategoryService";
 import ROUTES from "../../../core/routes/routes";
 
@@ -17,7 +17,7 @@ const useRegisterCategory = (categoryId = null) => {
 
     const [formData, setFormData] = useState(initialFormState);
 
-    const registerCategoryCommand = useOrchestratedCommand(
+    const registerCategoryCommand = useRegisterOrchestrator(
         registerCategoryService,
         {
             onSuccess: () => {
@@ -35,7 +35,7 @@ const useRegisterCategory = (categoryId = null) => {
         }
     );
 
-    const updateCategoryCommand = useOrchestratedCommand(
+    const updateCategoryCommand = useRegisterOrchestrator(
         updateCategoryService,
         {
             onSuccess: () => {

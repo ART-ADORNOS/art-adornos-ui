@@ -1,6 +1,6 @@
 import {useRef, useState} from "react";
 
-const useOrchestratedCommand = (commandFn, options = {}) => {
+const useRegisterOrchestrator = (commandFn, options = {}) => {
     const {onSuccess, onError, preventConcurrent = true} = options;
 
     const [loading, setLoading] = useState(false);
@@ -36,4 +36,4 @@ const useOrchestratedCommand = (commandFn, options = {}) => {
     };
 };
 
-export default useOrchestratedCommand;
+export default useRegisterOrchestrator;

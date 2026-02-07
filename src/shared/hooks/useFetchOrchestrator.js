@@ -1,6 +1,6 @@
 import {useEffect, useRef, useState} from "react";
 
-const useOrchestratedFetch = (fetchFn, options = {}) => {
+const useFetchOrchestrator = (fetchFn, options = {}) => {
     const {onError, enabled = true} = options;
 
     const [data, setData] = useState(null);
@@ -38,4 +38,4 @@ const useOrchestratedFetch = (fetchFn, options = {}) => {
     };
 };
 
-export default useOrchestratedFetch;
+export default useFetchOrchestrator;

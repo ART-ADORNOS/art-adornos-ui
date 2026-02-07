@@ -1,11 +1,11 @@
 import {getCategory} from "../services/getCategory";
 import {useNotification} from "../../../shared/providers/alertProvider";
-import useOrchestratedFetch from "../../../shared/hooks/useOrchestratedFetch";
+import useFetchOrchestrator from "../../../shared/hooks/useFetchOrchestrator";
 
 const useGetCategories = (startupId) => {
     const {showNotification} = useNotification();
 
-    const {data, loading, error} = useOrchestratedFetch(
+    const {data, loading, error} = useFetchOrchestrator(
         () => getCategory(startupId),
         {
             onError: () =>
