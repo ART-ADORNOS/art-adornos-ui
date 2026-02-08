@@ -1,7 +1,7 @@
 import {useNotification} from "../../../shared/providers/alertProvider";
 import {useState} from "react";
 import useFetchOrchestrator from "../../../shared/hooks/useFetchOrchestrator";
-import getOrderDetail from "../services/getOrderDetail";
+import {getOrderDetail} from "../services/getOrderDetail";
 
 const useGetOrderDetail = () => {
     const {showNotification} = useNotification();
