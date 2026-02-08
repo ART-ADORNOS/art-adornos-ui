@@ -1,13 +1,15 @@
-import React from 'react';
+import React, {useState} from 'react';
 import Navbar from "../../../shared/components/organisms/Navbar"
 import {Link} from "react-router-dom";
 import {useSellerLogin} from "../hooks/useSellerLogin";
 import ROUTES from "../../../core/routes/routes";
+import {AiOutlineEye, AiOutlineEyeInvisible} from "react-icons/ai";
 
 
 export default function AccountPage() {
     const {credentials, handleChange, handleSubmit} = useSellerLogin();
-
+    const [showPassword, setShowPassword] = useState(false);
+    const resolvedType = showPassword ? "text" : "password";
 
     return (
         <div className="bg-zinc-100 dark:bg-gray-900 flex-auto text-gray-900 dark:text-white flex flex-col">
@@ -46,31 +48,41 @@ export default function AccountPage() {
                                     >
                                         Contraseña
                                     </label>
-                                    <div className="text-sm">
-                                        <button
-                                            type="button"
-                                            className="font-semibold text-indigo-600 hover:text-indigo-500 bg-transparent border-none p-0 cursor-pointer"
-                                            onClick={() => {
-                                                // TODO: lógica de recuperación de contraseña
-                                            }}
-                                        >
-                                            Forgot password?
-                                        </button>
-                                    </div>
+                                    <button
+                                        type="button"
+                                        className="text-sm font-semibold text-indigo-600 hover:text-indigo-500"
+                                    >
+                                        Forgot password?
+                                    </button>
                                 </div>
-                                <div className="mt-2">
+
+                                <div className="relative mt-2">
                                     <input
-                                        type="password"
+                                        type={resolvedType}   // 👈 AQUÍ
                                         id="password"
                                         name="password"
-                                        className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
+                                        className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg
+                 focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 pr-10"
                                         placeholder="••••••••"
                                         value={credentials.password}
                                         onChange={handleChange}
                                         required
                                     />
+
+                                    <button
+                                        type="button"
+                                        onClick={() => setShowPassword(!showPassword)}
+                                        className="absolute inset-y-0 right-0 flex items-center pr-3 text-gray-500 hover:text-gray-700"
+                                    >
+                                        {showPassword ? (
+                                            <AiOutlineEyeInvisible size={20}/>
+                                        ) : (
+                                            <AiOutlineEye size={20}/>
+                                        )}
+                                    </button>
                                 </div>
                             </div>
+
 
                             <div>
                                 <button
@@ -94,5 +106,6 @@ export default function AccountPage() {
                 </div>
             </section>
         </div>
-    );
+    )
+        ;
 }
