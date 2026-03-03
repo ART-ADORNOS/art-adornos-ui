@@ -8,25 +8,22 @@ import {NotificationIcon} from "../atoms/NotificationIcon";
 import {ThemeToggleIcon} from "../atoms/ThemeToggleIcon";
 import {NotificationModal} from "../molecules/NotificationModal";
 import ROUTES from "../../../core/routes/routes";
-import USER_TYPE from "../../../core/constants/user/userType";
 import {useDashboardType} from "../../providers/dashboardTypeProvider";
 import {useDeleteAccount} from "../../../modules/auth/hooks/useDeleteAccount";
 import {initialUIState, MODALS, UI_ACTIONS, uiReducer} from "../../reducers/uiReducer";
+import {getDashboardRoute} from "../../utils/roleUtils";
 
 
 function Navbar() {
     const {isDarkMode, toggleTheme} = useContext(ThemeContext);
     const {user, logout} = useContext(AuthContext);
-    const {dashboardType} = useDashboardType()
-    const dashboardRedirect = dashboardType === USER_TYPE.SELLER ? ROUTES.ADMIN : ROUTES.LOGIN;
+    const dashboardRedirect = getDashboardRoute(user);
     const {deleteAccount} = useDeleteAccount(logout);
     const [ui, dispatch] = useReducer(uiReducer, initialUIState);
 
     const openModal = (modalType) => dispatch({type: UI_ACTIONS.OPEN_MODAL, payload: modalType});
     const closeModal = () => dispatch({type: UI_ACTIONS.CLOSE_MODAL});
     const toggleDropdown = () => dispatch({type: UI_ACTIONS.TOGGLE_DROPDOWN});
-    const showAlert = (message, type = "success") => dispatch({type: UI_ACTIONS.SHOW_ALERT, payload: {message, type},});
-
     const closeAlert = () => dispatch({type: UI_ACTIONS.HIDE_ALERT});
 
 

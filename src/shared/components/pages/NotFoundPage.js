@@ -1,6 +1,6 @@
 import Navbar from "../organisms/Navbar";
 
-export default function NotFountPage() {
+export default function NotFoundPage() {
     return (
 
         <div className="bg-zinc-100 dark:bg-gray-900 flex-auto text-gray-900 dark:text-white flex flex-col">

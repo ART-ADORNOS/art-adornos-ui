@@ -1,35 +1,19 @@
 import {Navigate} from "react-router-dom";
-import {jwtDecode} from "jwt-decode";
+import {useContext} from "react";
+import AuthContext from "../providers/AuthContext";
 
-const isTokenValid = (token) => {
-  if (!token || typeof token !== "string") {
-    return false;
-  }
+const ProtectedRoute = ({ children, allowedRoles }) => {
+    const { user, token } = useContext(AuthContext);
 
-  try {
-    const decoded = jwtDecode(token);
-
-    if (!decoded || typeof decoded !== "object") {
-      return false;
+    if (!token || !user) {
+        return <Navigate to="/login" replace />;
     }
 
-    const { exp } = decoded;
-
-    if (typeof exp !== "number") {
-      return false;
+    if (allowedRoles && !allowedRoles.includes(user.role)) {
+        return <Navigate to="/unauthorized" replace />;
     }
 
-    const nowInSeconds = Date.now() / 1000;
-    return exp > nowInSeconds;
-  } catch (e) {
-    return false;
-  }
-};
-
-const ProtectedRoute = ({ children }) => {
-  const token = localStorage.getItem("token");
-  const hasValidToken = isTokenValid(token);
-  return hasValidToken ? children : <Navigate to="/" replace />;
+    return children;
 };
 
 export default ProtectedRoute;

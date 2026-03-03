@@ -2,6 +2,7 @@ import React, {createContext, useEffect, useMemo, useState} from 'react';
 import accountsApi from '../../core/api/accountsApi';
 import {getCurrentUser, loginRequest,} from '../../modules/auth/services/authService';
 import {USER_ENDPOINTS} from "../../modules/auth/constants/user/endpoints";
+import USER_TYPE from "../../core/constants/user/userType";
 
 const AuthContext = createContext();
 
@@ -20,15 +21,23 @@ export const AuthProvider = ({children}) => {
     }, [token]);
 
     const loadUser = async () => {
-        try {
-            const userData = await getCurrentUser();
-            setUser(userData);
-        } catch (error) {
-            if (error.response?.status === 401) {
-                logout();
-            }
+    try {
+        const userData = await getCurrentUser();
+
+        const normalizedUser = {
+            ...userData,
+            role: userData.is_seller
+                ? USER_TYPE.SELLER
+                : USER_TYPE.USER,
+        };
+
+        setUser(normalizedUser);
+    } catch (error) {
+        if (error.response?.status === 401) {
+            logout();
         }
-    };
+    }
+};
 
     const login = async (username, password, typeUser) => {
         try {
