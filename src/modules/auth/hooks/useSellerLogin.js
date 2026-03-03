@@ -1,9 +1,8 @@
-import {useState, useContext} from "react";
+import {useContext, useState} from "react";
 import {useNotification} from "../../../shared/providers/alertProvider";
 import AuthContext from "../../../shared/providers/AuthContext";
 import {useNavigate} from "react-router-dom";
 import ROUTES from "../../../core/routes/routes";
-import USER_TYPE from "../../../core/constants/user/userType";
 
 export function useSellerLogin() {
     const {showNotification} = useNotification();
@@ -21,9 +20,9 @@ export function useSellerLogin() {
     const handleSubmit = async (event) => {
         event.preventDefault();
         try {
-            const success = await login(credentials.username, credentials.password, USER_TYPE.URL_SELLER);
+            const success = await login(credentials.username, credentials.password);
             success
-                ? navigate(ROUTES.DASHBOARD_SELLER)
+                ? navigate(ROUTES.DASHBOARD)
                 : showNotification("Credenciales incorrectas. Inténtalo de nuevo.", "error");
         } catch (error) {
             if (error.message === "NOT_SELLER") {
